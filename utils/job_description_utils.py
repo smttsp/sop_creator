@@ -1,4 +1,5 @@
 from utils.pdf_utils import convert_pdf_to_txt
+from utils.string_utils import remove_extra_spaces
 
 
 def get_jd_as_text(file):
@@ -16,5 +17,8 @@ def jd_main(input_info):
         jd = ""
     else:
         jd = get_jd_as_text(input_info)
+
+    if isinstance(jd, str):
+        jd = remove_extra_spaces(jd)
 
     return jd
