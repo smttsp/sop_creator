@@ -1,4 +1,4 @@
-from utils.resume_to_plain_text import convert_pdf_to_txt
+from utils.pdf_utils import convert_pdf_to_txt
 
 
 file = '/users/samettaspinar/desktop/resumes/resume2.pdf'
