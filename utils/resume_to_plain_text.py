@@ -1,3 +1,6 @@
+from PyPDF2 import PdfReader
+
+
 def convert_pdf_to_txt(file):
 
     all_resume = ""
