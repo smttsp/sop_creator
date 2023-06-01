@@ -295,6 +295,27 @@ files = [
 ]
 
 [[package]]
+name = "pypdf2"
+version = "3.0.1"
+description = "A pure-python PDF library capable of splitting, merging, cropping, and transforming PDF files"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "PyPDF2-3.0.1.tar.gz", hash = "sha256:a74408f69ba6271f71b9352ef4ed03dc53a31aa404d29b5d31f53bfecfee1440"},
+    {file = "pypdf2-3.0.1-py3-none-any.whl", hash = "sha256:d16e4205cfee272fbdc0568b68d82be796540b1537508cef59388f839c191928"},
+]
+
+[package.dependencies]
+typing_extensions = {version = ">=3.10.0.0", markers = "python_version < \"3.10\""}
+
+[package.extras]
+crypto = ["PyCryptodome"]
+dev = ["black", "flit", "pip-tools", "pre-commit (<2.18.0)", "pytest-cov", "wheel"]
+docs = ["myst_parser", "sphinx", "sphinx_rtd_theme"]
+full = ["Pillow", "PyCryptodome"]
+image = ["Pillow"]
+
+[[package]]
 name = "pytest"
 version = "6.2.1"
 description = "pytest: simple powerful testing with Python"
@@ -432,17 +453,16 @@ files = [
 
 [[package]]
 name = "typing-extensions"
-version = "3.7.4.3"
-description = "Backported and Experimental Type Hints for Python 3.5+"
+version = "4.6.2"
+description = "Backported and Experimental Type Hints for Python 3.7+"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "typing_extensions-3.7.4.3-py2-none-any.whl", hash = "sha256:dafc7639cde7f1b6e1acc0f457842a83e722ccca8eef5270af2d74792619a89f"},
-    {file = "typing_extensions-3.7.4.3-py3-none-any.whl", hash = "sha256:7cb407020f00f7bfc3cb3e7881628838e69d8f3fcab2f64742a5e76b2f841918"},
-    {file = "typing_extensions-3.7.4.3.tar.gz", hash = "sha256:99d4073b617d30288f569d3f13d2bd7548c3a7e4c8de87db09a9d29bb3a4a60c"},
+    {file = "typing_extensions-4.6.2-py3-none-any.whl", hash = "sha256:3a8b36f13dd5fdc5d1b16fe317f5668545de77fa0b8e02006381fd49d731ab98"},
+    {file = "typing_extensions-4.6.2.tar.gz", hash = "sha256:06006244c70ac8ee83fa8282cb188f697b8db25bc8b4df07be1873c43897060c"},
 ]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "6f47493cef12480a8c00f8a1dd942d3560f3286cc1dd7c3640e1836ab2d8928a"
+content-hash = "0c442f616657a8cfb00e694d560dc2e70f00bdd8c29be58671435ea991a3767f"
