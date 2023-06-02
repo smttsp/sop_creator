@@ -15,9 +15,8 @@ def process():
     resume_file = request.files["resume"]
     jd_file = request.files["jd"]
     jd_link = request.form["jd_link"]
-    # jd_link = ""
-    # print(jd_file)
-    # Process the uploaded file here and generate a reply
+    jd_text = request.form["jd_text"]
+
     reply = "Resume filename: " + resume_file.filename + "<br>"
     reply += "JD filename: " + jd_file.filename + "<br>"
     reply += jd_link
