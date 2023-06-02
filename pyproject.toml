@@ -11,6 +11,7 @@ pypdf2 = "^3.0.1"
 urllib3 = "<2.0.0"
 openai = "^0.27.7"
 pypandoc = "^1.11"
+docx2txt = "^0.8"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"

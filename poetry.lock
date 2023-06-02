@@ -389,6 +389,16 @@ files = [
 toml = ["tomli"]
 
 [[package]]
+name = "docx2txt"
+version = "0.8"
+description = "A pure python-based utility to extract text and images from docx files."
+optional = false
+python-versions = "*"
+files = [
+    {file = "docx2txt-0.8.tar.gz", hash = "sha256:2c06d98d7cfe2d3947e5760a57d924e3ff07745b379c8737723922e7009236e5"},
+]
+
+[[package]]
 name = "flake8"
 version = "3.9.2"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -1097,4 +1107,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "5d5870b927c979b4cf635f9ab64dd772c20bbf5ea66426124b77db319d04f938"
+content-hash = "09f69b3efb43b347ffe8b86ab850daec5580108e79a811495e5dcc50b64d0679"
