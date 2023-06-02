@@ -1,5 +1,3 @@
-
-
 def remove_extra_spaces(a_str):
     double_space = "  "
     double_line = "\n\n"
