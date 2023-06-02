@@ -45,6 +45,15 @@ https://direnv.net/docs/installation.html
 curl -sfL https://direnv.net/install.sh | bash
 ```
 
+then `pandoc` need to be installed 
+
+```bash
+brew install pandoc
+```
+
+ 
+
+
 ### Developer Setup
 
 If you are a new developer to this package and need to develop, test, or build -- please run the following to create a developer-ready local Virtual Environment:
