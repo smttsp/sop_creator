@@ -7,26 +7,25 @@ import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
-file = "/users/samettaspinar/desktop/resumes/resume2.doc"
-jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
 
-link = "https://recruiterflow.com/db_74f6835629d4836e1f3120b2162e6337/jobs/79"
-# get_text_from_html(link)
-jd = jd_main(link)
+def get_content_from_inputs(resume_file, jd_file, jd_link):
+    # resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
+    # resume_file = "/users/samettaspinar/desktop/resumes/resume2.doc"
+    # jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
 
-resume = get_resume_as_text(file)
-jd = jd_main(jd_file)
+    # jd_link = "https://recruiterflow.com/db_74f6835629d4836e1f3120b2162e6337/jobs/79"
+    # get_text_from_html(link)
+    # jd = jd_main(jd_link)
 
+    resume_content = get_resume_as_text(resume_file)
+    jd_content = jd_main(jd_file)
 
-# print()
-# print()
-content = (
-    f"Given that my resume is: {resume} \n"
-    f"and job description I am applying is {jd}."
-    "Can you write me a cover letter"
-)
-
+    content = (
+        f"Given that my resume_file is: {resume_content} \n\n"
+        f"and job description I am applying is {jd_content}.\n\n"
+        "Can you write me a cover letter"
+    )
+    return content
 
 # completion = openai.ChatCompletion.create(
 #   model="gpt-3.5-turbo",
