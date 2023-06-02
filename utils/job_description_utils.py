@@ -1,5 +1,6 @@
 from utils.pdf_utils import convert_pdf_to_txt
 from utils.string_utils import remove_extra_spaces
+from utils.http_utils import get_text_from_html
 
 
 def get_jd_as_text(file):
@@ -12,9 +13,8 @@ def get_jd_as_text(file):
 
 
 def jd_main(input_info):
-    link = "https://recruiterflow.com/db_74f6835629d4836e1f3120b2162e6337/jobs/79"
-    if input_info == "link":
-        jd = ""
+    if "http" in input_info:
+        jd = get_text_from_html(input_info)
     else:
         jd = get_jd_as_text(input_info)
 
