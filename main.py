@@ -1,5 +1,5 @@
 from utils.file_utils import read_text_from_file
-from utils.job_description_utils import jd_main
+from utils.job_description_utils import get_jd_from_inputs
 import glob
 from pprint import pprint
 
@@ -20,7 +20,7 @@ def get_content_from_inputs(resume_file, jd_file, jd_link, jd_text):
     # jd = jd_main(jd_link)
 
     resume_content = read_text_from_file(resume_file)
-    jd_content = jd_main(jd_file, jd_link, jd_text)
+    jd_content = get_jd_from_inputs(jd_file, jd_link, jd_text)
 
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
