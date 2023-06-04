@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request
+
 from main import get_content_from_inputs
 
 

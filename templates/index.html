@@ -12,7 +12,9 @@
 
         resume_true = resumeInput.files.length > 0
         jd_true = (
-            jdInput.files.length > 0 || jdLinkInput.value.trim() !== "" || jdTextInput.value.trim() !== ""
+            jdInput.files.length > 0
+            || jdLinkInput.value.trim() !== ""
+            || jdTextInput.value.trim() !== ""
         )
         if (resume_true && jd_true) {
             submitButton.disabled = false;

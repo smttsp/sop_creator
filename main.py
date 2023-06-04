@@ -1,10 +1,11 @@
-from utils.file_utils import read_text_from_file
-from utils.job_description_utils import get_jd_from_inputs
 import glob
+import os
 from pprint import pprint
 
-import os
 import openai
+
+from utils.file_utils import read_text_from_file
+from utils.job_description_utils import get_jd_from_inputs
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
