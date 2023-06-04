@@ -1,6 +1,8 @@
 from utils.resume_utils import get_resume_as_text
 from utils.job_description_utils import jd_main
-from utils.http_utils import get_text_from_html
+import glob
+from pprint import pprint
+
 import os
 import openai
 
@@ -35,4 +37,15 @@ def get_content_from_inputs(resume_file, jd_file, jd_link):
 # )
 #
 # print(completion.choices[0].message.content)
-pass
+
+
+if __name__ == "__main__":
+
+    resume_folder = '/users/samettaspinar/desktop/resumes/'
+
+    resume_files = glob.glob(resume_folder + '/*')
+
+    for resume_file in resume_files:
+        resume_content = get_resume_as_text(resume_file)
+        pprint(resume_content)
+        print("#"*100, "\n\n")

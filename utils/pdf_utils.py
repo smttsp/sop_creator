@@ -16,9 +16,9 @@ def convert_pdf_to_txt(filename):
         all_resume = ""
 
         reader = PdfReader(filename)
-
         for page in reader.pages:
-            all_resume += page.extract_text()
+            all_resume += page.extract_text() + "\n\n"
+
     except PdfReadError:
         all_resume = None
     return all_resume
