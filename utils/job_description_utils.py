@@ -1,22 +1,12 @@
-from utils.pdf_utils import convert_pdf_to_txt
 from utils.string_utils import remove_extra_spaces
 from utils.http_utils import get_text_from_html
+from utils.file_utils import read_text_from_file
 
 
-def get_jd_as_text(file):
-    all_resume = convert_pdf_to_txt(file)
-    if all_resume is None:
-        # try word
-        pass
-
-    return all_resume
-
-
-def jd_main(input_info):
-    if "http" in input_info:
-        jd = get_text_from_html(input_info)
-    else:
-        jd = get_jd_as_text(input_info)
+def jd_main(jd_file, jd_link, jd_text):
+    jd = read_text_from_file(jd_file)
+    jd = jd if jd is not None else get_text_from_html(jd_link)
+    jd = jd if jd is not None else jd_text
 
     if isinstance(jd, str):
         jd = remove_extra_spaces(jd)
