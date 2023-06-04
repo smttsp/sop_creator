@@ -21,7 +21,7 @@ def process():
     reply += "JD filename: " + jd_file.filename + "<br>"
     reply += jd_link
 
-    content = reply + "<br><br>" + get_content_from_inputs(resume_file, jd_file, jd_link)
+    content = reply + "<br><br>" + get_content_from_inputs(resume_file, jd_file, jd_link, jd_text)
     return content
 
 
