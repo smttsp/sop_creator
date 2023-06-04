@@ -1,4 +1,4 @@
-from utils.resume_utils import get_resume_as_text
+from utils.file_utils import read_text_from_file
 from utils.job_description_utils import jd_main
 import glob
 from pprint import pprint
@@ -10,7 +10,7 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def get_content_from_inputs(resume_file, jd_file, jd_link):
+def get_content_from_inputs(resume_file, jd_file, jd_link, jd_text):
     # resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
     # resume_file = "/users/samettaspinar/desktop/resumes/resume2.doc"
     # jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
@@ -19,8 +19,8 @@ def get_content_from_inputs(resume_file, jd_file, jd_link):
     # get_text_from_html(link)
     # jd = jd_main(jd_link)
 
-    resume_content = get_resume_as_text(resume_file)
-    jd_content = jd_main(jd_file)
+    resume_content = read_text_from_file(resume_file)
+    jd_content = jd_main(jd_file, jd_link, jd_text)
 
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
@@ -28,6 +28,7 @@ def get_content_from_inputs(resume_file, jd_file, jd_link):
         "Can you write me a cover letter"
     )
     return content
+
 
 # completion = openai.ChatCompletion.create(
 #   model="gpt-3.5-turbo",
@@ -40,12 +41,11 @@ def get_content_from_inputs(resume_file, jd_file, jd_link):
 
 
 if __name__ == "__main__":
+    resume_folder = "/users/samettaspinar/desktop/resumes/"
 
-    resume_folder = '/users/samettaspinar/desktop/resumes/'
-
-    resume_files = glob.glob(resume_folder + '/*')
+    resume_files = glob.glob(resume_folder + "/*")
 
     for resume_file in resume_files:
-        resume_content = get_resume_as_text(resume_file)
+        resume_content = read_text_from_file(resume_file)
         pprint(resume_content)
-        print("#"*100, "\n\n")
+        print("#" * 100, "\n\n")
