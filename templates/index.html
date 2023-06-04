@@ -2,29 +2,48 @@
 <html>
 <head>
     <title>My Web App</title>
+    <script>
+    function checkFormValidity() {
+        var resumeInput = document.getElementById("resume");
+        var jdInput = document.getElementById("jd");
+        var jdLinkInput = document.getElementById("jd_link");
+        var jdTextInput = document.getElementById("jd_text");
+        var submitButton = document.getElementById("submitButton");
+
+        resume_true = resumeInput.files.length > 0
+        jd_true = (
+            jdInput.files.length > 0 || jdLinkInput.value.trim() !== "" || jdTextInput.value.trim() !== ""
+        )
+        if (resume_true && jd_true) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+    </script>
+
 </head>
 <body>
 
-    <form action="/process" method="post" enctype="multipart/form-data">
-        <label for="resume">Enter resume:</label>
-        <input type="file" name="resume" id="resume">
+    <form action="/process" method="post" enctype="multipart/form-data" id="myForm">
+        <label for="resume">Upload resume:</label>
+        <input type="file" name="resume" id="resume" onchange="checkFormValidity()">
         <br><hr color="green"><br>
-        <label for="jd">Enter JD:</label>
-        <input type="file" name="jd" id="jd">
-        <br><br>
 
-        <label for="jd_link">Enter JD link:</label>
-        <input type="text" name="jd_link" id="jd_link">
-        <br><br>
+        <label for="jd">Upload JD:</label>
+        <input type="file" name="jd" id="jd" onchange="checkFormValidity()">
 
-        <label for="jd_text">Enter JD as text:</label>
-        <input type="text" name="jd_text" id="jd_text">
+        <label for="jd_link">or JD link:</label>
+        <input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">
+
+        <label for="jd_text">&emsp;&emsp;&emsp;or paste its text:</label>
+        <input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">
         <br><hr color="green"/><br>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="submitButton" disabled>
     </form>
-
 
     <div id="result">{{ result }}</div>
 </body>
 </html>
+
