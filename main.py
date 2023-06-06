@@ -4,22 +4,14 @@ from pprint import pprint
 
 import openai
 
-from utils.file_utils import read_text_from_file
+from utils.file_utils import read_text_from_file, save_files
 from utils.job_description_utils import get_jd_from_inputs
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def get_content_from_inputs(resume_file, jd_file, jd_link=None, jd_text=None):
-    # resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
-    # resume_file = "/users/samettaspinar/desktop/resumes/resume2.doc"
-    # jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
-
-    # jd_link = "https://recruiterflow.com/db_74f6835629d4836e1f3120b2162e6337/jobs/79"
-    # get_text_from_html(link)
-    # jd = jd_main(jd_link)
-
+def get_content_from_inputs(folder, resume_file, jd_file, jd_link=None, jd_text=None):
     resume_content = read_text_from_file(resume_file)
     jd_content = get_jd_from_inputs(jd_file, jd_link, jd_text)
 
@@ -29,7 +21,7 @@ def get_content_from_inputs(resume_file, jd_file, jd_link=None, jd_text=None):
         "resume_content": resume_content,
         "jd_content": jd_content,
     }
-    save_files(folder, resume_file, jd_file, content_dict=results_dict)
+    # save_files(folder, resume_file, jd_file, content_dict=results_dict)
 
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
@@ -61,8 +53,6 @@ if __name__ == "__main__":
     resume_file = "/users/samettaspinar/desktop/resumes/Samet_resume.pdf"
     jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
 
-    from utils.file_utils import save_files
-
     folder = "_files/user1"
-    content = get_content_from_inputs(resume_file, jd_file, None, None)
+    content = get_content_from_inputs(folder, resume_file, jd_file, None, None)
     cover_letter = get_cover_letter(content)

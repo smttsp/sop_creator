@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 
 from main import get_content_from_inputs
-from utils.file_utils import save_files
 
 
 app = Flask(__name__)
@@ -26,7 +25,11 @@ def process(folder=FOLDER):
     reply += "JD filename: " + jd_file.filename + "<br>"
     reply += jd_link
 
-    content = reply + "<br><br>" + get_content_from_inputs(resume_file, jd_file, jd_link, jd_text)
+    print(resume_file)
+
+    content = reply + "<br><br>" + get_content_from_inputs(
+        folder, resume_file, jd_file, jd_link, jd_text
+    )
     return content
 
 
