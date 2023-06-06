@@ -7,6 +7,13 @@ def find_emails(text):
 
     return emails
 
+
+def standardize_phone_numbers(phone_numbers):
+    formatted_numbers = [re.sub(r'\D', '', num) for num in phone_numbers]
+    formatted_numbers = [f'{num[:3]}-{num[3:6]}-{num[6:]}' for num in formatted_numbers]
+    return formatted_numbers
+
+
 def find_phone_numbers(text):
     phone_patterns = [
         # r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b',  # xxx-xxx-xxxx or xxxxxxxxxx
