@@ -67,13 +67,14 @@ def save_files(folder, resume_file, jd_file, content_dict):
 
 
 def read_text_from_file(filename):
-    """Given a pdf or docx file (this can be extended), this code extracts a plain text
+    """Reads plain text content from a PDF or DOCX file and performs text processing operations.
+    It finds the emails and phone numbers in the resumes, then deletes them. Then removes double spaces etc.
 
     Args:
-        filename:
+        filename (str): The path of the PDF or DOCX file.
 
     Returns:
-
+        str: Plain text content of the file with text processing operations applied.
     """
 
     all_resume = convert_pdf_to_txt(filename)
