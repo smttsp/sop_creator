@@ -23,6 +23,15 @@ def anonymize_text(text, info_to_be_removed: list, replacement=""):
 
 
 def find_emails(text):
+    """Finds email addresses in a given text using regular expressions.
+
+    Args:
+        text (str): The text to search for email addresses.
+
+    Returns:
+        list: A list of unique email addresses found in the text.
+    """
+
     email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     emails = list(set(re.findall(email_pattern, text)))
 
