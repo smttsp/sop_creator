@@ -23,6 +23,14 @@ def get_content_from_inputs(resume_file, jd_file, jd_link=None, jd_text=None):
     resume_content = read_text_from_file(resume_file)
     jd_content = get_jd_from_inputs(jd_file, jd_link, jd_text)
 
+    results_dict = {
+        "jd_link": jd_link or "",
+        "jd_text": jd_text or "",
+        "resume_content": resume_content,
+        "jd_content": jd_content,
+    }
+    save_files(folder, resume_file, jd_file, content_dict=results_dict)
+
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
         f"and job description I am applying is {jd_content}.\n\n"
@@ -55,5 +63,8 @@ if __name__ == "__main__":
 
     resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
     jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
+
+    from utils.file_utils import save_files
+    folder = "_files/user1"
     content = get_content_from_inputs(resume_file, jd_file, None, None)
     cover_letter = get_cover_letter(content)

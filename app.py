@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 
 from main import get_content_from_inputs
-
+from utils.file_utils import save_files
 
 app = Flask(__name__)
 
+
+FOLDER = "_files/user1"
 
 @app.route("/")
 def index():
@@ -12,7 +14,7 @@ def index():
 
 
 @app.route("/process", methods=["POST"])
-def process():
+def process(folder=FOLDER):
     resume_file = request.files["resume"]
     jd_file = request.files["jd"]
     jd_link = request.form["jd_link"]
