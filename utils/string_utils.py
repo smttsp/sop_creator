@@ -1,6 +1,12 @@
 def remove_extra_spaces(a_str):
     double_space = "  "
     double_line = "\n\n"
+def find_emails(text):
+    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    emails = list(set(re.findall(email_pattern, text)))
+
+    return emails
+
 def find_phone_numbers(text):
     phone_patterns = [
         # r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b',  # xxx-xxx-xxxx or xxxxxxxxxx
