@@ -1,6 +1,13 @@
 def remove_extra_spaces(a_str):
     double_space = "  "
     double_line = "\n\n"
+def anonymize_text(text, info_to_be_removed: list, replacement=""):
+    for info in info_to_be_removed:
+        text = text.replace(info, replacement)
+
+    return text
+
+
 def find_emails(text):
     email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     emails = list(set(re.findall(email_pattern, text)))
