@@ -11,7 +11,7 @@ from utils.job_description_utils import get_jd_from_inputs
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def get_content_from_inputs(resume_file, jd_file, jd_link, jd_text):
+def get_content_from_inputs(resume_file, jd_file, jd_link=None, jd_text=None):
     # resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
     # resume_file = "/users/samettaspinar/desktop/resumes/resume2.doc"
     # jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
@@ -31,22 +31,29 @@ def get_content_from_inputs(resume_file, jd_file, jd_link, jd_text):
     return content
 
 
-# completion = openai.ChatCompletion.create(
-#   model="gpt-3.5-turbo",
-#   messages=[
-#     {"role": "user", "content": content}
-#   ]
-# )
-#
-# print(completion.choices[0].message.content)
+def get_cover_letter(query):
+    completion = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=[
+        {"role": "user", "content": query}
+      ]
+    )
+    cover_letter = completion.choices[0].message.content
+    print(completion.choices[0].message.content)
+    return cover_letter
 
 
 if __name__ == "__main__":
-    resume_folder = "/users/samettaspinar/desktop/resumes/"
+    # resume_folder = "/users/samettaspinar/desktop/resumes/"
+    #
+    # resume_files = glob.glob(resume_folder + "/*")
+    #
+    # for resume_file in resume_files:
+    #     resume_content = read_text_from_file(resume_file)
+    #     pprint(resume_content)
+    #     print("#" * 100, "\n\n")
 
-    resume_files = glob.glob(resume_folder + "/*")
-
-    for resume_file in resume_files:
-        resume_content = read_text_from_file(resume_file)
-        pprint(resume_content)
-        print("#" * 100, "\n\n")
+    resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
+    jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
+    content = get_content_from_inputs(resume_file, jd_file, None, None)
+    cover_letter = get_cover_letter(content)
