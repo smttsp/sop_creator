@@ -32,15 +32,15 @@ def find_emails(text):
         list: A list of unique email addresses found in the text.
     """
 
-    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
     emails = list(set(re.findall(email_pattern, text)))
 
     return emails
 
 
 def standardize_phone_numbers(phone_numbers):
-    formatted_numbers = [re.sub(r'\D', '', num) for num in phone_numbers]
-    formatted_numbers = [f'{num[:3]}-{num[3:6]}-{num[6:]}' for num in formatted_numbers]
+    formatted_numbers = [re.sub(r"\D", "", num) for num in phone_numbers]
+    formatted_numbers = [f"{num[:3]}-{num[3:6]}-{num[6:]}" for num in formatted_numbers]
     return formatted_numbers
 
 
@@ -71,4 +71,3 @@ def find_phone_numbers(text):
     formatted_numbers = standardize_phone_numbers(phone_numbers)
     unique_phone_numbers = list(set(formatted_numbers))
     return phone_numbers, unique_phone_numbers
-

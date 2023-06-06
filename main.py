@@ -41,10 +41,7 @@ def get_content_from_inputs(resume_file, jd_file, jd_link=None, jd_text=None):
 
 def get_cover_letter(query):
     completion = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
-      messages=[
-        {"role": "user", "content": query}
-      ]
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": query}]
     )
     cover_letter = completion.choices[0].message.content
     print(completion.choices[0].message.content)
@@ -61,10 +58,11 @@ if __name__ == "__main__":
     #     pprint(resume_content)
     #     print("#" * 100, "\n\n")
 
-    resume_file = '/users/samettaspinar/desktop/resumes/Samet_resume.pdf'
+    resume_file = "/users/samettaspinar/desktop/resumes/Samet_resume.pdf"
     jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
 
     from utils.file_utils import save_files
+
     folder = "_files/user1"
     content = get_content_from_inputs(resume_file, jd_file, None, None)
     cover_letter = get_cover_letter(content)

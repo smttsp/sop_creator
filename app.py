@@ -3,10 +3,12 @@ from flask import Flask, render_template, request
 from main import get_content_from_inputs
 from utils.file_utils import save_files
 
+
 app = Flask(__name__)
 
 
 FOLDER = "_files/user1"
+
 
 @app.route("/")
 def index():

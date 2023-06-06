@@ -1,9 +1,11 @@
 import os
-from utils.pdf_utils import convert_pdf_to_txt
-from utils.string_utils import remove_extra_spaces, find_emails, find_phone_numbers, anonymize_text
-from utils.word_utils import convert_docx_to_text
 import shutil
+
 import orjson
+
+from utils.pdf_utils import convert_pdf_to_txt
+from utils.string_utils import anonymize_text, find_emails, find_phone_numbers, remove_extra_spaces
+from utils.word_utils import convert_docx_to_text
 
 
 def split_file_path(file_path):
