@@ -1,6 +1,20 @@
+import re
+
+
 def remove_extra_spaces(a_str):
-    double_space = "  "
-    double_line = "\n\n"
+    replacement_dict = {
+        "  ": " ",
+        "\n\n": "\n",
+        " \n": "\n",
+    }
+
+    for input_space, output_space in replacement_dict.items():
+        while input_space in a_str:
+            a_str = a_str.replace(input_space, output_space)
+
+    return a_str
+
+
 def anonymize_text(text, info_to_be_removed: list, replacement=""):
     for info in info_to_be_removed:
         text = text.replace(info, replacement)
