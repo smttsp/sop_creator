@@ -7,6 +7,7 @@ from utils.job_description_utils import get_jd_from_inputs
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+DEFAULT_GCP_BUCKET = "cover_letter_user_data"
 
 
 def get_content_from_inputs(folder, resume_file, jd_file, jd_link=None, jd_text=None):
@@ -39,6 +40,16 @@ def get_cover_letter(query):
 
 
 if __name__ == "__main__":
+    from google.cloud.storage.client import Client as StorageClient
+    GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
+    # storage_client = StorageClient(project="CoverLetter")
+    storage_client = StorageClient.from_service_account_json(GOOGLE_SERVICE_ACCOUNT)
+
+    bucket = storage_client.get_bucket("secim2")
+    blobs = bucket.list_blobs()
+    for blob in blobs:
+        print(blob.name)
+
     # resume_folder = "/users/samettaspinar/desktop/resumes/"
     #
     # resume_files = glob.glob(resume_folder + "/*")

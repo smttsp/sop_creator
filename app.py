@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request
 
 from main import get_content_from_inputs
-
+from google.cloud.storage.client import Client as StorageClient
 
 app = Flask(__name__)
 
 
 FOLDER = "_files/user1"
 
+
+# storage_client = StorageClient()
 
 @app.route("/")
 def index():
