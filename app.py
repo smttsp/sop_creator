@@ -31,7 +31,7 @@ def process(folder=FOLDER):
     print(resume_file)
 
     tmp_content = get_content_from_inputs(
-        folder, resume_file.filename, jd_file.filename, jd_link, jd_text
+        storage_client, folder, resume_file.filename, jd_file.filename, jd_link, jd_text
     )
     content = reply + "<br><br>" + tmp_content
 
