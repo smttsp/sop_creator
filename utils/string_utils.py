@@ -40,7 +40,9 @@ def find_emails(text):
 
 def standardize_phone_numbers(phone_numbers):
     formatted_numbers = [re.sub(r"\D", "", num) for num in phone_numbers]
-    formatted_numbers = [f"{num[:3]}-{num[3:6]}-{num[6:]}" for num in formatted_numbers]
+    formatted_numbers = [
+        f"{num[:3]}-{num[3:6]}-{num[6:]}" for num in formatted_numbers
+    ]
     return formatted_numbers
 
 

@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
+from google.cloud.storage.client import Client as StorageClient
 
 from main import get_content_from_inputs
-from google.cloud.storage.client import Client as StorageClient
+
 
 app = Flask(__name__)
 
@@ -31,7 +32,12 @@ def process(folder=FOLDER):
     print(resume_file)
 
     tmp_content = get_content_from_inputs(
-        storage_client, folder, resume_file.filename, jd_file.filename, jd_link, jd_text
+        storage_client,
+        folder,
+        resume_file.filename,
+        jd_file.filename,
+        jd_link,
+        jd_text,
     )
     content = reply + "<br><br>" + tmp_content
 

@@ -1,10 +1,14 @@
 import os
-import shutil
 
 import orjson
 
 from utils.pdf_utils import convert_pdf_to_txt
-from utils.string_utils import anonymize_text, find_emails, find_phone_numbers, remove_extra_spaces
+from utils.string_utils import (
+    anonymize_text,
+    find_emails,
+    find_phone_numbers,
+    remove_extra_spaces,
+)
 from utils.word_utils import convert_docx_to_text
 
 
@@ -15,7 +19,8 @@ def split_file_path(file_path):
         file_path (str): The path of the file.
 
     Returns:
-        tuple: A tuple containing the parent directory, filename without extension, and file extension.
+        tuple: A tuple containing the parent directory, filename without extension,
+            and file extension.
     """
 
     parent_dir = os.path.dirname(file_path)
@@ -68,14 +73,16 @@ def save_json_to_cloud(storage_client, data: dict, gs_uri: str):
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(blob_name)
 
-    json_str = orjson.dumps(data).decode('utf-8')
+    json_str = orjson.dumps(data).decode("utf-8")
     blob.upload_from_string(json_str)
 
     print(f"JSON file uploaded to: {gs_uri}")
     return None
 
 
-def save_files_to_cloud(storage_client, gcp_folder, resume_file, jd_file, content_dict):
+def save_files_to_cloud(
+    storage_client, gcp_folder, resume_file, jd_file, content_dict
+):
     """Save files to a specified folder, including resume, job description, and content dictionary.
 
     Args:
@@ -115,7 +122,9 @@ def read_text_from_file(filename):
     """
 
     all_resume = convert_pdf_to_txt(filename)
-    all_resume = convert_docx_to_text(filename) if all_resume is None else all_resume
+    all_resume = (
+        convert_docx_to_text(filename) if all_resume is None else all_resume
+    )
 
     emails = find_emails(all_resume)
     phone_numbers, formatted_numbers = find_phone_numbers(all_resume)

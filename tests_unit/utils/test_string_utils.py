@@ -15,7 +15,10 @@ from utils.string_utils import find_emails, find_phone_numbers
             ["support@example.com", "sales@example.com"],
         ),
         ("No emails to be found here.", []),
-        ("Multiple: john@example.com, jane@example.com", ["john@example.com", "jane@example.com"]),
+        (
+            "Multiple: john@example.com, jane@example.com",
+            ["john@example.com", "jane@example.com"],
+        ),
         ("  \ts.a.m.e.@example.com  ", ["s.a.m.e.@example.com"]),
         ("example@example", []),
         ("example@example.", []),
@@ -33,10 +36,19 @@ def test_find_emails(text, expected_emails):
     "text, expected_phone_numbers",
     [
         (" 555-123-4567 or (123) 456-7890", ["555-123-4567", "123-456-7890"]),
-        ("Phone numbers: 123-456-7890, (555) 222 3333", ["123-456-7890", "555-222-3333"]),
+        (
+            "Phone numbers: 123-456-7890, (555) 222 3333",
+            ["123-456-7890", "555-222-3333"],
+        ),
         ("No phone numbers in this text.", []),
-        ("Multiple phone numbers: 123-456-7890, (111)-222 3333", ["123-456-7890", "111-222-3333"]),
-        ("Multiple phone numbers: 1234567890, (111)2223333", ["123-456-7890", "111-222-3333"]),
+        (
+            "Multiple phone numbers: 123-456-7890, (111)-222 3333",
+            ["123-456-7890", "111-222-3333"],
+        ),
+        (
+            "Multiple phone numbers: 1234567890, (111)2223333",
+            ["123-456-7890", "111-222-3333"],
+        ),
         (
             "Multiple phone numbers: 123  456    7890, (111)- 222--3333",
             ["123-456-7890", "111-222-3333"],
