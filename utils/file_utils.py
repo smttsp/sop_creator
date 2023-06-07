@@ -26,7 +26,7 @@ def split_file_path(file_path):
     return parent_dir, filename, file_extension
 
 
-def save_orjson(filepath, data):
+def save_orjson(file_path, data):
     """Save data as a JSON file using orjson.
 
     Args:
@@ -37,15 +37,50 @@ def save_orjson(filepath, data):
         OSError: If there is an error while opening or writing to the file.
     """
 
-    with open(filepath, "wb") as file:
+    with open(file_path, "wb") as file:
         file.write(orjson.dumps(data))
 
+    return None
 
-def save_files(folder, resume_file, jd_file, content_dict):
+
+def get_bucket_blobname_from_uri(gs_uri):
+    splits = gs_uri.replace("gs://", "").split("/")
+    assert len(splits), f"invalid {gs_uri=}"
+    bucket_name = splits[0]
+    blob_name = "/".join(splits[1:])
+    return bucket_name, blob_name
+
+
+def save_file_to_cloud(storage_client, file_path: str, gs_uri: str):
+    bucket_name, blob_name = get_bucket_blobname_from_uri(gs_uri)
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    blob.upload_from_filename(file_path)
+
+    # shutil.rmtree(pdf_file_path)
+
+    print(f"File uploaded to: {gs_uri}")
+    return None
+
+
+def save_json_to_cloud(storage_client, data: dict, gs_uri: str):
+    bucket_name, blob_name = get_bucket_blobname_from_uri(gs_uri)
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+
+    json_str = orjson.dumps(data).decode('utf-8')
+    blob.upload_from_string(json_str)
+
+    print(f"JSON file uploaded to: {gs_uri}")
+    return None
+
+
+def save_files_to_cloud(storage_client, gcp_folder, resume_file, jd_file, content_dict):
     """Save files to a specified folder, including resume, job description, and content dictionary.
 
     Args:
-        folder (str): The path of the destination folder where the files will be saved.
+        storage_client (google.cloud.storage.Client): The Google Cloud Storage client.
+        gcp_folder (str): The path of the destination folder where the files will be saved.
         resume_file (str): The path of the resume file to be saved.
         jd_file (str): The path of the job description file to be saved.
         content_dict (dict): The content dictionary to be saved as a JSON file.
@@ -57,13 +92,13 @@ def save_files(folder, resume_file, jd_file, content_dict):
     *_, resume_extension = split_file_path(resume_file)
     *_, jd_extension = split_file_path(jd_file)
 
-    resume_dst_path = os.path.join(folder, "resume" + resume_extension)
-    jd_dst_path = os.path.join(folder, "jd" + resume_extension)
-    content_dst_path = os.path.join(folder, "content.json")
+    resume_dst_path = os.path.join(gcp_folder, "resume" + resume_extension)
+    jd_dst_path = os.path.join(gcp_folder, "jd" + resume_extension)
+    content_dst_path = os.path.join(gcp_folder, "content.json")
 
-    shutil.copyfile(resume_file, resume_dst_path)
-    shutil.copyfile(jd_file, jd_dst_path)
-    save_orjson(content_dst_path, content_dict)
+    save_file_to_cloud(storage_client, resume_file, resume_dst_path)
+    save_file_to_cloud(storage_client, jd_file, jd_dst_path)
+    save_json_to_cloud(storage_client, content_dict, content_dst_path)
 
     return None
 
