@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # storage_client = StorageClient(project="CoverLetter")
     storage_client = StorageClient.from_service_account_json(GOOGLE_SERVICE_ACCOUNT)
 
-    bucket = storage_client.get_bucket("secim2")
+    bucket = storage_client.get_bucket(DEFAULT_GCP_BUCKET)
     blobs = bucket.list_blobs()
     for blob in blobs:
         print(blob.name)
