@@ -150,3 +150,7 @@ wandb/**
 **.png
 **.doc
 **.docx
+**.whl
+**.json
+**.tar
+**.tar.gz
