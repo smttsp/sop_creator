@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "example_template"
+name = "cover letter creator"
 version = "1.0.0"
 description = "This is a template example for creating internal Python Packages"
-authors = ["Overjet <info@overjet.ai>"]
+authors = ["samet <samet@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"

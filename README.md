@@ -1,4 +1,4 @@
-# SoP creator
+# Cover Letter creator
 
 Creating Cover Letter/Statement of Purpose from resume/CV and job description
 
