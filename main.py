@@ -20,7 +20,7 @@ def get_content_from_inputs(folder, resume_file, jd_file, jd_link=None, jd_text=
         "resume_content": resume_content,
         "jd_content": jd_content,
     }
-    # save_files(folder, resume_file, jd_file, content_dict=results_dict)
+    save_files(folder, resume_file, jd_file, content_dict=results_dict)
 
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
@@ -59,8 +59,8 @@ if __name__ == "__main__":
     #     pprint(resume_content)
     #     print("#" * 100, "\n\n")
 
-    resume_file = "/users/samettaspinar/desktop/resumes/Samet_resume.pdf"
-    jd_file = "/users/samettaspinar/desktop/jd/cellino_jd.pdf"
+    resume_file = "/users/samet/desktop/sop_creator/resumes/Samet_resume.pdf"
+    jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
 
     folder = "_files/user1"
     content = get_content_from_inputs(folder, resume_file, jd_file, None, None)
