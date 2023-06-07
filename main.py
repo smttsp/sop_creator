@@ -1,34 +1,14 @@
-import json
 import os
 
 import openai
-from google.cloud import secretmanager
+from utils.secret_manager_utils import get_secret_value_dict
+from google.cloud.storage.client import Client as StorageClient
 
 from utils.file_utils import read_text_from_file, save_files_to_cloud
 from utils.job_description_utils import get_jd_from_inputs
 
 
 DEFAULT_GCP_BUCKET = "cover_letter_user_data"
-
-
-def get_secret_value():
-    # Create a Secret Manager client
-    client = secretmanager.SecretManagerServiceClient()
-
-    # Access a secret version
-    project_id = "818082405938"
-    secret_id = "cover_letter"
-    version_id = "latest"  # or specify a specific version
-    secret_name = (
-        f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
-    )
-
-    response = client.access_secret_version(request={"name": secret_name})
-    secret_value = json.loads(response.payload.data.decode("UTF-8"))
-    openai.api_key = secret_value.get("OPENAI_API_KEY")
-
-
-# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def get_content_from_inputs(
@@ -89,12 +69,14 @@ def get_cover_letter(query):
 
 
 if __name__ == "__main__":
-    from google.cloud.storage.client import Client as StorageClient
 
     GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
     storage_client = StorageClient.from_service_account_json(
         GOOGLE_SERVICE_ACCOUNT
     )
+
+    secret_value_dict = get_secret_value_dict()
+    openai.api_key = secret_value_dict.get("OPENAI_API_KEY")
 
     resume_file = "/users/samet/desktop/sop_creator/resumes/Samet_resume.pdf"
     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
