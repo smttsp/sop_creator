@@ -11,13 +11,13 @@ DEFAULT_GCP_BUCKET = "cover_letter_user_data"
 
 
 def get_content_from_inputs(
-    folder: str, resume_file: str, jd_file: str, jd_link: str = None, jd_text: str = None
+    gcp_bucket: str, resume_file: str, jd_file: str, jd_link: str = None, jd_text: str = None
 ):
     """Process the inputs and retrieve content from the resume and job description.
         The inputs and the content are, then, saved in gcp bucket
 
     Args:
-        folder (str): The folder to save the files in.
+        gcp_bucket (str): The folder to save the files in.
         resume_file (str): The path to the resume file.
         jd_file (str): The path to the job description file.
         jd_link (str, optional): The link to the job description. Defaults to None.
@@ -36,7 +36,7 @@ def get_content_from_inputs(
         "resume_content": resume_content,
         "jd_content": jd_content,
     }
-    save_files(folder, resume_file, jd_file, content_dict=results_dict)
+    save_files(gcp_bucket, resume_file, jd_file, content_dict=results_dict)
 
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
@@ -80,5 +80,5 @@ if __name__ == "__main__":
     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
 
     folder = "_files/user1"
-    content = get_content_from_inputs(folder=folder, resume_file=resume_file, jd_file=jd_file)
+    content = get_content_from_inputs(gcp_bucket=folder, resume_file=resume_file, jd_file=jd_file)
     cover_letter = get_cover_letter(content)
