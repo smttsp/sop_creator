@@ -10,7 +10,23 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 DEFAULT_GCP_BUCKET = "cover_letter_user_data"
 
 
-def get_content_from_inputs(folder, resume_file, jd_file, jd_link=None, jd_text=None):
+def get_content_from_inputs(
+    folder: str, resume_file: str, jd_file: str, jd_link: str = None, jd_text: str = None
+):
+    """Process the inputs and retrieve content from the resume and job description.
+        The inputs and the content are, then, saved in gcp bucket
+
+    Args:
+        folder (str): The folder to save the files in.
+        resume_file (str): The path to the resume file.
+        jd_file (str): The path to the job description file.
+        jd_link (str, optional): The link to the job description. Defaults to None.
+        jd_text (str, optional): The text of the job description. Defaults to None.
+
+    Returns:
+        str: A string containing the resume content and job description content.
+    """
+
     resume_content = read_text_from_file(resume_file)
     jd_content = get_jd_from_inputs(jd_file, jd_link, jd_text)
 
@@ -41,6 +57,7 @@ def get_cover_letter(query):
 
 if __name__ == "__main__":
     from google.cloud.storage.client import Client as StorageClient
+
     GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
     # storage_client = StorageClient(project="CoverLetter")
     storage_client = StorageClient.from_service_account_json(GOOGLE_SERVICE_ACCOUNT)
@@ -63,5 +80,5 @@ if __name__ == "__main__":
     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
 
     folder = "_files/user1"
-    content = get_content_from_inputs(folder, resume_file, jd_file, None, None)
+    content = get_content_from_inputs(folder=folder, resume_file=resume_file, jd_file=jd_file)
     cover_letter = get_cover_letter(content)

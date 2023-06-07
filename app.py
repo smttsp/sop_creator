@@ -11,6 +11,7 @@ FOLDER = "_files/user1"
 
 # storage_client = StorageClient()
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -29,9 +30,11 @@ def process(folder=FOLDER):
 
     print(resume_file)
 
-    content = (
-        reply + "<br><br>" + get_content_from_inputs(folder, resume_file, jd_file, jd_link, jd_text)
+    tmp_content = get_content_from_inputs(
+        folder, resume_file.filename, jd_file.filename, jd_link, jd_text
     )
+    content = reply + "<br><br>" + tmp_content
+
     return content
 
 
