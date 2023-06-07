@@ -27,8 +27,8 @@ def process(folder=FOLDER):
 
     print(resume_file)
 
-    content = reply + "<br><br>" + get_content_from_inputs(
-        folder, resume_file, jd_file, jd_link, jd_text
+    content = (
+        reply + "<br><br>" + get_content_from_inputs(folder, resume_file, jd_file, jd_link, jd_text)
     )
     return content
 

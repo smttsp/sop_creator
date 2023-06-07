@@ -1,6 +1,4 @@
-import glob
 import os
-from pprint import pprint
 
 import openai
 
