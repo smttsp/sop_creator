@@ -69,15 +69,17 @@ def get_cover_letter(query):
 
 
 if __name__ == "__main__":
-
     GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
     storage_client = StorageClient.from_service_account_json(
         GOOGLE_SERVICE_ACCOUNT
     )
 
     secret_value_dict = get_secret_value_dict()
-    openai.api_key = secret_value_dict.get("OPENAI_API_KEY")
+    openai.api_key = secret_value_dict["OPENAI_API_KEY"]
+    db_login_info_dict = secret_value_dict["DATABASE_INFO"]
+    from utils.database_utils import connect_to_db
 
+    connect_to_db(db_login_info_dict)
     resume_file = "/users/samet/desktop/sop_creator/resumes/Samet_resume.pdf"
     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
 
