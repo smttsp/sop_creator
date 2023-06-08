@@ -19,6 +19,7 @@ ruff = "^0.0.271"
 google-cloud-storage = "^2.9.0"
 google-auth = "^2.19.1"
 google-cloud-secret-manager = "^2.16.1"
+psycopg2 = "^2.9.6"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"
