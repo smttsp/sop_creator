@@ -84,11 +84,12 @@ def save_json_to_cloud(storage_client, data: dict, gs_uri: str):
 def save_files_to_cloud(
     storage_client, gcp_folder, resume_file, jd_file, content_dict
 ):
-    """Save files to a specified folder, including resume, job description, and content dictionary.
+    """Save files to a specified folder, including resume, job description,
+        and content dictionary.
 
     Args:
         storage_client (google.cloud.storage.Client): The Google Cloud Storage client.
-        gcp_folder (str): The path of the destination folder where the files will be saved.
+        gcp_folder (str): The main folder in gcp where the files will be saved.
         resume_file (FileStorage): The path of the resume file to be saved.
         jd_file (FileStorage): The path of the job description file to be saved.
         content_dict (dict): The content dictionary to be saved as a JSON file.
@@ -113,7 +114,8 @@ def save_files_to_cloud(
 
 def read_text_from_file(filename):
     """Reads plain text content from a PDF or DOCX file and performs text processing operations.
-    It finds the emails and phone numbers in the resumes, then deletes them. Then removes double spaces etc.
+        It finds the emails and phone numbers in the resumes, then deletes them.
+        Then removes double spaces etc.
 
     Args:
         filename (str): The path of the PDF or DOCX file.

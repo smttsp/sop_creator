@@ -1,14 +1,16 @@
 import os
-
-import openai
 from datetime import datetime
 
-from utils.secret_manager_utils import get_secret_value_dict
-from google.cloud.storage.client import Client as StorageClient
+import openai
 
 from utils.file_utils import read_text_from_file, save_files_to_cloud
 from utils.job_description_utils import get_jd_from_inputs
-from utils.constants import DEFAULT_GCP_BUCKET
+
+
+# from utils.secret_manager_utils import get_secret_value_dict
+# from google.cloud.storage.client import Client as StorageClient
+# from utils.constants import DEFAULT_GCP_BUCKET
+
 
 
 def get_session_id():
@@ -63,13 +65,16 @@ def get_content_from_inputs(
 
 
 def get_cover_letter(query):
-    # completion = openai.ChatCompletion.create(
-    #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": query, "session_id": "fjewhr984urjfewf"}]
-    # )
-    # cover_letter = completion.choices[0].message.content
-    # print(cover_letter)
-    cover_letter = ""
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": query, "session_id": "fjewhr984urjfewf"}
+        ],
+    )
+    cover_letter = completion.choices[0].message.content
+    print(cover_letter)
     return cover_letter
+
 
 #
 # if __name__ == "__main__":

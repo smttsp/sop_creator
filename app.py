@@ -1,8 +1,9 @@
+import os
+
 from flask import Flask, render_template, request
 from google.cloud.storage.client import Client as StorageClient
-import os
-from main import get_content_from_inputs, get_session_id
 
+from main import get_content_from_inputs, get_session_id
 from utils.constants import DEFAULT_GCP_BUCKET
 from utils.secret_manager_utils import get_secret_value_dict
 
@@ -34,7 +35,9 @@ class SessionInfo:
         self.openai_api_key = self.secret_value_dict["OPENAI_API_KEY"]
         self.db_login_info_dict = self.secret_value_dict["DATABASE_INFO"]
 
-        self.gcp_folder = os.path.join(self.default_gcp_bucket, self.user, self.session_id)
+        self.gcp_folder = os.path.join(
+            self.default_gcp_bucket, self.user, self.session_id
+        )
 
         return None
 

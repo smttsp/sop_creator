@@ -7,7 +7,7 @@ def connect_to_db(db_login_info_dict):
         port=db_login_info_dict["port"],
         database=db_login_info_dict["database"],
         user=db_login_info_dict["user"],
-        password=db_login_info_dict["password"]
+        password=db_login_info_dict["password"],
     )
     # cursor = conn.cursor()
     #
