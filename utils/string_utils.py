@@ -3,9 +3,9 @@ import re
 
 def remove_extra_spaces(a_str):
     replacement_dict = {
+        " \n": "\n",
         "  ": " ",
         "\n\n": "\n",
-        " \n": "\n",
     }
 
     for input_space, output_space in replacement_dict.items():

@@ -56,15 +56,16 @@ def get_bucket_blobname_from_uri(gs_uri):
     return bucket_name, blob_name
 
 
-def save_file_to_cloud(storage_client, file_path: str, gs_uri: str):
+def save_file_to_cloud(storage_client, file, gs_uri: str):
     bucket_name, blob_name = get_bucket_blobname_from_uri(gs_uri)
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(blob_name)
-    blob.upload_from_filename(file_path)
+    # blob.upload_from_filename(file)
+    blob.upload_from_string(file.read(), content_type=file.content_type)
 
     # shutil.rmtree(pdf_file_path)
 
-    print(f"File uploaded to: {gs_uri}")
+    print(f"File uploaded to: gs://{gs_uri}")
     return None
 
 
@@ -88,16 +89,16 @@ def save_files_to_cloud(
     Args:
         storage_client (google.cloud.storage.Client): The Google Cloud Storage client.
         gcp_folder (str): The path of the destination folder where the files will be saved.
-        resume_file (str): The path of the resume file to be saved.
-        jd_file (str): The path of the job description file to be saved.
+        resume_file (FileStorage): The path of the resume file to be saved.
+        jd_file (FileStorage): The path of the job description file to be saved.
         content_dict (dict): The content dictionary to be saved as a JSON file.
 
     Returns:
         None
     """
 
-    *_, resume_extension = split_file_path(resume_file)
-    *_, jd_extension = split_file_path(jd_file)
+    *_, resume_extension = split_file_path(resume_file.filename)
+    *_, jd_extension = split_file_path(jd_file.filename)
 
     resume_dst_path = os.path.join(gcp_folder, "resume" + resume_extension)
     jd_dst_path = os.path.join(gcp_folder, "jd" + resume_extension)
