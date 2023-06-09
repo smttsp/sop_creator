@@ -1,16 +1,42 @@
 from flask import Flask, render_template, request
 from google.cloud.storage.client import Client as StorageClient
+import os
+from main import get_content_from_inputs, get_session_id
 
-from main import get_content_from_inputs
+from utils.constants import DEFAULT_GCP_BUCKET
+from utils.secret_manager_utils import get_secret_value_dict
 
 
 app = Flask(__name__)
 
 
-FOLDER = "_files/user1"
+class SessionInfo:
+    def __init__(self, user, default_gcp_bucket=DEFAULT_GCP_BUCKET):
+        self.user = user
+        self.session_id = get_session_id()
+        self.default_gcp_bucket = default_gcp_bucket
 
+        self.google_service_account = os.getenv("GOOGLE_SERVICE_ACCOUNT", None)
 
-# storage_client = StorageClient()
+        self.secret_value_dict = get_secret_value_dict()
+
+        # self.storage_client = None
+        # self.openai_api_key = None
+        # self.gcp_folder = None
+        # self.db_login_info_dict = None
+
+        self._set_apis()
+
+    def _set_apis(self):
+        self.storage_client = StorageClient.from_service_account_json(
+            self.google_service_account
+        )
+        self.openai_api_key = self.secret_value_dict["OPENAI_API_KEY"]
+        self.db_login_info_dict = self.secret_value_dict["DATABASE_INFO"]
+
+        self.gcp_folder = os.path.join(self.default_gcp_bucket, self.user, self.session_id)
+
+        return None
 
 
 @app.route("/")
