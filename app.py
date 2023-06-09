@@ -45,7 +45,10 @@ def index():
 
 
 @app.route("/process", methods=["POST"])
-def process(folder=FOLDER):
+def process():
+    USER = "smttsp"
+    session_info = SessionInfo(user=USER)
+
     resume_file = request.files["resume"]
     jd_file = request.files["jd"]
     jd_link = request.form["jd_link"]
@@ -58,10 +61,9 @@ def process(folder=FOLDER):
     print(resume_file)
 
     tmp_content = get_content_from_inputs(
-        storage_client,
-        folder,
-        resume_file.filename,
-        jd_file.filename,
+        session_info,
+        resume_file,
+        jd_file,
         jd_link,
         jd_text,
     )
