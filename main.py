@@ -1,21 +1,24 @@
 import os
 
 import openai
+from datetime import datetime
+
 from utils.secret_manager_utils import get_secret_value_dict
 from google.cloud.storage.client import Client as StorageClient
 
 from utils.file_utils import read_text_from_file, save_files_to_cloud
 from utils.job_description_utils import get_jd_from_inputs
+from utils.constants import DEFAULT_GCP_BUCKET
 
 
-DEFAULT_GCP_BUCKET = "cover_letter_user_data"
+def get_session_id():
+    return datetime.now().strftime("%Y-%m-%d_%H%M%S")
 
 
 def get_content_from_inputs(
-    storage_client,
-    gcp_folder: str,
-    resume_file: str,
-    jd_file: str,
+    session_info,
+    resume_file,
+    jd_file,
     jd_link: str = None,
     jd_text: str = None,
 ):
@@ -23,9 +26,9 @@ def get_content_from_inputs(
         The inputs and the content are, then, saved in gcp bucket
 
     Args:
-        gcp_folder (str): The folder to save the files in.
-        resume_file (str): The path to the resume file.
-        jd_file (str): The path to the job description file.
+        session_info (SessionInfo):
+        resume_file (FileStorage): The path to the resume file.
+        jd_file (FileStorage): The path to the job description file.
         jd_link (str, optional): The link to the job description. Defaults to None.
         jd_text (str, optional): The text of the job description. Defaults to None.
 
@@ -44,8 +47,8 @@ def get_content_from_inputs(
     }
 
     save_files_to_cloud(
-        storage_client,
-        gcp_folder,
+        session_info.storage_client,
+        session_info.gcp_folder,
         resume_file,
         jd_file,
         content_dict=results_dict,
@@ -60,34 +63,38 @@ def get_content_from_inputs(
 
 
 def get_cover_letter(query):
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": query}]
-    )
-    cover_letter = completion.choices[0].message.content
-    print(completion.choices[0].message.content)
+    # completion = openai.ChatCompletion.create(
+    #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": query, "session_id": "fjewhr984urjfewf"}]
+    # )
+    # cover_letter = completion.choices[0].message.content
+    # print(cover_letter)
+    cover_letter = ""
     return cover_letter
 
-
-if __name__ == "__main__":
-    GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
-    storage_client = StorageClient.from_service_account_json(
-        GOOGLE_SERVICE_ACCOUNT
-    )
-
-    secret_value_dict = get_secret_value_dict()
-    openai.api_key = secret_value_dict["OPENAI_API_KEY"]
-    db_login_info_dict = secret_value_dict["DATABASE_INFO"]
-    from utils.database_utils import connect_to_db
-
-    connect_to_db(db_login_info_dict)
-    resume_file = "/users/samet/desktop/sop_creator/resumes/Samet_resume.pdf"
-    jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
-
-    gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"
-    content = get_content_from_inputs(
-        storage_client=storage_client,
-        gcp_folder=gcp_folder,
-        resume_file=resume_file,
-        jd_file=jd_file,
-    )
-    cover_letter = get_cover_letter(content)
+#
+# if __name__ == "__main__":
+#     USER = "smttsp"
+#     SESSION = get_session()
+#     GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
+#     storage_client = StorageClient.from_service_account_json(
+#         GOOGLE_SERVICE_ACCOUNT
+#     )
+#
+#     secret_value_dict = get_secret_value_dict()
+#     openai.api_key = secret_value_dict["OPENAI_API_KEY"]
+#     db_login_info_dict = secret_value_dict["DATABASE_INFO"]
+#     from utils.database_utils import connect_to_db
+#     conn = connect_to_db(db_login_info_dict)
+#     resume_file = "/users/samet/desktop/sop_creator/resumes/Samet_resume.pdf"
+#     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
+#
+#     gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"
+#     content = get_content_from_inputs(
+#         storage_client=storage_client,
+#         gcp_folder=gcp_folder,
+#         resume_file=resume_file,
+#         jd_file=jd_file,
+#     )
+#     cover_letter = get_cover_letter(content)
+#
+#     pass
