@@ -12,7 +12,6 @@ from utils.job_description_utils import get_jd_from_inputs
 # from utils.constants import DEFAULT_GCP_BUCKET
 
 
-
 def get_session_id():
     return datetime.now().strftime("%Y-%m-%d_%H%M%S")
 
