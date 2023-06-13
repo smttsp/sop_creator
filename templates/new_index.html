@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cover Letter Creator</title>
+</head>
+
+<style>
+  .submit_button {
+    border: 1px solid #0066cc;
+    background-color: #0099cc;
+    color: #ffffff;
+    padding: 5px 10px;
+  }
+
+  .submit_button:hover {
+    border: 1px solid #0099cc;
+    background-color: #00aacc;
+    color: #ffffff;
+    padding: 5px 10px;
+  }
+
+  .submit_button:disabled,
+  .submit_button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+</style>
+
+<body>
+<label for="resume">
+	Upload resume:
+	<input type="file" name="resume" id="resume" oninput="checkFormValidity()">
+</label>
+
+<br><br>
+<hr color="green">
+<br>
+
+<label for="jd">Upload JD:
+	<input type="file" name="jd" id="jd" oninput="checkFormValidity()">
+
+	or JD link:
+	<input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">
+
+	&emsp;&emsp;&emsp;or paste its text:
+	<input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">
+</label>
+<br><br>
+<hr color="green">
+<br>
+
+<button id="submit_button" class="submit_button" disabled onclick="new_func()">Submit
+</button>
+
+{#<script src="scripts.js"></script>#}
+
+<script>
+    function new_func() {
+        alert('hello')
+    }
+
+    function checkFormValidity() {
+        let resume_input = document.getElementById("resume");
+        let jd_input = document.getElementById("jd");
+        let jd_link_input = document.getElementById("jd_link");
+        let jd_text_input = document.getElementById("jd_text");
+        let submit_button = document.getElementById("submit_button");
+
+        resume_true = resume_input.files.length > 0
+        jd_true = (
+            jd_input.files.length > 0
+            || jd_link_input.value.trim() !== ""
+            || jd_text_input.value.trim() !== ""
+        )
+        submit_button.disabled = !(resume_true && jd_true);
+    }
+
+</script>
+</body>
+</html>
+
