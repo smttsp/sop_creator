@@ -7,9 +7,9 @@ from main import get_content_from_inputs, get_session_id
 from utils.constants import DEFAULT_GCP_BUCKET
 from utils.secret_manager_utils import get_secret_value_dict
 
-
 app = Flask(__name__)
 
+entry_point_html = "new_index.html"
 
 class SessionInfo:
     def __init__(self, user, default_gcp_bucket=DEFAULT_GCP_BUCKET):
@@ -44,7 +44,7 @@ class SessionInfo:
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template(entry_point_html)
 
 
 @app.route("/process", methods=["POST"])
