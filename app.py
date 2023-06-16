@@ -7,6 +7,7 @@ from main import get_content_from_inputs, get_session_id
 from utils.constants import DEFAULT_GCP_BUCKET
 from utils.secret_manager_utils import get_secret_value_dict
 
+
 app = Flask(__name__)
 
 entry_point_html = "index.html"

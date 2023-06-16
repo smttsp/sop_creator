@@ -1,4 +1,4 @@
-import os
+# import os
 from datetime import datetime
 
 import openai
@@ -67,7 +67,11 @@ def get_cover_letter(content):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "user", "content": content, "session_id": "fjewhr984urjfewf"}
+            {
+                "role": "user",
+                "content": content,
+                "session_id": "fjewhr984urjfewf",
+            }
         ],
     )
     cover_letter = completion.choices[0].message.content
