@@ -9,7 +9,8 @@ from utils.secret_manager_utils import get_secret_value_dict
 
 app = Flask(__name__)
 
-entry_point_html = "new_index.html"
+entry_point_html = "index.html"
+
 
 class SessionInfo:
     def __init__(self, user, default_gcp_bucket=DEFAULT_GCP_BUCKET):

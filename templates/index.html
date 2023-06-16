@@ -1,56 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Cover Letter Creator</title>
 
 	<style>
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
+    #submit_button {
+      border: 1px solid #0066cc;
+      background-color: #0099cc;
+      color: #ffffff;
+      padding: 5px 10px;
+    }
 
-        #editor {
-            height: 300px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            display: none; /* Initially hide the editor */
-        }
+    #submit_button:hover {
+      border: 1px solid #0099cc;
+      background-color: #00aacc;
+      color: #ffffff;
+      padding: 5px 10px;
+    }
+
+    #submit_button:disabled,
+    #submit_button[disabled] {
+      border: 1px solid #999999;
+      background-color: #cccccc;
+      color: #666666;
+    }
 	</style>
 
 	<script>
-        function checkFormValidity() {
-            var resumeInput = document.getElementById("resume");
-            var jdInput = document.getElementById("jd");
-            var jdLinkInput = document.getElementById("jd_link");
-            var jdTextInput = document.getElementById("jd_text");
-            var submitButton = document.getElementById("submitButton");
+      function checkFormValidity() {
+          let resumeInput = document.getElementById("resume");
+          let jdInput = document.getElementById("jd");
+          let jdLinkInput = document.getElementById("jd_link");
+          let jdTextInput = document.getElementById("jd_text");
+          let submit_button = document.getElementById("submit_button");
 
-            resume_true = resumeInput.files.length > 0
-            jd_true = (
-                jdInput.files.length > 0
-                || jdLinkInput.value.trim() !== ""
-                || jdTextInput.value.trim() !== ""
-            )
-            submitButton.disabled = false
-            {#!(resume_true && jd_true);#}
-        }
+          let resume_true = resumeInput.files.length > 0
+          let jd_true = (
+              jdInput.files.length > 0
+              || jdLinkInput.value.trim() !== ""
+              || jdTextInput.value.trim() !== ""
+          )
+          submit_button.disabled = !(resume_true && jd_true);
+      }
 	</script>
 
 
 	<script>
-        const submitButton = document.getElementById('submitButton');
-        const content = document.getElementById('content');
-        const suggestions = document.getElementById('suggestions');
-        const suggestionList = [];
+      const submit_button = document.getElementById('submit_button');
+      const content = document.getElementById('content');
+      const suggestions = document.getElementById('suggestions');
+      const suggestionList = [];
 
-        submitButton.addEventListener('click', openEditor);
+      submit_button.addEventListener('click', openEditor);
 
-        function openEditor() {
-            content.style.display = 'block';
-            suggestions.style.display = 'block';
-            {#content.textContent = result.textContent#}
-        }
+      function openEditor() {
+          content.style.display = 'block';
+          suggestions.style.display = 'block';
+          {#content.textContent = result.textContent#}
+      }
 
 	</script>
 </head>
@@ -75,8 +82,7 @@
 	<hr color="green"/>
 	<br>
 
-	{#            <input type="submit" value="Submit" id="submitButton" disabled>#}
-	<input type="submit" value="Submit" id="submitButton">
+	<input type="submit" value="Submit" id="submit_button" disabled>
 
 </form>
 
