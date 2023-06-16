@@ -26,6 +26,26 @@
     background-color: #cccccc;
     color: #666666;
   }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  #content {
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: none; /* Initially hide the content area */
+  }
+
+  #suggestions {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none; /* Initially hide the suggestions area */
+  }
+
 </style>
 
 <body>
@@ -51,14 +71,39 @@
 <hr color="green">
 <br>
 
-<button id="submit_button" class="submit_button" disabled onclick="new_func()">Submit
+<button id="submit_button" class="submit_button" disabled onclick="new_func2()">Submit
 </button>
 
-{#<script src="scripts.js"></script>#}
+<div class="container">
+	<div id="content" contenteditable="true"></div>
+	<div id="suggestions"></div>
+</div>
+
 
 <script>
-    function new_func() {
-        alert('hello')
+    {#function new_func() {#}
+    {#    fetch("/process").then(response => response.json()).then(function (data))#}
+    {#    {#}
+    {##}
+    {#    }#}
+    {# } #}
+
+    function new_func2() {
+        const submitBtn = document.getElementById('submit_button');
+        const content = document.getElementById('content');
+        const suggestions = document.getElementById('suggestions');
+        const suggestionList = [];
+
+        submitBtn.addEventListener('click', openEditor);
+
+        function openEditor() {
+            content.style.display = 'block';
+            suggestions.style.display = 'block';
+            {#content.textContent = Math.floor(Math.random() * 10) + 1;#}
+            fetch("/process").then(response => response.json()).then(function (data) {
+                content.textContent = data;
+            });
+        }
     }
 
     function checkFormValidity() {
@@ -76,8 +121,10 @@
         )
         submit_button.disabled = !(resume_true && jd_true);
     }
-
 </script>
+
+{#<script type="text/javascript" src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>#}
+
 </body>
 </html>
 

@@ -1,75 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<style>
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        #editor {
-            height: 300px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            display: none; /* Initially hide the editor */
-        }
-	</style>
+	<meta charset="UTF-8">
+	<title>Cover Letter Creator</title>
 </head>
 
+<style>
+  .submit_button {
+    border: 1px solid #0066cc;
+    background-color: #0099cc;
+    color: #ffffff;
+    padding: 5px 10px;
+  }
+
+  .submit_button:hover {
+    border: 1px solid #0099cc;
+    background-color: #00aacc;
+    color: #ffffff;
+    padding: 5px 10px;
+  }
+
+  .submit_button:disabled,
+  .submit_button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+</style>
 
 <body>
-<div class="container">
-	<label for="resume">Upload resume:</label>
-	<input type="file" name="resume" id="resume" onchange="checkFormValidity()">
-	<br>
-	<hr color="green">
-	<br>
+<label for="resume">
+	Upload resume:
+	<input type="file" name="resume" id="resume" oninput="checkFormValidity()">
+</label>
 
-	<label for="jd">Upload JD:</label>
-	<input type="file" name="jd" id="jd" onchange="checkFormValidity()">
+<br><br>
+<hr color="green">
+<br>
 
-	<label for="jd_link">or JD link:</label>
+<label for="jd">Upload JD:
+	<input type="file" name="jd" id="jd" oninput="checkFormValidity()">
+
+	or JD link:
 	<input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">
 
-	<label for="jd_text">&emsp;&emsp;&emsp;or paste its text:</label>
+	&emsp;&emsp;&emsp;or paste its text:
 	<input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">
-	<br>
-	<hr color="green"/>
-	<br>
+</label>
+<br><br>
+<hr color="green">
+<br>
 
-	<button id="submitButton" onclick="openEditor()" disabled>Submit</button>
+<button id="submit_button" class="submit_button" disabled onclick="new_func()">Submit
+</button>
 
-	<div id="editor" contenteditable="true"></div>
+<div class="container">
+	<div id="content" contenteditable="true"></div>
+	<div id="suggestions"></div>
 </div>
 
-<script>
-    const submitButton = document.getElementById('submitButton');
-    const editor = document.getElementById('editor');
 
-    function openEditor() {
-        editor.style.display = 'block';
-        
+{#<script src="scripts.script"></script>#}
+
+<script>
+    function new_func() {
+        alert('hello')
     }
-</script>
 
-<script>
     function checkFormValidity() {
-        var resumeInput = document.getElementById("resume");
-        var jdInput = document.getElementById("jd");
-        var jdLinkInput = document.getElementById("jd_link");
-        var jdTextInput = document.getElementById("jd_text");
-        var submitButton = document.getElementById("submitButton");
+        let resume_input = document.getElementById("resume");
+        let jd_input = document.getElementById("jd");
+        let jd_link_input = document.getElementById("jd_link");
+        let jd_text_input = document.getElementById("jd_text");
+        let submit_button = document.getElementById("submit_button");
 
-        resume_true = resumeInput.files.length > 0
+        resume_true = resume_input.files.length > 0
         jd_true = (
-            jdInput.files.length > 0
-            || jdLinkInput.value.trim() !== ""
-            || jdTextInput.value.trim() !== ""
+            jd_input.files.length > 0
+            || jd_link_input.value.trim() !== ""
+            || jd_text_input.value.trim() !== ""
         )
-        submitButton.disabled = !(resume_true && jd_true);
+        submit_button.disabled = !(resume_true && jd_true);
     }
 </script>
 
 </body>
 </html>
+

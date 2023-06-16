@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Cover Letter Creator</title>
-        <script>
+<head>
+	<title>Cover Letter Creator</title>
+
+	<style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        #editor {
+            height: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: none; /* Initially hide the editor */
+        }
+	</style>
+
+	<script>
         function checkFormValidity() {
             var resumeInput = document.getElementById("resume");
             var jdInput = document.getElementById("jd");
@@ -16,36 +32,61 @@
                 || jdLinkInput.value.trim() !== ""
                 || jdTextInput.value.trim() !== ""
             )
-            if (resume_true && jd_true) {
-                submitButton.disabled = false;
-            } else {
-                submitButton.disabled = true;
-            }
+            submitButton.disabled = false
+            {#!(resume_true && jd_true);#}
         }
-        </script>
+	</script>
 
-    </head>
-    <body>
 
-        <form action="/process" method="post" enctype="multipart/form-data" id="myForm">
-            <label for="resume">Upload resume:</label>
-            <input type="file" name="resume" id="resume" onchange="checkFormValidity()">
-            <br><hr color="green"><br>
+	<script>
+        const submitButton = document.getElementById('submitButton');
+        const content = document.getElementById('content');
+        const suggestions = document.getElementById('suggestions');
+        const suggestionList = [];
 
-            <label for="jd">Upload JD:</label>
-            <input type="file" name="jd" id="jd" onchange="checkFormValidity()">
+        submitButton.addEventListener('click', openEditor);
 
-            <label for="jd_link">or JD link:</label>
-            <input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">
+        function openEditor() {
+            content.style.display = 'block';
+            suggestions.style.display = 'block';
+            {#content.textContent = result.textContent#}
+        }
 
-            <label for="jd_text">&emsp;&emsp;&emsp;or paste its text:</label>
-            <input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">
-            <br><hr color="green"/><br>
+	</script>
+</head>
+<body>
 
-            <input type="submit" value="Submit" id="submitButton" disabled>
-        </form>
+<form action="/process" method="post" enctype="multipart/form-data" id="myForm">
+	<label for="resume">Upload resume:</label>
+	<input type="file" name="resume" id="resume" onchange="checkFormValidity()">
+	<br>
+	<hr color="green">
+	<br>
 
-        <div id="result">{{ result }}</div>
-    </body>
+	<label for="jd">Upload JD:</label>
+	<input type="file" name="jd" id="jd" onchange="checkFormValidity()">
+
+	<label for="jd_link">or JD link:</label>
+	<input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">
+
+	<label for="jd_text">&emsp;&emsp;&emsp;or paste its text:</label>
+	<input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">
+	<br>
+	<hr color="green"/>
+	<br>
+
+	{#            <input type="submit" value="Submit" id="submitButton" disabled>#}
+	<input type="submit" value="Submit" id="submitButton">
+
+</form>
+
+<div class="container">
+	<div id="content" contenteditable="true"></div>
+	<div id="suggestions"></div>
+	{#        <div id="result">{{ result }}</div>#}
+</div>
+</body>
+
+
 </html>
 

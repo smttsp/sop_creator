@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    #editor {
+      height: 300px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: none; /* Initially hide the editor */
+    }
+	</style>
+</head>
+
+
+<body>
+
+
+{#<div class="container">#}
+{#	<label for="resume">Upload resume:</label>#}
+{#	<input type="file" name="resume" id="resume" onchange="checkFormValidity()">#}
+{#	<br>#}
+{#	<hr color="green">#}
+{#	<br>#}
+{##}
+{#	<label for="jd">Upload JD:</label>#}
+{#	<input type="file" name="jd" id="jd" onchange="checkFormValidity()">#}
+{##}
+{#	<label for="jd_link">or JD link:</label>#}
+{#	<input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">#}
+{##}
+{#	<label for="jd_text">&emsp;&emsp;&emsp;or paste its text:</label>#}
+{#	<input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">#}
+{#	<br>#}
+{#	<hr color="green"/>#}
+{#	<br>#}
+{##}
+{#	<button id="submitButton" onclick="openEditor()">Submit</button>#}
+{#	<div id="editor" contenteditable="true"></div>#}
+{#</div>#}
+{##}
+{#<script>#}
+{#    const submitButton = document.getElementById('submitButton');#}
+{#    const editor = document.getElementById('editor');#}
+{##}
+{#    function openEditor() {#}
+{#        fetch('/process')  // Send a request to the backend endpoint#}
+{#            .then(response => response.text())  // Get the response as text#}
+{#            .then(content => {#}
+{#                editor.style.display = 'block';#}
+{#                editor.textContent = content;  // Fill the editor with the generated content#}
+{#            })#}
+{#            .catch(error => console.error(error));#}
+{#    }#}
+{#</script>#}
+
+
+<div class="container">
+	<form id="myForm" enctype="multipart/form-data">
+		<label for="resume">Upload resume:</label>
+		<input type="file" name="resume" id="resume" onchange="checkFormValidity()">
+		<br>
+		<hr color="green">
+		<br>
+
+		<label for="jd">Upload JD:</label>
+		<input type="file" name="jd" id="jd" onchange="checkFormValidity()">
+
+		<label for="jd_link">or JD link:</label>
+		<input type="text" name="jd_link" id="jd_link" oninput="checkFormValidity()">
+
+		<label for="jd_text">&emsp;&emsp;&emsp;or paste its text:</label>
+		<input type="text" name="jd_text" id="jd_text" oninput="checkFormValidity()">
+		<br>
+		<hr color="green"/>
+		<br>
+
+		<button id="submitButton" onclick="submitForm()" disabled>Submit</button>
+	</form>
+	<div id="editor" contenteditable="true"></div>
+</div>
+
+<script>
+    const myForm = document.getElementById('myForm');
+    const editor = document.getElementById('editor');
+
+    function submitForm() {
+        const formData = new FormData(myForm);
+        fetch('/process', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(content => {
+                editor.style.display = 'block';
+                editor.innerHTML = content;
+                {#console.log(content)#}
+            })
+            .catch(error => console.error(error));
+    }
+</script>
+
+
+<script>
+    function checkFormValidity() {
+        var resumeInput = document.getElementById("resume");
+        var jdInput = document.getElementById("jd");
+        var jdLinkInput = document.getElementById("jd_link");
+        var jdTextInput = document.getElementById("jd_text");
+        var submitButton = document.getElementById("submitButton");
+
+        resume_true = resumeInput.files.length > 0
+        jd_true = (
+            jdInput.files.length > 0
+            || jdLinkInput.value.trim() !== ""
+            || jdTextInput.value.trim() !== ""
+        )
+        submitButton.disabled = !(resume_true && jd_true);
+    }
+</script>
+
+</body>
+</html>
