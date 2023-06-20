@@ -1,10 +1,13 @@
 # Cover Letter creator
 
-Creating Cover Letter/Statement of Purpose from resume/CV and job description
+Creating a Cover Letter/Statement of Purpose from resume/CV + job description. This tool reads your resume from a pdf or docx file and reads job description from a pdf/docx/text or a static web link. Then creates a cover letter. 
+
+I implemented a very primitive version of a web app that will take the inputs and give outputs. Then you will update the cover letter based on your needs (non-factual/didn't like sentence etc). Then it will give a query to chatgpt and will do a back-and-forth process until you are satisfied with your cover letter. 
 
 
 ## Motivation
 
+I faced this problem. Copying and pasting a resume from a pdf/docx, then finding the job description, writing queries etc is a hairy process. This utility tool can simplify it. 
 
 ## Installation
 
