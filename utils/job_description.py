@@ -1,4 +1,3 @@
-
 from utils.file_utils import read_text_from_file
 from utils.http_utils import get_text_from_html
 from utils.string_utils import remove_extra_spaces

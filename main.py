@@ -3,8 +3,8 @@ from datetime import datetime
 
 import openai
 
-from utils.file_utils import read_text_from_file, save_files_to_cloud
 from utils import JobDescription, Resume
+from utils.file_utils import read_text_from_file, save_files_to_cloud
 
 
 # from utils.secret_manager_utils import get_secret_value_dict
@@ -102,7 +102,10 @@ if __name__ == "__main__":
         resume_file=resume_file,
         jd_file=jd_file,
     )
+    from utils.word_utils import get_word_cloud
 
+    get_word_cloud(resume.content)
+    get_word_cloud(jd.content)
     cover_letter = get_cover_letter(content)
 
     pass

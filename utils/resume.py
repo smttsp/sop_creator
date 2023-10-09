@@ -14,4 +14,3 @@ class Resume:
 
     def convert_to_pdf_resume(self, template_name):
         pass
-

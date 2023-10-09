@@ -151,5 +151,5 @@ def read_text_from_file(filename):
             all_resume = remove_extra_spaces(all_resume)
     except:
         all_resume = None
-        
+
     return all_resume
