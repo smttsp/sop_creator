@@ -20,6 +20,12 @@ google-cloud-storage = "^2.9.0"
 google-auth = "^2.19.1"
 google-cloud-secret-manager = "^2.16.1"
 psycopg2 = "^2.9.6"
+linkedin-scraper = "^2.11.1"
+webdriver-manager = "^3.8.6"
+torch = "^2.0.1"
+torchvision = "^0.15.2"
+opencv-python = "^4.8.0.76"
+wordcloud = "^1.9.2"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"
@@ -27,6 +33,9 @@ flake8 = "^3.8.4"
 pytest = "^6.1.2"
 pytest-cov = "^2.10.1"
 isort = "^5.6.4"
+
+[tool.poetry.group.dev.dependencies]
+matplotlib = "^3.7.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
