@@ -1,7 +1,13 @@
+from utils.file_utils import read_text_from_file
+
 
 class Resume:
-    def __init__(self, resume_content):
-        self.resume_content = resume_content
+    def __init__(self, resume_file):
+        self.resume_file = resume_file
+        self.content = self.get_resume_content()
+
+    def get_resume_content(self):
+        return read_text_from_file(self.resume_file)
 
     def convert_to_json_resume(self):
         pass

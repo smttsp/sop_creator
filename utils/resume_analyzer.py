@@ -1,6 +1,5 @@
 
 
-
 class ResumeAnalyzer:
     def __init__(self, resume, job_description):
         self.resume = resume

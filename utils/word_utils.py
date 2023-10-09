@@ -13,8 +13,8 @@ def convert_docx_to_text(file):
 
 
 def get_word_cloud(content):
-    #convert list to string and generate
-    wordcloud = WordCloud(width=1000, height=500).generate(content)
+    wordcloud_obj = WordCloud(width=1000, height=500, max_words=20, min_word_length=2)
+    wordcloud = wordcloud_obj.generate(content)
     plt.figure(figsize=(15, 8))
     plt.imshow(wordcloud)
     plt.axis("off")
