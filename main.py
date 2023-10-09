@@ -47,20 +47,20 @@ def get_content_from_inputs(
         "jd_content": jd_content,
     }
 
-    save_files_to_cloud(
-        session_info.storage_client,
-        session_info.gcp_folder,
-        resume_file,
-        jd_file,
-        content_dict=results_dict,
-    )
+    # save_files_to_cloud(
+    #     session_info.storage_client,
+    #     session_info.gcp_folder,
+    #     resume_file,
+    #     jd_file,
+    #     content_dict=results_dict,
+    # )
 
     content = (
         f"Given that my resume_file is: {resume_content} \n\n"
         f"and job description I am applying is {jd_content}.\n\n"
         "Can you write me a cover letter"
     )
-    return content
+    return content, resume_content, jd_content
 
 
 def get_cover_letter(content):
@@ -75,7 +75,7 @@ def get_cover_letter(content):
         ],
     )
     cover_letter = completion.choices[0].message.content
-    print(cover_letter)
+    # print(cover_letter)
     return cover_letter
 
 #

@@ -3,10 +3,9 @@ import os
 from flask import Flask, render_template, request
 from google.cloud.storage.client import Client as StorageClient
 
-from main import get_content_from_inputs, get_session_id
+from main import get_content_from_inputs, get_session_id, get_cover_letter
 from utils.constants import DEFAULT_GCP_BUCKET
 from utils.secret_manager_utils import get_secret_value_dict
-
 
 app = Flask(__name__)
 
@@ -51,9 +50,9 @@ def index():
 
 @app.route("/process", methods=["POST"])
 def process():
-    USER = "smttsp"
-    session_info = SessionInfo(user=USER)
-
+    # USER = "smttsp"
+    # session_info = SessionInfo(user=USER)
+    session_info = None
     resume_file = request.files["resume"]
     jd_file = request.files["jd"]
     jd_link = request.form["jd_link"]
@@ -65,14 +64,16 @@ def process():
 
     print(resume_file)
 
-    tmp_content = get_content_from_inputs(
+    tmp_content, resume_content, jd_content = get_content_from_inputs(
         session_info,
         resume_file,
         jd_file,
         jd_link,
         jd_text,
     )
-    content = reply + "<br><br>" + tmp_content
+
+    content = get_cover_letter(tmp_content)
+    # content = reply + "<br><br>" + tmp_content
 
     return content
 
