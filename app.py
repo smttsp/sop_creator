@@ -64,7 +64,7 @@ def process():
 
     print(resume_file)
 
-    tmp_content, resume_content, jd_content = get_content_from_inputs(
+    tmp_content, resume, jd = get_content_from_inputs(
         session_info,
         resume_file,
         jd_file,

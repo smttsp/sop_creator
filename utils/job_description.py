@@ -9,8 +9,7 @@ class JobDescription:
         self.jd_file = jd_file
         self.jd_link = jd_link
         self.jd_text = jd_text
-
-        self.jd_content = self.get_jd_from_inputs()
+        self.content = self.get_jd_from_inputs()
 
     def convert_to_json_jd(self):
         pass
