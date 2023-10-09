@@ -48,9 +48,22 @@ def save_orjson(file_path, data):
     return None
 
 
-def get_bucket_blobname_from_uri(gs_uri):
+def get_bucket_blobname_from_uri(gs_uri: str) -> tuple[str, str]:
+    """Extract the bucket name and blob name from a Google Cloud Storage URI.
+
+    Args:
+        gs_uri (str): The Google Cloud Storage URI.
+    Returns:
+        Tuple[str, str]: The bucket name and blob name.
+    """
+
+    # if not gs_uri.startswith("gs://"):
+    #     raise ValueError(f"Invalid Google Cloud Storage URI: {gs_uri}")
+
     splits = gs_uri.replace("gs://", "").split("/")
-    assert len(splits), f"invalid {gs_uri=}"
+    if not splits:
+        raise ValueError(f"Invalid Google Cloud Storage URI: {gs_uri}")
+
     bucket_name = splits[0]
     blob_name = "/".join(splits[1:])
     return bucket_name, blob_name
@@ -123,18 +136,20 @@ def read_text_from_file(filename):
     Returns:
         str: Plain text content of the file with text processing operations applied.
     """
+    try:
+        all_resume = convert_pdf_to_txt(filename)
+        all_resume = (
+            convert_docx_to_text(filename) if all_resume is None else all_resume
+        )
 
-    all_resume = convert_pdf_to_txt(filename)
-    all_resume = (
-        convert_docx_to_text(filename) if all_resume is None else all_resume
-    )
+        emails = find_emails(all_resume)
+        phone_numbers, formatted_numbers = find_phone_numbers(all_resume)
 
-    emails = find_emails(all_resume)
-    phone_numbers, formatted_numbers = find_phone_numbers(all_resume)
-
-    if isinstance(all_resume, str):
-        all_resume = anonymize_text(all_resume, emails, "")
-        all_resume = anonymize_text(all_resume, phone_numbers, "")
-        all_resume = remove_extra_spaces(all_resume)
-
+        if isinstance(all_resume, str):
+            all_resume = anonymize_text(all_resume, emails, "")
+            all_resume = anonymize_text(all_resume, phone_numbers, "")
+            all_resume = remove_extra_spaces(all_resume)
+    except:
+        all_resume = None
+        
     return all_resume
