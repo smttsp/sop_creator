@@ -164,3 +164,32 @@ class ResumeAnalyzer:
         plt.title("JD - Resume", fontdict=fontdict)
 
         plt.show()
+
+    def give_recommendations(self):
+        """Give recommendations based on the weighted Jaccard similarity score."""
+
+        if self.weighted_jaccard >= EXPECTED_SIMILARITY:
+            print(
+                f"Your resume is a good match for the job description. "
+                f"Your weighted Jaccard similarity score is "
+                f"{self.weighted_jaccard:.2f}."
+            )
+        else:
+            print(
+                f"Improving similarity between your resume and the job description "
+                f"may increase your chance of match. "
+                f"Your weighted Jaccard similarity score is {self.weighted_jaccard:.2f}"
+            )
+
+        words1 = [word for word, diff in self.resume_jd_diff]
+        words2 = [word for word, diff in self.jd_resume_diff]
+
+        pprint(
+            f"Here are some words that are more frequent in your resume "
+            f"than the job description:\n{words1}",
+        )
+
+        pprint(
+            "Here are some words that are more frequent in the job description "
+            f"than your resume:\n{words2}"
+        )
