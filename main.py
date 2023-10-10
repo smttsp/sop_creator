@@ -56,12 +56,12 @@ def get_content_from_inputs(
     #     content_dict=results_dict,
     # )
 
-    content = (
-        f"Given that my resume_file is: {resume.content} \n\n"
-        f"and job description I am applying is {jd.content}.\n\n"
-        "Can you write me a cover letter"
-    )
-    return content, resume, jd
+    # content = (
+    #     f"Given that my resume_file is: {resume.content} \n\n"
+    #     f"and job description I am applying is {jd.content}.\n\n"
+    #     "Can you write me a cover letter"
+    # )
+    return resume, jd
 
 
 def get_cover_letter(content):
@@ -71,7 +71,6 @@ def get_cover_letter(content):
             {
                 "role": "user",
                 "content": content,
-                "session_id": "fjewhr984urjfewf",
             }
         ],
     )
