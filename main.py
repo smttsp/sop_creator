@@ -105,6 +105,7 @@ if __name__ == "__main__":
     )
 
     from utils.resume_analyzer import ResumeAnalyzer
+
     ra = ResumeAnalyzer(resume, jd)
     jaccard = ra.get_weighted_jaccard()
     cover_letter = get_cover_letter(content)

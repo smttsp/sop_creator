@@ -87,4 +87,3 @@ class ResumeAnalyzer:
 
             differences[keys] = weight1 - weight2
         return differences
-    

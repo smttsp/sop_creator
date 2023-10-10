@@ -1,4 +1,4 @@
-STOPWORDS = [
+STOPWORDS2 = [
     "a",
     "about",
     "above",
@@ -215,4 +215,20 @@ STOPWORDS = [
     "yours",
     "yourself",
     "yourselves",
+    "www",
+    "http",
+    "like",
+    "else",
+    "get",
+    "com",
+    "ever",
+    "can",
+    "since",
+    "just",
+    "however",
+    "therefore",
+    "otherwise",
+    "also",
+    "shall",
+    "hence",
 ]
