@@ -102,7 +102,7 @@ if __name__ == "__main__":
         resume_file=resume_file,
         jd_file=jd_file,
     )
-    from utils.word_utils import get_word_cloud, get_weighted_jaccard
+    from utils.word_utils import get_weighted_jaccard, get_word_cloud
 
     w1 = get_word_cloud(resume.content)
     w2 = get_word_cloud(jd.content)

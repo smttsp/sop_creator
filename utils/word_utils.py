@@ -3,8 +3,9 @@ import sys
 import docx2txt
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+
 from utils.stop_word_list import STOPWORDS
-import sys
+
 
 EPS = sys.float_info.epsilon
 
@@ -12,7 +13,7 @@ EPS = sys.float_info.epsilon
 def convert_docx_to_text(file):
     try:
         text = docx2txt.process(file)
-    except:
+    except Exception as e:
         text = None
 
     return text
