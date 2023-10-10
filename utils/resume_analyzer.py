@@ -2,7 +2,7 @@ import sys
 
 from wordcloud import WordCloud
 from utils.word_utils import get_word_cloud
-
+from utils import Resume, JobDescription
 EPS = sys.float_info.epsilon
 
 
@@ -26,7 +26,7 @@ def get_word_count_dict(wordcloud: WordCloud):
 
 
 class ResumeAnalyzer:
-    def __init__(self, resume: "Resume", jd: "JobDescription"):
+    def __init__(self, resume: Resume, jd: JobDescription):
         self.resume = resume
         self.jd = jd
         self.resume_wc, self.jd_wc = self.get_word_cloud()
@@ -79,6 +79,12 @@ class ResumeAnalyzer:
         return intersection / (union + EPS)
 
     def get_differences(self):
+        """Calculate the differences between the word frequencies of the resume and jd.
+
+        Returns:
+            dict: A dictionary containing the differences between the word frequencies
+        """
+
         differences = {}
         keys = set(self.resume_wf.keys()).union(set(self.jd_wf.keys()))
         for key in keys:
@@ -86,4 +92,5 @@ class ResumeAnalyzer:
             weight2 = self.jd_wf.get(key, 0)
 
             differences[keys] = weight1 - weight2
+
         return differences

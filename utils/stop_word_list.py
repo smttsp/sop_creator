@@ -1,4 +1,4 @@
-STOPWORDS2 = [
+STOPWORDS = [
     "a",
     "about",
     "above",

@@ -1,8 +1,8 @@
 import docx2txt
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud, STOPWORDS
+from wordcloud import WordCloud
 
-from utils.stop_word_list import STOPWORDS2
+from utils.stop_word_list import STOPWORDS
 
 
 def convert_docx_to_text(file):
@@ -16,7 +16,7 @@ def convert_docx_to_text(file):
 
 def get_word_cloud(content, stopwords=None):
     if stopwords is None:
-        stopwords = STOPWORDS2
+        stopwords = STOPWORDS
 
     wordcloud_obj = WordCloud(
         background_color="white",
