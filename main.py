@@ -97,16 +97,18 @@ if __name__ == "__main__":
     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
 
     # gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"
-    content, resume, jd = get_content_from_inputs(
+    resume, jd = get_content_from_inputs(
         None,
         resume_file=resume_file,
         jd_file=jd_file,
     )
 
     from utils.resume_analyzer import ResumeAnalyzer
+    from utils.cover_letter import CoverLetter
 
     ra = ResumeAnalyzer(resume, jd)
     # jaccard = ra.get_weighted_jaccard()
-    cover_letter = get_cover_letter(content)
+    cover_letter = CoverLetter(resume, jd)
+    # cover_letter = get_cover_letter(content)
 
     pass
