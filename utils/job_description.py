@@ -1,6 +1,7 @@
 from utils.file_utils import read_text_from_file
 from utils.http_utils import get_text_from_html
 from utils.string_utils import remove_extra_spaces
+from utils.llm_utils import get_completion
 
 
 class JobDescription:
@@ -8,7 +9,8 @@ class JobDescription:
         self.jd_file = jd_file
         self.jd_link = jd_link
         self.jd_text = jd_text
-        self.content = self.get_jd_from_inputs()
+        self.ori_content = self._get_jd_from_inputs()
+        self.content = self._remove_extra_wording_from_jd()
 
     def convert_to_json_jd(self):
         pass
@@ -16,7 +18,7 @@ class JobDescription:
     def convert_to_pdf_jd(self, template_name):
         pass
 
-    def get_jd_from_inputs(self):
+    def _get_jd_from_inputs(self):
         """Process the JD (Job Description) based on the provided inputs.
 
         This function takes in the JD file, JD link, and JD text as inputs.
@@ -36,3 +38,20 @@ class JobDescription:
             jd = remove_extra_spaces(jd)
 
         return jd
+
+    def _remove_extra_wording_from_jd(self):
+        """Remove the common wording from the JD, such as equal opportunity employer,
+        non-discrimination, benefits etc.
+        """
+
+        prompt = (
+            f"Given the job description here: {self.ori_content}."
+            "Can you remove the common wording such as"
+            "- equal opportunity employer"
+            "- non-discrimination"
+            "- benefits"
+            " that are at the end of the from the JD?"
+        )
+
+        clean_content = get_completion(prompt)
+        return clean_content
