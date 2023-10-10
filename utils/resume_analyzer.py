@@ -1,3 +1,30 @@
+import sys
+
+from wordcloud import WordCloud
+from utils.word_utils import get_word_cloud
+
+EPS = sys.float_info.epsilon
+
+
+def get_word_count_dict(wordcloud: WordCloud):
+    """Extracts word frequencies from a WordCloud object and returns a dictionary
+    where keys are words and values are their corresponding frequencies.
+
+    Parameters:
+        wordcloud (WordCloud): The input WordCloud object.
+
+    Returns:
+        dict: A dictionary containing words as keys and their frequencies as values.
+    """
+
+    word_count_dict = {}
+    for a_tuple in wordcloud.layout_:
+        word, freq = a_tuple[0]
+        word_count_dict[word] = freq
+
+    return word_count_dict
+
+
 class ResumeAnalyzer:
     def __init__(self, resume: "Resume", jd: "JobDescription"):
         self.resume = resume
