@@ -41,12 +41,12 @@ def get_content_from_inputs(
     resume = Resume(resume_file)
     jd = JobDescription(jd_file, jd_link, jd_text)
 
-    results_dict = {
-        "jd_link": jd_link or "",
-        "jd_text": jd_text or "",
-        "resume_content": resume.content,
-        "jd_content": jd.content,
-    }
+    # results_dict = {
+    #     "jd_link": jd_link or "",
+    #     "jd_text": jd_text or "",
+    #     "resume_content": resume.content,
+    #     "jd_content": jd.content,
+    # }
 
     # save_files_to_cloud(
     #     session_info.storage_client,
@@ -104,6 +104,7 @@ if __name__ == "__main__":
     )
 
     ra = ResumeAnalyzer(resume, jd)
+    ra.visualize_word_clouds()
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
     # cover_letter = get_cover_letter(content)

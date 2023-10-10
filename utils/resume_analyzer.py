@@ -39,7 +39,10 @@ class ResumeAnalyzer:
         self.differences = self.get_differences()
         self.weighted_jaccard = self.get_weighted_jaccard()
 
-        self.top_n_diff_wc = self.get_top_n_differences_as_wc()
+        (
+            self.resume_jd_diff_wc,
+            self.jd_resume_diff_wc,
+        ) = self.get_top_n_differences_as_wc()
 
     def get_word_cloud(self):
         """Generate a word cloud from the resume and jd.
@@ -99,7 +102,7 @@ class ResumeAnalyzer:
             weight1 = self.resume_wf.get(key, 0)
             weight2 = self.jd_wf.get(key, 0)
 
-            differences[key] = abs(weight1 - weight2)
+            differences[key] = weight1 - weight2
 
         return differences
 
@@ -114,45 +117,41 @@ class ResumeAnalyzer:
                 differences in word frequencies.
         """
 
-        top_n = sorted(
+        sorted_diffs = sorted(
             self.differences.items(), key=lambda x: x[1], reverse=True
-        )[:n]
+        )
+
+        resume_jd_diff = sorted_diffs[:n]
+        jd_resume_diff = [(k, -x) for k, x in sorted_diffs[-n:]]
+
         diff_wc_tmp = WordCloud(width=800, height=400, background_color="white")
-        diff_wc = diff_wc_tmp.generate_from_frequencies(dict(top_n))
-        return diff_wc
+        resume_jd_diff_wc = diff_wc_tmp.generate_from_frequencies(
+            dict(resume_jd_diff)
+        )
+        jd_resume_diff_wc = diff_wc_tmp.generate_from_frequencies(
+            dict(jd_resume_diff)
+        )
+
+        return resume_jd_diff_wc, jd_resume_diff_wc
 
     def visualize_word_clouds(self):
         """Visualize the word clouds of the resume and jd."""
 
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 8))
+        fig, (ax1, ax2) = plt.subplots(2, 2, figsize=(15, 15))
         ax1.imshow(self.resume_wc)
         ax1.axis("off")
         ax1.set_title("Resume")
+
         ax2.imshow(self.jd_wc)
         ax2.axis("off")
         ax2.set_title("Job Description")
+
+        ax1.imshow(self.resume_wc)
+        ax1.axis("off")
+        ax1.set_title("Resume - JD")
+
+        ax2.imshow(self.jd_wc)
+        ax2.axis("off")
+        ax2.set_title("JD - Resume")
+
         plt.show()
-
-    def visualize_top_n_differences(self, n: int = 10):
-        """Visualize the top n words with the highest differences in word frequencies.
-
-        Args:
-            n (int, optional): The number of words to return. Defaults to 10.
-        """
-
-        fig, ax = plt.subplots(figsize=(15, 8))
-        ax.imshow(self.top_n_diff_wc)
-        ax.axis("off")
-        ax.set_title(f"Top {n} Differences")
-        plt.show()
-
-    def visualize_all(self, n: int = 10):
-        """Visualize the word clouds of the resume and jd, and the top n words with the
-        highest differences in word frequencies.
-
-        Args:
-            n (int, optional): The number of words to return. Defaults to 10.
-        """
-
-        self.visualize_word_clouds()
-        self.visualize_top_n_differences(n=n)
