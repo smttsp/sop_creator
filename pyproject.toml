@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cover letter creator"
+name = "Cover letter creator"
 version = "1.0.0"
 description = "This is a template example for creating internal Python Packages"
 authors = ["samet <samet@gmail.com>"]

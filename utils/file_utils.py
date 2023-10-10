@@ -95,7 +95,11 @@ def save_json_to_cloud(storage_client, data: dict, gs_uri: str):
 
 
 def save_files_to_cloud(
-    storage_client, gcp_folder, resume_file, jd_file, content_dict
+        storage_client,
+        gcp_folder: str,
+        resume_file,
+        jd_file,
+        content_dict: dict,
 ):
     """Save files to a specified folder, including resume, job description,
         and content dictionary.
@@ -126,7 +130,7 @@ def save_files_to_cloud(
 
 
 def read_text_from_file(filename):
-    """Reads plain text content from a PDF or DOCX file and performs text processing operations.
+    """Reads plain text content from a pdf/docx file and performs text processing.
         It finds the emails and phone numbers in the resumes, then deletes them.
         Then removes double spaces etc.
 
@@ -149,7 +153,7 @@ def read_text_from_file(filename):
             all_resume = anonymize_text(all_resume, emails, "")
             all_resume = anonymize_text(all_resume, phone_numbers, "")
             all_resume = remove_extra_spaces(all_resume)
-    except:
+    except Exception as e:
         all_resume = None
 
     return all_resume

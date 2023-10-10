@@ -1,11 +1,12 @@
 import sys
 
+import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+
+from utils import JobDescription, Resume
 from utils.word_utils import get_word_cloud
-from utils import Resume, JobDescription
 
 EPS = sys.float_info.epsilon
-import matplotlib.pyplot as plt
 
 
 def get_word_count_dict(wordcloud: WordCloud):
@@ -108,8 +109,8 @@ class ResumeAnalyzer:
             n (int, optional): The number of words to return. Defaults to 10.
 
         Returns:
-            list: A list of tuples containing the top n words with the highest differences
-                in word frequencies.
+            list: A list of tuples containing the top n words with the highest
+                differences in word frequencies.
         """
 
         top_n = sorted(
