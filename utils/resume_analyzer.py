@@ -33,7 +33,10 @@ class ResumeAnalyzer:
         self.jd = jd
         self.resume_wc, self.jd_wc = self.get_word_cloud()
         self.resume_wf, self.jd_wf = self.get_word_freq_dict()
+
         self.differences = self.get_differences()
+        self.weighted_jaccard = self.get_weighted_jaccard()
+
         self.top_n_diff_wc = self.get_top_n_differences_as_wc()
 
     def get_word_cloud(self):
