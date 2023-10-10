@@ -124,11 +124,12 @@ class ResumeAnalyzer:
         resume_jd_diff = sorted_diffs[:n]
         jd_resume_diff = [(k, -x) for k, x in sorted_diffs[-n:]]
 
-        diff_wc_tmp = WordCloud(width=800, height=400, background_color="white")
-        resume_jd_diff_wc = diff_wc_tmp.generate_from_frequencies(
+        diff_wc1 = WordCloud(background_color="ivory")
+        resume_jd_diff_wc = diff_wc1.generate_from_frequencies(
             dict(resume_jd_diff)
         )
-        jd_resume_diff_wc = diff_wc_tmp.generate_from_frequencies(
+        diff_wc2 = WordCloud(background_color="lavender")
+        jd_resume_diff_wc = diff_wc2.generate_from_frequencies(
             dict(jd_resume_diff)
         )
 
@@ -137,21 +138,29 @@ class ResumeAnalyzer:
     def visualize_word_clouds(self):
         """Visualize the word clouds of the resume and jd."""
 
-        fig, (ax1, ax2) = plt.subplots(2, 2, figsize=(15, 15))
-        ax1.imshow(self.resume_wc)
-        ax1.axis("off")
-        ax1.set_title("Resume")
+        fontdict = dict(size=30, color="blue", verticalalignment="bottom")
 
-        ax2.imshow(self.jd_wc)
-        ax2.axis("off")
-        ax2.set_title("Job Description")
+        fig = plt.subplots(2, 2, figsize=(15, 10))
+        plt.tight_layout()
 
-        ax1.imshow(self.resume_wc)
-        ax1.axis("off")
-        ax1.set_title("Resume - JD")
+        plt.subplot(2, 2, 1)
+        plt.imshow(self.resume_wc)
+        plt.axis("off")
+        plt.title("Resume", fontdict=fontdict)
 
-        ax2.imshow(self.jd_wc)
-        ax2.axis("off")
-        ax2.set_title("JD - Resume")
+        plt.subplot(2, 2, 2)
+        plt.imshow(self.jd_wc)
+        plt.axis("off")
+        plt.title("Job Description", fontdict=fontdict)
+
+        plt.subplot(2, 2, 3)
+        plt.imshow(self.resume_jd_diff_wc)
+        plt.axis("off")
+        plt.title("Resume - JD", fontdict=fontdict)
+
+        plt.subplot(2, 2, 4)
+        plt.imshow(self.jd_resume_diff_wc)
+        plt.axis("off")
+        plt.title("JD - Resume", fontdict=fontdict)
 
         plt.show()
