@@ -6,6 +6,7 @@ from wordcloud import WordCloud
 from utils import JobDescription, Resume
 from utils.word_utils import get_word_cloud
 
+
 EPS = sys.float_info.epsilon
 
 

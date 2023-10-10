@@ -3,7 +3,7 @@ from datetime import datetime
 
 import openai
 
-from utils import JobDescription, Resume
+from utils import CoverLetter, JobDescription, Resume, ResumeAnalyzer
 from utils.file_utils import read_text_from_file, save_files_to_cloud
 from utils.word_utils import get_word_cloud
 
@@ -102,9 +102,6 @@ if __name__ == "__main__":
         resume_file=resume_file,
         jd_file=jd_file,
     )
-
-    from utils.resume_analyzer import ResumeAnalyzer
-    from utils.cover_letter import CoverLetter
 
     ra = ResumeAnalyzer(resume, jd)
     # jaccard = ra.get_weighted_jaccard()
