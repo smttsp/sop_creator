@@ -20,8 +20,6 @@ def get_word_cloud(content, stopwords=None):
 
     wordcloud_obj = WordCloud(
         background_color="white",
-        width=1000,
-        height=500,
         max_words=20,
         min_word_length=2,
         stopwords=stopwords,

@@ -9,8 +9,9 @@ class JobDescription:
         self.jd_file = jd_file
         self.jd_link = jd_link
         self.jd_text = jd_text
-        self.ori_content = self._get_jd_from_inputs()
-        self.content = self._remove_extra_wording_from_jd()
+        # self.ori_content = self._get_jd_from_inputs()
+        # self.content = self._remove_extra_wording_from_jd()
+        self.content = self._get_jd_from_inputs()
 
     def convert_to_json_jd(self):
         pass
