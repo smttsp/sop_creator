@@ -202,6 +202,7 @@ STOPWORDS = [
     "why",
     "why's",
     "with",
+    "will",
     "won't",
     "would",
     "wouldn't",

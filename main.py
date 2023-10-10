@@ -102,10 +102,12 @@ if __name__ == "__main__":
         resume_file=resume_file,
         jd_file=jd_file,
     )
-    from utils.word_utils import get_word_cloud
+    from utils.word_utils import get_word_cloud, get_weighted_jaccard
 
-    get_word_cloud(resume.content)
-    get_word_cloud(jd.content)
+    w1 = get_word_cloud(resume.content)
+    w2 = get_word_cloud(jd.content)
+
+    res = get_weighted_jaccard(w1, w2)
     cover_letter = get_cover_letter(content)
 
     pass
