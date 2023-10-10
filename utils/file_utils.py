@@ -145,15 +145,24 @@ def read_text_from_file(filename):
         all_resume = (
             convert_docx_to_text(filename) if all_resume is None else all_resume
         )
+    except Exception as e:
+        all_resume = None
 
+    return all_resume
+
+
+def anonymize_resume(all_resume):
+    emails = None
+    phone_numbers = None
+    try:
         emails = find_emails(all_resume)
-        phone_numbers, formatted_numbers = find_phone_numbers(all_resume)
+        _, phone_numbers = find_phone_numbers(all_resume)
 
         if isinstance(all_resume, str):
             all_resume = anonymize_text(all_resume, emails, "")
             all_resume = anonymize_text(all_resume, phone_numbers, "")
             all_resume = remove_extra_spaces(all_resume)
     except Exception as e:
-        all_resume = None
+        print("Exception in anonymize_resume: ", e)
 
-    return all_resume
+    return all_resume, emails, phone_numbers

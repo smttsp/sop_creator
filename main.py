@@ -93,7 +93,7 @@ if __name__ == "__main__":
     # from utils.database_utils import connect_to_db
     # conn = connect_to_db(db_login_info_dict)
 
-    resume_file = "/users/samet/desktop/sop_creator/resumes/Samet_resume.pdf"
+    resume_file = "/users/samet/desktop/sop_creator/resumes/Taspinar_Resume.pdf"
     jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
 
     # gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"
@@ -107,6 +107,5 @@ if __name__ == "__main__":
     ra.visualize_word_clouds()
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
-    # cover_letter = get_cover_letter(content)
 
     pass
