@@ -5,7 +5,7 @@ import openai
 
 from utils import JobDescription, Resume
 from utils.file_utils import read_text_from_file, save_files_to_cloud
-from utils.word_utils import get_weighted_jaccard, get_word_cloud
+from utils.word_utils import get_word_cloud
 
 
 # from utils.secret_manager_utils import get_secret_value_dict
@@ -104,10 +104,9 @@ if __name__ == "__main__":
         jd_file=jd_file,
     )
 
-    w1 = get_word_cloud(resume.content)
-    w2 = get_word_cloud(jd.content)
-
-    res = get_weighted_jaccard(w1, w2)
+    from utils.resume_analyzer import ResumeAnalyzer
+    ra = ResumeAnalyzer(resume, jd)
+    jaccard = ra.get_weighted_jaccard()
     cover_letter = get_cover_letter(content)
 
     pass
