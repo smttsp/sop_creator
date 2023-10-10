@@ -27,8 +27,12 @@ def get_word_cloud(content, stopwords=None):
         stopwords=stopwords,
     )
     wordcloud = wordcloud_obj.generate(content.lower())
-    plt.figure(figsize=(15, 8))
-    plt.imshow(wordcloud)
-    plt.axis("off")
-    plt.show()
+    # visualize_word_cloud(wordcloud)
     return wordcloud
+
+
+# def visualize_word_cloud(wordcloud):
+#     plt.figure(figsize=(15, 8))
+#     plt.imshow(wordcloud)
+#     plt.axis("off")
+#     plt.show()

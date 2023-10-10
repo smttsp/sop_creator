@@ -3,7 +3,9 @@ import sys
 from wordcloud import WordCloud
 from utils.word_utils import get_word_cloud
 from utils import Resume, JobDescription
+
 EPS = sys.float_info.epsilon
+import matplotlib.pyplot as plt
 
 
 def get_word_count_dict(wordcloud: WordCloud):
@@ -32,6 +34,7 @@ class ResumeAnalyzer:
         self.resume_wc, self.jd_wc = self.get_word_cloud()
         self.resume_wf, self.jd_wf = self.get_word_freq_dict()
         self.differences = self.get_differences()
+        self.top_n_diff_wc = self.get_top_n_differences_as_wc()
 
     def get_word_cloud(self):
         """Generate a word cloud from the resume and jd.
@@ -85,12 +88,66 @@ class ResumeAnalyzer:
             dict: A dictionary containing the differences between the word frequencies
         """
 
-        differences = {}
+        differences = dict()
         keys = set(self.resume_wf.keys()).union(set(self.jd_wf.keys()))
         for key in keys:
             weight1 = self.resume_wf.get(key, 0)
             weight2 = self.jd_wf.get(key, 0)
 
-            differences[keys] = weight1 - weight2
+            differences[key] = abs(weight1 - weight2)
 
         return differences
+
+    def get_top_n_differences_as_wc(self, n: int = 10):
+        """Get the top n words with the highest differences in word frequencies.
+
+        Args:
+            n (int, optional): The number of words to return. Defaults to 10.
+
+        Returns:
+            list: A list of tuples containing the top n words with the highest differences
+                in word frequencies.
+        """
+
+        top_n = sorted(
+            self.differences.items(), key=lambda x: x[1], reverse=True
+        )[:n]
+        diff_wc_tmp = WordCloud(width=800, height=400, background_color="white")
+        diff_wc = diff_wc_tmp.generate_from_frequencies(dict(top_n))
+        return diff_wc
+
+    def visualize_word_clouds(self):
+        """Visualize the word clouds of the resume and jd."""
+
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 8))
+        ax1.imshow(self.resume_wc)
+        ax1.axis("off")
+        ax1.set_title("Resume")
+        ax2.imshow(self.jd_wc)
+        ax2.axis("off")
+        ax2.set_title("Job Description")
+        plt.show()
+
+    def visualize_top_n_differences(self, n: int = 10):
+        """Visualize the top n words with the highest differences in word frequencies.
+
+        Args:
+            n (int, optional): The number of words to return. Defaults to 10.
+        """
+
+        fig, ax = plt.subplots(figsize=(15, 8))
+        ax.imshow(self.top_n_diff_wc)
+        ax.axis("off")
+        ax.set_title(f"Top {n} Differences")
+        plt.show()
+
+    def visualize_all(self, n: int = 10):
+        """Visualize the word clouds of the resume and jd, and the top n words with the
+        highest differences in word frequencies.
+
+        Args:
+            n (int, optional): The number of words to return. Defaults to 10.
+        """
+
+        self.visualize_word_clouds()
+        self.visualize_top_n_differences(n=n)
