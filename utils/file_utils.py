@@ -95,11 +95,11 @@ def save_json_to_cloud(storage_client, data: dict, gs_uri: str):
 
 
 def save_files_to_cloud(
-        storage_client,
-        gcp_folder: str,
-        resume_file,
-        jd_file,
-        content_dict: dict,
+    storage_client,
+    gcp_folder: str,
+    resume_file,
+    jd_file,
+    content_dict: dict,
 ):
     """Save files to a specified folder, including resume, job description,
         and content dictionary.
