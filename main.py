@@ -64,19 +64,19 @@ def get_content_from_inputs(
     return resume, jd
 
 
-def get_cover_letter(content):
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {
-                "role": "user",
-                "content": content,
-            }
-        ],
-    )
-    cover_letter = completion.choices[0].message.content
-    # print(cover_letter)
-    return cover_letter
+# def get_cover_letter(content):
+#     completion = openai.ChatCompletion.create(
+#         model="gpt-3.5-turbo",
+#         messages=[
+#             {
+#                 "role": "user",
+#                 "content": content,
+#             }
+#         ],
+#     )
+#     cover_letter = completion.choices[0].message.content
+#     # print(cover_letter)
+#     return cover_letter
 
 
 if __name__ == "__main__":

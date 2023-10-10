@@ -5,9 +5,10 @@ from wordcloud import WordCloud
 
 from utils import JobDescription, Resume
 from utils.word_utils import get_word_cloud
-
+from pprint import pprint
 
 EPS = sys.float_info.epsilon
+EXPECTED_SIMILARITY = 0.25
 
 
 def get_word_count_dict(wordcloud: WordCloud):
@@ -30,13 +31,19 @@ def get_word_count_dict(wordcloud: WordCloud):
 
 
 class ResumeAnalyzer:
-    def __init__(self, resume: Resume, jd: JobDescription):
+    def __init__(self, resume: Resume, jd: JobDescription, top_n: int = 10):
         self.resume = resume
         self.jd = jd
+        self.top_n = top_n
+
         self.resume_wc, self.jd_wc = self.get_word_cloud()
         self.resume_wf, self.jd_wf = self.get_word_freq_dict()
 
-        self.differences = self.get_differences()
+        (
+            self.differences,
+            self.resume_jd_diff,
+            self.jd_resume_diff,
+        ) = self.get_differences()
         self.weighted_jaccard = self.get_weighted_jaccard()
 
         (
@@ -104,9 +111,16 @@ class ResumeAnalyzer:
 
             differences[key] = weight1 - weight2
 
-        return differences
+        sorted_diffs = sorted(
+            differences.items(), key=lambda x: x[1], reverse=True
+        )
 
-    def get_top_n_differences_as_wc(self, n: int = 10):
+        resume_jd_diff = sorted_diffs[: self.top_n]
+        jd_resume_diff = [(k, -x) for k, x in sorted_diffs[-self.top_n :]]
+
+        return differences, resume_jd_diff, jd_resume_diff
+
+    def get_top_n_differences_as_wc(self):
         """Get the top n words with the highest differences in word frequencies.
 
         Args:
@@ -117,20 +131,13 @@ class ResumeAnalyzer:
                 differences in word frequencies.
         """
 
-        sorted_diffs = sorted(
-            self.differences.items(), key=lambda x: x[1], reverse=True
-        )
-
-        resume_jd_diff = sorted_diffs[:n]
-        jd_resume_diff = [(k, -x) for k, x in sorted_diffs[-n:]]
-
         diff_wc1 = WordCloud(background_color="ivory")
         resume_jd_diff_wc = diff_wc1.generate_from_frequencies(
-            dict(resume_jd_diff)
+            dict(self.resume_jd_diff)
         )
         diff_wc2 = WordCloud(background_color="lavender")
         jd_resume_diff_wc = diff_wc2.generate_from_frequencies(
-            dict(jd_resume_diff)
+            dict(self.jd_resume_diff)
         )
 
         return resume_jd_diff_wc, jd_resume_diff_wc
