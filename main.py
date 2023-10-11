@@ -105,6 +105,7 @@ if __name__ == "__main__":
 
     ra = ResumeAnalyzer(resume, jd)
     ra.visualize_word_clouds()
+    ra.give_recommendations()
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
 

@@ -46,7 +46,7 @@ class JobDescription:
         """
 
         prompt = (
-            f"Given the job description here: {self.ori_content}."
+            f"Given the job description here: {self.content}."
             "Can you remove the common wording such as"
             "- equal opportunity employer"
             "- non-discrimination"

@@ -8,7 +8,7 @@ from utils.word_utils import get_word_cloud
 from pprint import pprint
 
 EPS = sys.float_info.epsilon
-EXPECTED_SIMILARITY = 0.25
+EXPECTED_SIMILARITY = 0.2
 
 
 def get_word_count_dict(wordcloud: WordCloud):
@@ -31,7 +31,7 @@ def get_word_count_dict(wordcloud: WordCloud):
 
 
 class ResumeAnalyzer:
-    def __init__(self, resume: Resume, jd: JobDescription, top_n: int = 10):
+    def __init__(self, resume: Resume, jd: JobDescription, top_n: int = 20):
         self.resume = resume
         self.jd = jd
         self.top_n = top_n
@@ -115,8 +115,12 @@ class ResumeAnalyzer:
             differences.items(), key=lambda x: x[1], reverse=True
         )
 
-        resume_jd_diff = sorted_diffs[: self.top_n]
-        jd_resume_diff = [(k, -x) for k, x in sorted_diffs[-self.top_n :]]
+        resume_jd_diff = [
+            (k, x) for k, x in sorted_diffs[: self.top_n] if x > 0
+        ]
+        jd_resume_diff = [
+            (k, -x) for k, x in sorted_diffs[-self.top_n :] if x < 0
+        ]
 
         return differences, resume_jd_diff, jd_resume_diff
 
@@ -177,13 +181,13 @@ class ResumeAnalyzer:
 
         if self.weighted_jaccard >= EXPECTED_SIMILARITY:
             print(
-                f"Your resume is a good match for the job description. "
+                f"Your resume is a good match for the job description. \n"
                 f"Your weighted Jaccard similarity score is "
                 f"{self.weighted_jaccard:.2f}."
             )
         else:
             print(
-                f"Improving similarity between your resume and the job description "
+                f"Improving similarity between your resume and the job description \n"
                 f"may increase your chance of match. "
                 f"Your weighted Jaccard similarity score is {self.weighted_jaccard:.2f}"
             )
