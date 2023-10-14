@@ -1,7 +1,10 @@
 from utils.file_utils import read_text_from_file
 from utils.http_utils import get_text_from_html
 from utils.string_utils import remove_extra_spaces
-from utils.llm_utils import get_completion
+
+import json
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
 
 
 class JobDescription:
@@ -12,6 +15,7 @@ class JobDescription:
         # self.ori_content = self._get_jd_from_inputs()
         # self.content = self._remove_extra_wording_from_jd()
         self.content = self._get_jd_from_inputs()
+        self.clean_content = self._remove_extra_wording_from_jd_v2()
 
     def convert_to_json_jd(self):
         pass
@@ -40,19 +44,37 @@ class JobDescription:
 
         return jd
 
-    def _remove_extra_wording_from_jd(self):
+    def _remove_extra_wording_from_jd_v2(self, llm_model="gpt-3.5-turbo"):
         """Remove the common wording from the JD, such as equal opportunity employer,
         non-discrimination, benefits etc.
         """
 
-        prompt = (
-            f"Given the job description here: {self.content}."
-            "Can you remove the common wording such as"
-            "- equal opportunity employer"
-            "- non-discrimination"
-            "- benefits"
-            " that are at the end of the from the JD?"
-        )
+        chat = ChatOpenAI(temperature=0.0, model=llm_model)
 
-        clean_content = get_completion(prompt)
+        template_string = (
+            """Here is a {job_description}.
+            Can you remove the common wording such as
+            - equal opportunity employer
+            - non-discrimination
+            - benefits
+             that are at the end of the from the job description?
+             ---
+             Along with that, can you also extract `job_title`, `company_name`, 
+             `location` from the job description?
+             
+             Format the output as JSON with the following keys:
+                clean_job_description
+                job_title
+                company_name
+                location
+             """
+        )
+        prompt_template = ChatPromptTemplate.from_template(template_string)
+
+        service_messages = prompt_template.format_messages(
+            job_description=self.content
+        )
+        response = chat(service_messages)
+        clean_content = json.loads(response.content)
+
         return clean_content
