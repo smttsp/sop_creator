@@ -6,7 +6,9 @@ import openai
 from utils import CoverLetter, JobDescription, Resume, ResumeAnalyzer
 from utils.file_utils import read_text_from_file, save_files_to_cloud
 from utils.word_utils import get_word_cloud
+import os
 
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 # from utils.secret_manager_utils import get_secret_value_dict
 # from google.cloud.storage.client import Client as StorageClient
@@ -64,21 +66,6 @@ def get_content_from_inputs(
     return resume, jd
 
 
-# def get_cover_letter(content):
-#     completion = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=[
-#             {
-#                 "role": "user",
-#                 "content": content,
-#             }
-#         ],
-#     )
-#     cover_letter = completion.choices[0].message.content
-#     # print(cover_letter)
-#     return cover_letter
-
-
 if __name__ == "__main__":
     # USER = "smttsp"
     # SESSION = get_session()
@@ -93,13 +80,13 @@ if __name__ == "__main__":
     # from utils.database_utils import connect_to_db
     # conn = connect_to_db(db_login_info_dict)
 
-    resume_file = "/users/samet/desktop/sop_creator/resumes/Taspinar_Resume.pdf"
-    jd_file = "/users/samet/desktop/sop_creator/jd/cellino_jd.pdf"
+    cv_file = "/users/samet/desktop/sop_creator/resumes/Taspinar_Resume.docx"
+    jd_file = "/users/samet/desktop/sop_creator/resumes/cellino_simple2.docx"
 
     # gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"
     resume, jd = get_content_from_inputs(
         None,
-        resume_file=resume_file,
+        resume_file=cv_file,
         jd_file=jd_file,
     )
 

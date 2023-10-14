@@ -51,8 +51,7 @@ class JobDescription:
 
         chat = ChatOpenAI(temperature=0.0, model=llm_model)
 
-        template_string = (
-            """Here is a {job_description}.
+        template_string = """Here is a {job_description}.
             Can you remove the common wording such as
             - equal opportunity employer
             - non-discrimination
@@ -68,7 +67,6 @@ class JobDescription:
                 company_name
                 location
              """
-        )
         prompt_template = ChatPromptTemplate.from_template(template_string)
 
         service_messages = prompt_template.format_messages(
