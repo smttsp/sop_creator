@@ -188,8 +188,9 @@ class ResumeAnalyzer:
         else:
             print(
                 f"Improving similarity between your resume and the job description \n"
-                f"may increase your chance of match. "
+                f"may increase your chance of match. \n"
                 f"Your weighted Jaccard similarity score is {self.weighted_jaccard:.2f}"
+                f"The recommended score is {EXPECTED_SIMILARITY:.2f}."
             )
 
         words1 = [word for word, diff in self.resume_jd_diff]
