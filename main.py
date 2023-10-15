@@ -1,12 +1,22 @@
 # import os
+import os
 from datetime import datetime
 
 import openai
 
-from career_tool import CoverLetter, JobDescription, Resume, CareerFitAnalyzer
-from career_tool.utils.file_utils import read_text_from_file, save_files_to_cloud
+from career_tool import (
+    CareerFitAnalyzer,
+    CoverLetter,
+    JobDescription,
+    Resume,
+    ResumeAnalyzer,
+)
+from career_tool.utils.file_utils import (
+    read_text_from_file,
+    save_files_to_cloud,
+)
 from career_tool.utils.word_utils import get_word_cloud
-import os
+
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
@@ -85,10 +95,10 @@ if __name__ == "__main__":
         resume_file=cv_file,
         jd_file=jd_file,
     )
-
-    ra = CareerFitAnalyzer(resume, jd)
-    ra.visualize_word_clouds()
-    ra.give_recommendations()
+    ra = ResumeAnalyzer(resume)
+    cfa = CareerFitAnalyzer(resume, jd)
+    cfa.visualize_word_clouds()
+    cfa.give_recommendations()
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
 

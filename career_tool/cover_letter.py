@@ -1,8 +1,9 @@
-from career_tool.utils.llm_utils import get_completion
+import json
 
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-import json
+
+from career_tool.utils.llm_utils import get_completion
 
 
 class CoverLetter:

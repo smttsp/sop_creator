@@ -1,10 +1,11 @@
+import json
+
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+
 from career_tool.utils.file_utils import read_text_from_file
 from career_tool.utils.http_utils import get_text_from_html
 from career_tool.utils.string_utils import remove_extra_spaces
-
-import json
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate
 
 
 class JobDescription:
@@ -62,17 +63,18 @@ class JobDescription:
             - equal opportunity employer
             - non-discrimination
             - benefits
-             that are at the end of the from the job description?
-             ---
-             Along with that, can you also extract `job_title`, `company_name`, 
-             `location` from the job description?
+            that are at the end of the from the job description?
+            
+            ---
+            Along with that, can you also extract `job_title`, `company_name`, 
+            `location` from the job description?
              
-             Format the output as JSON with the following keys:
+            Format the output as JSON with the following keys:
                 clean_job_description
                 job_title
                 company_name
                 location
-             """
+        """
         prompt_template = ChatPromptTemplate.from_template(template_string)
 
         service_messages = prompt_template.format_messages(

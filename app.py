@@ -3,9 +3,9 @@ import os
 from flask import Flask, render_template, request
 from google.cloud.storage.client import Client as StorageClient
 
-from main import get_content_from_inputs, get_cover_letter, get_session_id
 from career_tool.constants import DEFAULT_GCP_BUCKET
 from career_tool.secret_manager_utils import get_secret_value_dict
+from main import get_content_from_inputs, get_cover_letter, get_session_id
 
 
 app = Flask(__name__)
