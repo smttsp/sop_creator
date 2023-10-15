@@ -1,6 +1,6 @@
 import pytest
 
-from utils.string_utils import find_emails, find_phone_numbers
+from career_tool.string_utils import find_emails, find_phone_numbers
 
 
 @pytest.mark.parametrize(

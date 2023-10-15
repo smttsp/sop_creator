@@ -14,8 +14,14 @@ class JobDescription:
         self.jd_text = jd_text
         # self.ori_content = self._get_jd_from_inputs()
         # self.content = self._remove_extra_wording_from_jd()
+
         self.content = self._get_jd_from_inputs()
-        self.clean_content = self._remove_extra_wording_from_jd_v2()
+
+        extracted_info = self._remove_extra_wording_from_jd_v2()
+        self.clean_jd = extracted_info.get("clean_job_description", "")
+        self.company = extracted_info.get("company", "")
+        self.job_title = extracted_info.get("job_title", "")
+        self.location = extracted_info.get("location", "")
 
     def convert_to_json_jd(self):
         pass

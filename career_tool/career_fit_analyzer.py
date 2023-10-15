@@ -30,7 +30,7 @@ def get_word_count_dict(wordcloud: WordCloud):
     return word_count_dict
 
 
-class ResumeAnalyzer:
+class CareerFitAnalyzer:
     def __init__(self, resume: Resume, jd: JobDescription, top_n: int = 20):
         self.resume = resume
         self.jd = jd
