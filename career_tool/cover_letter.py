@@ -1,4 +1,4 @@
-from utils.llm_utils import get_completion
+from career_tool.llm_utils import get_completion
 
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate

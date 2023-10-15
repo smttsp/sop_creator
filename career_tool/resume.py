@@ -1,7 +1,7 @@
 import json
 
-from utils.file_utils import read_text_from_file, anonymize_resume
-from utils.llm_utils import get_completion
+from career_tool.file_utils import read_text_from_file, anonymize_resume
+from career_tool.llm_utils import get_completion
 
 
 class Resume:

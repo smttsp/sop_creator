@@ -3,12 +3,13 @@ from datetime import datetime
 
 import openai
 
-from utils import CoverLetter, JobDescription, Resume, ResumeAnalyzer
-from utils.file_utils import read_text_from_file, save_files_to_cloud
-from utils.word_utils import get_word_cloud
+from career_tool import CoverLetter, JobDescription, Resume, CareerFitAnalyzer
+from career_tool.file_utils import read_text_from_file, save_files_to_cloud
+from career_tool.word_utils import get_word_cloud
 import os
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
+
 
 # from utils.secret_manager_utils import get_secret_value_dict
 # from google.cloud.storage.client import Client as StorageClient
@@ -58,11 +59,6 @@ def get_content_from_inputs(
     #     content_dict=results_dict,
     # )
 
-    # content = (
-    #     f"Given that my resume_file is: {resume.content} \n\n"
-    #     f"and job description I am applying is {jd.content}.\n\n"
-    #     "Can you write me a cover letter"
-    # )
     return resume, jd
 
 
@@ -90,7 +86,7 @@ if __name__ == "__main__":
         jd_file=jd_file,
     )
 
-    ra = ResumeAnalyzer(resume, jd)
+    ra = CareerFitAnalyzer(resume, jd)
     ra.visualize_word_clouds()
     ra.give_recommendations()
     # jaccard = ra.get_weighted_jaccard()

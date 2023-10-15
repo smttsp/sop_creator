@@ -2,14 +2,14 @@ import os
 
 import orjson
 
-from utils.pdf_utils import convert_pdf_to_txt
-from utils.string_utils import (
+from career_tool.pdf_utils import convert_pdf_to_txt
+from career_tool.string_utils import (
     anonymize_text,
     find_emails,
     find_phone_numbers,
     remove_extra_spaces,
 )
-from utils.word_utils import convert_docx_to_text
+from career_tool.word_utils import convert_docx_to_text
 
 
 def split_file_path(file_path):

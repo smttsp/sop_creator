@@ -1,6 +1,6 @@
-from utils.file_utils import read_text_from_file
-from utils.http_utils import get_text_from_html
-from utils.string_utils import remove_extra_spaces
+from career_tool.file_utils import read_text_from_file
+from career_tool.http_utils import get_text_from_html
+from career_tool.string_utils import remove_extra_spaces
 
 import json
 from langchain.chat_models import ChatOpenAI

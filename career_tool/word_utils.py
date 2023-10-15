@@ -2,7 +2,7 @@ import docx2txt
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-from utils.constants import STOPWORDS
+from career_tool.constants import STOPWORDS
 
 
 def convert_docx_to_text(file):
