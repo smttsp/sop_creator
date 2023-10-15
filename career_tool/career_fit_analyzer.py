@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
 from career_tool import JobDescription, Resume
-from career_tool.word_utils import get_word_cloud
+from career_tool.utils.word_utils import get_word_cloud
 from pprint import pprint
 
 EPS = sys.float_info.epsilon

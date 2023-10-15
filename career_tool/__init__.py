@@ -8,4 +8,4 @@ This is an example Python package for internal use
 from .job_description import JobDescription
 from .resume import Resume
 from .cover_letter import CoverLetter
-from .resume_analyzer import CareerFitAnalyzer
+from .career_fit_analyzer import CareerFitAnalyzer

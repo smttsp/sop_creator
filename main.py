@@ -4,8 +4,8 @@ from datetime import datetime
 import openai
 
 from career_tool import CoverLetter, JobDescription, Resume, CareerFitAnalyzer
-from career_tool.file_utils import read_text_from_file, save_files_to_cloud
-from career_tool.word_utils import get_word_cloud
+from career_tool.utils.file_utils import read_text_from_file, save_files_to_cloud
+from career_tool.utils.word_utils import get_word_cloud
 import os
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
