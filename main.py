@@ -52,6 +52,8 @@ def get_content_from_inputs(
     """
 
     resume = Resume(resume_file)
+    ra = ResumeAnalyzer(resume)
+
     jd = JobDescription(jd_file, jd_link, jd_text)
 
     # results_dict = {
@@ -99,6 +101,7 @@ if __name__ == "__main__":
     cfa = CareerFitAnalyzer(resume, jd)
     cfa.visualize_word_clouds()
     cfa.give_recommendations()
+    
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
 
