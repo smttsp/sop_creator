@@ -1,6 +1,8 @@
-# Cover Letter creator
+# Career Canvas
 
-Creating a Cover Letter/Statement of Purpose from resume/CV + job description. This tool reads your resume from a pdf or docx file and reads job description from a pdf/docx/text or a static web link. Then creates a cover letter. 
+1. Create a Cover Letter/Statement of Purpose from your resume/CV and a job description. This tool reads your resume from a pdf or docx file and reads the job description from a pdf/docx/text or a static web link. Then help the user create a cover letter for the job.
+2. Find the most common words about your resume, and what the most fitting job titles based on the resume are.
+3. Application Tracking: Keeps track of the job applications for a user. 
 
 I implemented a very primitive version of a web app that will take the inputs and give outputs. Then you will update the cover letter based on your needs (non-factual/didn't like sentence etc). Then it will give a query to chatgpt and will do a back-and-forth process until you are satisfied with your cover letter. 
 
