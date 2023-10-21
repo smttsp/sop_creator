@@ -57,7 +57,7 @@ class Resume:
 class ResumeAnalyzer:
     def __init__(self, resume):
         self.resume = resume
-        
+
         info = self._get_resume_details()
 
         self.name = info.get("name", "")
@@ -106,6 +106,7 @@ class ResumeAnalyzer:
                 management_score
                 professional_summary
         """
+
         prompt_template = ChatPromptTemplate.from_template(template_string)
 
         service_messages = prompt_template.format_messages(

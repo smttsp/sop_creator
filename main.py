@@ -101,7 +101,7 @@ if __name__ == "__main__":
     cfa = CareerFitAnalyzer(resume, jd)
     cfa.visualize_word_clouds()
     cfa.give_recommendations()
-    
+
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
 
