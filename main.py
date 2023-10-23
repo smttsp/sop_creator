@@ -1,4 +1,3 @@
-# import os
 import os
 from datetime import datetime
 
@@ -11,11 +10,6 @@ from career_tool import (
     Resume,
     ResumeAnalyzer,
 )
-from career_tool.utils.file_utils import (
-    read_text_from_file,
-    save_files_to_cloud,
-)
-from career_tool.utils.word_utils import get_word_cloud
 
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
@@ -52,7 +46,7 @@ def get_content_from_inputs(
     """
 
     resume = Resume(resume_file)
-    ra = ResumeAnalyzer(resume)
+    # ra = ResumeAnalyzer(resume)
 
     jd = JobDescription(jd_file, jd_link, jd_text)
 
@@ -88,7 +82,7 @@ if __name__ == "__main__":
     # from utils.database_utils import connect_to_db
     # conn = connect_to_db(db_login_info_dict)
 
-    cv_file = "/users/samet/desktop/sop_creator/resumes/Taspinar_Resume.docx"
+    cv_file = "/users/samet/desktop/sop_creator/resumes/Resume_Mariana_Queiroz_Velter_2023.pdf"
     jd_file = "/users/samet/desktop/sop_creator/resumes/cellino_simple2.docx"
 
     # gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"

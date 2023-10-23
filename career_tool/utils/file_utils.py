@@ -145,7 +145,7 @@ def read_text_from_file(filename):
         all_resume = (
             convert_docx_to_text(filename) if all_resume is None else all_resume
         )
-    except Exception as e:
+    except Exception:
         all_resume = None
 
     return all_resume

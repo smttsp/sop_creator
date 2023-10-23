@@ -1,5 +1,4 @@
 import docx2txt
-import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
 from career_tool.utils.constants import STOPWORDS
@@ -8,7 +7,7 @@ from career_tool.utils.constants import STOPWORDS
 def convert_docx_to_text(file):
     try:
         text = docx2txt.process(file)
-    except Exception as e:
+    except Exception:
         text = None
 
     return text

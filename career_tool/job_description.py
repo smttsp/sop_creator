@@ -75,6 +75,7 @@ class JobDescription:
                 company_name
                 location
         """
+
         prompt_template = ChatPromptTemplate.from_template(template_string)
 
         service_messages = prompt_template.format_messages(
