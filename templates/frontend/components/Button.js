@@ -45,10 +45,10 @@ export default function Button(props) {
   };
 
   return (
-    <div>
+    <div className='flex'>
       <button
         onClick={handleButtonClick}
-        className="bg-blue-500 hover-bg-blue-700 text-white font-semibold py-2 px-4 rounded focus-outline-none focus-shadow-outline-blue active-bg-blue-800"
+        className="bg-purple-900 flex-auto w-1/2 h-16 hover-bg-purple-500 text-white font-semibold py-2 px-4 rounded-lg focus-outline-none focus-shadow-outline-blue active-bg-blue-800"
       >
         {props.name}
       </button>

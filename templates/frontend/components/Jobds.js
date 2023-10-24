@@ -19,7 +19,7 @@ export default function Jobds(props) {
         <textarea
           id="jobDescription"
           name="jobDescription"
-          className={`w-full p-2 border h-48 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${
+          className={`w-full p-2 border mt-4 h-60 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${
             jobDescription ? 'pt-4' : ''
           }`}
           rows="4"
@@ -28,11 +28,11 @@ export default function Jobds(props) {
         ></textarea>
         <label
           htmlFor="jobDescription"
-          className={`absolute left-2 top-0 transition-all text-gray-700 text-sm font-bold ${
+          className={`absolute left-2 top-0 transition-all text-white text-sm font-bold ${
             jobDescription ? '-top-3 text-xs text-blue-500' : ''
           }`}
         >
-          Job Description
+          
         </label>
       </div>
     </div>
