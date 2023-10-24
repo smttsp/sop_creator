@@ -1,4 +1,4 @@
-DEFAULT_GCP_BUCKET = "cover_letter_user_data"
+DEFAULT_GCP_BUCKET = "career_canvas"
 
 STOPWORDS = [
     "a",
