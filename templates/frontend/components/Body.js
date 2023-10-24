@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Jobds from './Jobds';
 import Button from './Button';
 import Recomendation from './Recomendation';
+import ResumeContainer from './ResumeContainer';
 
 export default function Body() {
   const [fileText, setFileText] = useState('');
@@ -17,23 +18,26 @@ export default function Body() {
   };
 
   return (
-    <div className="p-8 h-screen bg-gray-300">
+    <div className="p-8 h-screen bg-gradient-to-br from-purple-800 to-purple-200
+    ">
       <div className="text-md">
         <div className="flex flex-row">
           <div className="w-full pr-4">
-            <Jobds description={fileText} />
-            <Button name="Upload Job description" onFileTextChange={handleFileTextChange} />
+
+            <ResumeContainer>
+              <Button className= "w-full" name="Upload Resume" onFileTextChange={handleFileTextChange} />
+              {fileText && <Jobds description={fileText} />}
+            </ResumeContainer>
+           
+            
           </div>
           
           <div className="w-full">
-            <Recomendation/>
+            <ResumeContainer></ResumeContainer>
           </div>
          
         </div>
-        <div>
-            <br/>
-          <Button  className = "w-full"name="Upload Resume" onFileTextChange={handleResume} />
-          </div>
+        
       </div>
     </div>
   );
