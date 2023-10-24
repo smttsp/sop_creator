@@ -10,12 +10,9 @@ from career_tool import (
     Resume,
     ResumeAnalyzer,
 )
+from google.cloud import storage
+from career_tool.utils.secret_manager_utils import get_secret_value_dict
 
-
-openai.api_key = os.environ["OPENAI_API_KEY"]
-
-
-# from utils.secret_manager_utils import get_secret_value_dict
 # from google.cloud.storage.client import Client as StorageClient
 # from utils.constants import DEFAULT_GCP_BUCKET
 
@@ -71,13 +68,14 @@ def get_content_from_inputs(
 if __name__ == "__main__":
     # USER = "smttsp"
     # SESSION = get_session()
-    # GOOGLE_SERVICE_ACCOUNT = os.getenv("GOOGLE_SERVICE_ACCOUNT")
-    # storage_client = StorageClient.from_service_account_json(
-    #     GOOGLE_SERVICE_ACCOUNT
-    # )
-    #
-    # secret_value_dict = get_secret_value_dict()
-    # openai.api_key = secret_value_dict["OPENAI_API_KEY"]
+
+    service_account_key_path = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
+    storage_client = storage.Client.from_service_account_json(
+        service_account_key_path
+    )
+
+    secret_value_dict = get_secret_value_dict(service_account_key_path)
+    openai.api_key = secret_value_dict["OPENAI_API_KEY"]
     # db_login_info_dict = secret_value_dict["DATABASE_INFO"]
     # from utils.database_utils import connect_to_db
     # conn = connect_to_db(db_login_info_dict)
