@@ -135,7 +135,6 @@ dmypy.json
 .pyre/
 
 # Data files
-**/*.json
 *.csv
 **.zip
 **-ubyte
@@ -152,6 +151,6 @@ wandb/**
 **.doc
 **.docx
 **.whl
-**.json
 **.tar
 **.tar.gz
+_files/
