@@ -15,6 +15,11 @@ I faced this problem. Copying and pasting a resume from a pdf/docx, then finding
 
 ### Prerequisite: `pyenv`
 
+`pyenv` simplifies Python version management, enabling you to seamlessly switch between 
+Python versions for different project requirements.
+
+
+
 https://github.com/pyenv/pyenv-installer
 
 On macOS you can use [brew](https://brew.sh), but you may need to grab the `--HEAD` version for the latest:
@@ -44,16 +49,24 @@ continue with installation? (y/N) N
 
 ### Prerequisite: `direnv`
 
+`direnv` streamlines environment variable management, allowing you to isolate 
+project-specific configurations and dependencies within your development environment.
+
 https://direnv.net/docs/installation.html
 
 ```bash
 curl -sfL https://direnv.net/install.sh | bash
 ```
 
-Then we need to install `postgresql` as it is a dependency that `psycopg2` needs
+
+### Prerequisite: `npm` and `Node.js`
+
+Aside from the above setup, we also need to install `npm` and `Node.js` to run the frontend.
+
+https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
 ```bash
-brew install postgresql@14
+brew install node
 ```
 
 ### Developer Setup
@@ -66,4 +79,14 @@ python --version
 pip install --upgrade pip
 pip install poetry
 poetry install
+```
+
+### Usage
+
+Once the above are complete, you can run the following command from project
+folder to start the frontend:
+
+```bash
+npm install
+npm run start # or npm run dev for development
 ```
