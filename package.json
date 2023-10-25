@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@pdftron/webviewer": "^10.4.0",
+    "axios": "^1.5.1",
     "ckeditor4-react": "^5.0.0",
     "html-react-parser": "^4.2.9",
     "jszip": "^3.10.1",
