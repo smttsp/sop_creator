@@ -87,6 +87,10 @@ Once the above are complete, you can run the following command from project
 folder to start the frontend:
 
 ```bash
-npm install
-npm run start # or npm run dev for development
+rm -rf templates/frontend/.next
+npm install   # Ensure dependencies are up to date
+npm run build
+npm start
 ```
+
+Then you can open the browser and go to `http://localhost:3000` to see the frontend.
