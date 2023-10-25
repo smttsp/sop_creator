@@ -88,7 +88,7 @@ folder to start the frontend:
 
 ```bash
 rm -rf templates/frontend/.next
-npm install   # Ensure dependencies are up to date
+npm install
 npm run build
 npm start
 ```
