@@ -17,10 +17,6 @@ from career_tool.utils.secret_manager_utils import get_secret_value_dict
 # from utils.constants import DEFAULT_GCP_BUCKET
 
 
-def get_session_id():
-    return datetime.now().strftime("%Y-%m-%d_%H%M%S")
-
-
 def get_content_from_inputs(
     session_info,
     resume_file,
