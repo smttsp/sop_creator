@@ -25,7 +25,7 @@ torch = "^2.0.1"
 torchvision = "^0.15.2"
 opencv-python = "^4.8.0.76"
 wordcloud = "^1.9.2"
-langchain = "^0.0.314"
+langchain = "^0.0.317"
 
 [tool.poetry.group.dev.dependencies]
 matplotlib = "^3.7.3"
