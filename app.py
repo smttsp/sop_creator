@@ -19,7 +19,7 @@ def upload_file():
     print("hi")
     file = request.files['file']
     if file:
-        # file_path = f'tmp/{file.filename}'  # Save the file temporarily
+        # file_path = f'tmp/{file.filename}'
         # file.save(file_path)
         save_file_to_cloud(session_info.storage_client, file, f'{DEFAULT_GCP_BUCKET}/{file.filename}')
         return jsonify({'message': 'File uploaded successfully'}), 200

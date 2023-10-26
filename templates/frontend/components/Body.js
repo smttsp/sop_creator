@@ -5,6 +5,7 @@ import ButtonSubmit from './ButtonSubmit';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
 import SignificantTerms from './SignificantTerms';
+import FileUploadComponent  from "@/components/FileUpload";
 
 export default function Body() {
   const [fileText, setFileText] = useState('');

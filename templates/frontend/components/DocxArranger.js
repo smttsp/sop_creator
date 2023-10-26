@@ -10,13 +10,13 @@ function DocxArranger({ setShowButton }) {
   const [editedContent, setEditedContent] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState(null);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const fileContents = e.target.result;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const fileContents = e.target.result;
 
       
       mammoth.convertToHtml({ arrayBuffer: fileContents })
@@ -33,14 +33,12 @@ function DocxArranger({ setShowButton }) {
           console.error("Error converting .docx to HTML", error);
         });
     };
-    reader.readAsArrayBuffer(file);
-  };
 
-  useEffect(() => {
-    if (quill && fileContent) {
-      quill.clipboard.dangerouslyPasteHTML(fileContent);
-    }
-  }, [quill, fileContent]);
+    useEffect(() => {
+        if (quill && fileContent) {
+            quill.clipboard.dangerouslyPasteHTML(fileContent);
+        }
+    }, [quill, fileContent]);
 
 
   const handleSave = () => {
