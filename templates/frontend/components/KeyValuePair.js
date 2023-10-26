@@ -12,8 +12,7 @@ export default function KeyValuePair(){
             { id: 2, name: 'Alice' },
             { id: 3, name: 'Bob' },
             { id: 1, name: 'John' },
-            { id: 2, name: 'Alice' },
-            { id: 3, name: 'Bob' },
+            
           ];
           setData(fetchedData);
           setLoading(false);

@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import Jobds from './Jobds';
-import Button from './Button';
-import Recomendation from './Recomendation';
-import ResumeContainer from './ResumeContainer';
+import DocxArranger from './DocxArranger';
 import ButtonSubmit from './ButtonSubmit';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
@@ -13,6 +10,7 @@ export default function Body() {
   const [fileText, setFileText] = useState('');
   const [resume, setResume] = useState('');
   const [showResult, setShowResult] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   const handleResume = (text) => {
     setResume(text);
@@ -23,7 +21,6 @@ export default function Body() {
   };
 
   const handleIdentifyKeys = () => {
-    console.log("america")
     setShowResult(true);
   };
 
@@ -32,30 +29,19 @@ export default function Body() {
       <div className="text-md">
         <div className="flex flex-row">
           <div className="w-full pr-4">
-            <ResumeContainer>
-              <Button
-                className="w-full"
-                name="Upload Resume"
-                onFileTextChange={handleFileTextChange}
-              />
-              {fileText && (
-                <>
-                  <Jobds description={fileText} />
-                  <ButtonSubmit text="Identify Keys" onClick={handleIdentifyKeys} />
-                </>
-              )}
-            </ResumeContainer>
+            <DocxArranger setShowButton={setShowButton} />
+            {showButton && (
+              <ButtonSubmit text="Identify Keys" onClick={handleIdentifyKeys} />
+            )}
           </div>
           <div className="w-full">
-            
-              <Result>
-                {showResult &&(
+            <Result>
+              {showResult && (
                 <AnalysisContainer>
                   <SignificantTerms />
                 </AnalysisContainer>
-                )}
-              </Result>
-            
+              )}
+            </Result>
           </div>
         </div>
       </div>
