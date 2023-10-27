@@ -1,5 +1,6 @@
 "use client";
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
+
 // import DocxArranger from './DocxArranger';
 // import ButtonSubmit from './ButtonSubmit';
 import Result from './Result';
@@ -9,13 +10,36 @@ import ApryseEditor from './ApryseEditor';
 import Button from './Button';
 
 
-function UploadSection({showEditor, handleShowEditor, handleIdentifyKeys}) {
+function UploadSection({showEditor, handleIdentifyKeys, handleFileUpload}) {
+    const [docxFile, setDocxFile] = useState(null);
+    const fileInputRef = useRef(null);
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        setDocxFile(file);
+        console.log("file", file)
+        handleFileUpload(file); // Pass the file to the parent component's function for further processing
+    };
+
+    const handleUploadResumeClick = () => {
+        // Trigger the file input when the "Upload Resume" button is clicked
+        fileInputRef.current.click();
+    };
+
     return (
         <div className="w-full mx-2 pr-4 col-span-2 min-h-96">
+            <input
+                type="file"
+                onChange={handleFileChange}
+                accept=".docx"
+                ref={fileInputRef}
+                style={{display: 'none'}} // Hide the file input
+            />
+            {docxFile && <p>Selected DOCX file: {docxFile.name}</p>}
             <Button
                 text="Upload Resume"
                 customClass="bg-purple-900 w-1/2 shadow-xl text-white py-2 px-4 rounded cursor-pointer"
-                onClick={handleShowEditor}
+                onClick={handleUploadResumeClick} // Trigger file input when this button is clicked
             />
             {showEditor && (
                 <ApryseEditor text="Identify Keys" customClass={""} shower={handleIdentifyKeys}/>
@@ -33,7 +57,7 @@ function ResultsSection({showResult}) {
                     <AnalysisContainer>
                         <SignificantTerms/>
                     </AnalysisContainer>
-                 )}
+                )}
             </Result>
         </div>
     );
@@ -61,6 +85,11 @@ export default function Body() {
         }
     };
 
+    // this will be used when saving the file into GCP
+    const handleFileUpload = (file) => {
+        // console.log("Uploaded file:", file);
+    };
+
     const handleShowEditor = (e) => {
         e.preventDefault();
         setShowEditor(true);
@@ -71,9 +100,10 @@ export default function Body() {
         <div className="p-4 h-auto bg-gradient-to-br from-purple-800 to-purple-200">
             <div className="">
                 <div className="grid grid-cols-3">
-                    <UploadSection showEditor={showEditor} handleShowEditor={handleShowEditor}
-                                   handleIdentifyKeys={handleIdentifyKeys}/>
-                    <ResultsSection showResult={showResult} />
+                    <UploadSection showEditor={showEditor} handleIdentifyKeys={handleIdentifyKeys}
+                                   handleFileUpload={handleFileUpload}/>
+
+                    <ResultsSection showResult={showResult}/>
                 </div>
             </div>
         </div>
