@@ -27,7 +27,6 @@ export default function Body() {
     if (pass){
       setShowResult(true);
     }
-    
   };
 
   const handleShowEditor = (e) => {
@@ -53,8 +52,6 @@ export default function Body() {
               <ApryseEditor text="Identify Keys" 
                             customClass ={""}
                             shower ={handleIdentifyKeys}/>
-              
-             
             )} 
           
           </div>
