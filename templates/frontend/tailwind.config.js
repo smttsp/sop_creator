@@ -13,7 +13,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       height: {
-        '150': '550px', // Define your custom size 200px
+        '150': '650px', // Define your custom size 200px
       },
     },
   },
