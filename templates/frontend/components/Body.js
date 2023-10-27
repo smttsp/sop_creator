@@ -10,7 +10,7 @@ import ApryseEditor from './ApryseEditor';
 import Button from './Button';
 
 
-function UploadSection({showEditor, handleIdentifyKeys, handleFileUpload}) {
+function UploadSection({showEditor, handleIdentifyKeys, handleFileUpload, resume}) {
     const [docxFile, setDocxFile] = useState(null);
     const fileInputRef = useRef(null);
 
@@ -21,9 +21,11 @@ function UploadSection({showEditor, handleIdentifyKeys, handleFileUpload}) {
         handleFileUpload(file); // Pass the file to the parent component's function for further processing
     };
 
+    // const handleUploadResumeClick = () =>
     const handleUploadResumeClick = () => {
-        // Trigger the file input when the "Upload Resume" button is clicked
+        // e.preventDefault(); // Ensure the event object is passed and used here
         fileInputRef.current.click();
+        // handleShowEditor(e);
     };
 
     return (
@@ -42,7 +44,13 @@ function UploadSection({showEditor, handleIdentifyKeys, handleFileUpload}) {
                 onClick={handleUploadResumeClick} // Trigger file input when this button is clicked
             />
             {showEditor && (
-                <ApryseEditor text="Identify Keys" customClass={""} shower={handleIdentifyKeys}/>
+                <ApryseEditor
+                    text="Identify Keys"
+                    customClass={""}
+                    handleFileUpload={handleFileUpload} // Pass the handleFileUpload function as a prop
+                    // resume={resume} // Pass the resume state variable as a prop
+                    // shower={handleIdentifyKeys}
+                />
             )}
         </div>
     );
@@ -88,20 +96,29 @@ export default function Body() {
     // this will be used when saving the file into GCP
     const handleFileUpload = (file) => {
         // console.log("Uploaded file:", file);
-    };
-
-    const handleShowEditor = (e) => {
-        e.preventDefault();
         setShowEditor(true);
+        setResume(file); // Pass the selected DOCX file to the state
         console.log("showEditor"); // Log the showEditor value after it's updated
     };
+
+
+    // const handleShowEditor = (e) => {
+    //     e.preventDefault();
+    //     setShowEditor(true);
+    //     console.log("showEditor"); // Log the showEditor value after it's updated
+    // };
 
     return (
         <div className="p-4 h-auto bg-gradient-to-br from-purple-800 to-purple-200">
             <div className="">
                 <div className="grid grid-cols-3">
-                    <UploadSection showEditor={showEditor} handleIdentifyKeys={handleIdentifyKeys}
-                                   handleFileUpload={handleFileUpload}/>
+                    <UploadSection
+                        showEditor={showEditor}
+                        handleIdentifyKeys={handleIdentifyKeys}
+                        handleFileUpload={handleFileUpload}
+                        // resume={resume}
+                        // handleShowEditor={handleShowEditor}
+                    />
 
                     <ResultsSection showResult={showResult}/>
                 </div>
