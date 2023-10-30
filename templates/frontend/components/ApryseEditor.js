@@ -27,7 +27,8 @@ const ApryseEditor = (props) => {
 
   const handleSave = () =>{
       const formData = new FormData();
-      formData.append('docxFile',  documentViewer.getDocument());
+      formData.append('docxFile', documentViewer.getDocument());
+      console.log(documentViewer.getDocument())
 
         // axios.post('/backend-endpoint', formData)
         //   .then((response) => {

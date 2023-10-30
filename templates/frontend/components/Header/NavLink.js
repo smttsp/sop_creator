@@ -1,7 +1,7 @@
 export default function NavLink(props){
     return <div>
-        <a href="#" className="text-white hover:underline hover:text-blue-700 
-                            transition duration-300 ease-in-out">
+        <Link href="#" className="text-gray-50  hover:text-gray-400  active:text-gray-600 hover:font-semibold 
+                            active:font-semibold tracking-widest font-roboto text-md transition duration-300 ease-in-out">
 
             {props.text}
 
