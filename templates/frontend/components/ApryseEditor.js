@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import Button from './Button';
 const ApryseEditor = (props) => {
   const viewer = useRef(null);
@@ -24,21 +25,25 @@ const ApryseEditor = (props) => {
       }
     });
   }, []);
+
+
+  
   const handleSave = () => {
     if (documentViewer) {
       const formData = new FormData();
-      formData.append('docxFile', documentViewer.getDocument());
+      formData.append('docxFile', documentViewer.getDocument()); // Ensure the key is 'docxFile'
       console.log(documentViewer.getDocument())
-      // axios.post('/backend-endpoint', formData)
-      //   .then((response) => {
-      //     console.log('Successfully sent to the backend');
-      //   })
-      //   .catch((error) => {
-      //     console.log('Failed to send to the backend');
-      //   });
+      axios.post('http://localhost:5000/upload', formData)
+        .then((response) => {
+          console.log('Successfully sent to the backend');
+        })
+        .catch((error) => {
+          console.log('Failed to send to the backend');
+        });
       props.shower(true);
     }
   };
+  
   return (
     <div className="h-150 mt-1 flex flex-col">
       <div className="flex-1 bg-gray-100" ref={viewer}></div>
