@@ -1,7 +1,7 @@
 import NavLink from "./NavLink"
 
 export default function Navbar(){
-    return <div className="h-full w-auto flex gap-2 text-white text-md font-semibold">
+    return <div className="h-full w-auto flex justify-between items-center  gap-4 text-white text-md ">
                       
                       <NavLink text={"Product"}/>
                       <NavLink text={"About Us"}/>

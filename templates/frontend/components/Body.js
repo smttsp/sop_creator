@@ -30,13 +30,11 @@ export default function Body() {
       }
     };
 
-
-
   return (
     <div className="p-4 h-auto bg-gradient-to-br from-purple-800 to-purple-200">
       <div className="">
-        <div className="grid grid-cols-3">
-          <div className="w-full mx-2 pr-4 col-span-2 min-h-96">
+        <div className="grid grid-cols-5">
+          <div className="w-full mx-2 pr-4 col-span-3 min-h-96">
             {!selectedFile && (<Button
               text="Upload Resume"
               customClass="bg-purple-900 w-1/2 shadow-xl  
@@ -57,12 +55,11 @@ export default function Body() {
                             customClass ={""}
                             shower ={handleIdentifyKeys}
                             selectedFile={selectedFile}/>
-              
-             
+                           
             )} 
           
           </div>
-          <div className="w-full ">
+          <div className="w-full col-span-2">
             <Result className="min-h-150 h-auto">
               {showResult && (
                 <AnalysisContainer>
