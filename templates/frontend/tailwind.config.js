@@ -16,6 +16,9 @@ module.exports = {
       height: {
         '150': '650px', // Define your custom size 200px
       },
+      width:{
+        '100': '400px'
+      },
       fontFamily:{
         "roboto":['Roboto', 'sans-serif']
       },
