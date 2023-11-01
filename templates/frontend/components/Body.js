@@ -31,7 +31,7 @@ export default function Body() {
     };
 
   return (
-    <div className="p-4 h-auto bg-gradient-to-br from-purple-800 to-purple-200">
+    <div className="p-4 h-auto bg-gradient-to-br from-purple-900 to-pink-200">
       <div className="">
         <div className="grid grid-cols-5">
           <div className="w-full mx-2 pr-4 col-span-3 min-h-96">

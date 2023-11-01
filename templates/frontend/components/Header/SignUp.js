@@ -16,7 +16,11 @@ const SignUpForm = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed top-16 overflow-scroll right-0 w-100 h-3/4 p-4 bg-white  text-black z-30 shadow-2xl rounded-lg px-6">
+    <div className=" fixed shadow-xl top-24 right-16 w-96 h-3/4">
+      <div className="absolute bg-yellow-400  shadow-xl rounded-xl h-full w-full -right-5 -bottom-5">
+
+      </div>
+      <div className="overflow-scroll w-full h-full relative p-4 bg-gray-50 shadow-xl shadow-yellow-400 text-black rounded-xl px-6">
       <button className="absolute text-sm top-2 right-2 text-black" onClick={onClose}>
       <Image src={"close-bold.svg"} alt="close image" width={20} height={20}/>
       </button>
@@ -94,6 +98,8 @@ const SignUpForm = ({ onClose }) => {
       </div>
       
     </div>
+    </div>
+   
   );
 };
 
