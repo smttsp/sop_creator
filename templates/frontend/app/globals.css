@@ -25,3 +25,12 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 6px; /* Adjust the scrollbar width as needed */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Adjust the scrollbar color as needed */
+}
