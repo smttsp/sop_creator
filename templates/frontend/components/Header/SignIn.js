@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Input from './Inpupt';
 import Brand from './Brand';
 import Link from 'next/link';
+import SignWith from '../Authentication/AuthMain';
 const SignInForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +18,7 @@ const SignInForm = ({ onClose }) => {
       <div className='absolute bg-yellow-400  shadow-xl rounded-xl h-full w-full -right-5 -bottom-5'>
 
       </div>
-      <div className="relative h-full w-full p-4 bg-gray-50 shadow-xl shadow-yellow-400 text-black rounded-xl px-6">
+      <div className="overflow-scroll relative h-full w-full p-4 bg-gray-50 shadow-xl shadow-yellow-400 text-black rounded-xl px-6">
       <button className="absolute text-sm top-2 right-2" onClick={onClose}>
         <Image src={"close-bold.svg"} alt="close image" width={20} height={20}/>
       </button>
@@ -57,6 +58,7 @@ const SignInForm = ({ onClose }) => {
       </button>
 
       </div>
+      <SignWith/>
       
     </div>
 

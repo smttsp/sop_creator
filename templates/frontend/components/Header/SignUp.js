@@ -29,7 +29,7 @@ const SignUpForm = ({ onClose }) => {
         <Input
           type="name"
           placeholder="Full Name"
-          lable="Full Name"
+          lable="Full Name*"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -47,7 +47,7 @@ const SignUpForm = ({ onClose }) => {
         <Input
           type="email"
           placeholder="Email"
-          lable="Email"
+          lable="Email*"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -56,7 +56,7 @@ const SignUpForm = ({ onClose }) => {
         <Input
           type="phone"
           placeholder="Phone number"
-          lable="Phone Number"
+          lable="Phone Number*"
           value={phoneNo}
           onChange={(e) => setPhoneNo(e.target.value)}
         />
@@ -65,7 +65,7 @@ const SignUpForm = ({ onClose }) => {
         <Input
           type="password"
           placeholder="Password"
-          lable="Password"
+          lable="Password*"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -74,7 +74,7 @@ const SignUpForm = ({ onClose }) => {
         <Input
           type="vallidpassword"
           placeholder="Validate Password"
-          lable="Validate Password"
+          lable="Validate Password*"
           value={validPassword}
           onChange={(e) => setValidPassword(e.target.value)}
         />
