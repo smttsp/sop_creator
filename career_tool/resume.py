@@ -4,6 +4,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 
 from career_tool.utils.file_utils import anonymize_resume, read_text_from_file
+from career_tool.utils.word_utils import get_word_cloud, get_word_freq
 
 
 class Resume:
@@ -12,6 +13,8 @@ class Resume:
         self.content = self.get_resume_content()
         # self.json_resume = self.convert_to_json_resume()
         self.anonymized_resume = self.get_anonymized_resume()
+        self.wc = get_word_cloud(self.content)
+        self.wf = get_word_freq(self.wc)
 
     def get_resume_content(self):
         return read_text_from_file(self.resume_file)

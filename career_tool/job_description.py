@@ -6,6 +6,7 @@ from langchain.prompts import ChatPromptTemplate
 from career_tool.utils.file_utils import read_text_from_file
 from career_tool.utils.http_utils import get_text_from_html
 from career_tool.utils.string_utils import remove_extra_spaces
+from career_tool.utils.word_utils import get_word_cloud, get_word_freq
 
 
 class JobDescription:
@@ -17,6 +18,9 @@ class JobDescription:
         # self.content = self._remove_extra_wording_from_jd()
 
         self.content = self._get_jd_from_inputs()
+
+        self.wc = get_word_cloud(self.content)
+        self.wf = get_word_freq(self.wc)
 
         extracted_info = self._remove_extra_wording_from_jd_v2()
         self.clean_jd = extracted_info.get("clean_job_description", "")
