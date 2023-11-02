@@ -73,12 +73,11 @@ def save_file_to_cloud(storage_client, file, gs_uri: str):
     bucket_name, blob_name = get_bucket_blobname_from_uri(gs_uri)
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(blob_name)
-    # blob.upload_from_filename(file)
-    blob.upload_from_string(file.read(), content_type=file.content_type)
-
-    # shutil.rmtree(pdf_file_path)
-
-    print(f"File uploaded to: gs://{gs_uri}")
+    if not blob.exists():
+        blob.upload_from_string(file.read(), content_type=file.content_type)
+        print(f"File uploaded to: gs://{gs_uri}")
+    else:
+        print(f"File already exists in: gs://{gs_uri}")
     return None
 
 

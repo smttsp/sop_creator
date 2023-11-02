@@ -1,4 +1,5 @@
 # import os
+import os.path
 
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, request
@@ -23,18 +24,19 @@ def upload_file():
 
     file = request.files["resume_file"]
     if file:
-        # file_path = f'tmp/{file.filename}'  # Save the file temporarily
-        # file.save(file_path)
+        user = session_info.user
+        session_id = session_info.session_id
+        bucket = session_info.default_gcp_bucket
+        file_path = os.path.join(bucket, user, session_id, file.filename)
+
         save_file_to_cloud(
             session_info.storage_client,
             file,
-            f"{DEFAULT_GCP_BUCKET}/{file.filename}",
+            file_path
         )
         return jsonify({"message": "File uploaded successfully"}), 200
     else:
         return jsonify({"error": "No file provided"}), 400
-
-    # return{"message" :"this is response from back end"}
 
 
 if __name__ == "__main__":
