@@ -39,33 +39,3 @@ def upload_file():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-
-
-# @app.route("/process", methods=["POST"])
-# def process():
-#     # USER = "smttsp"
-#     # session_info = SessionInfo(user=USER)
-#     session_info = None
-#     resume_file = request.files["resume"]
-#     jd_file = request.files["jd"]
-#     jd_link = request.form["jd_link"]
-#     jd_text = request.form["jd_text"]
-#
-#     reply = "Resume filename: " + resume_file.filename + "<br>"
-#     reply += "JD filename: " + jd_file.filename + "<br>"
-#     reply += jd_link
-#
-#     print(resume_file)
-#
-#     tmp_content, resume, jd = get_content_from_inputs(
-#         session_info,
-#         resume_file,
-#         jd_file,
-#         jd_link,
-#         jd_text,
-#     )
-#
-#     # content = get_cover_letter(tmp_content)
-#     # content = reply + "<br><br>" + tmp_content
-#     content = tmp_content
-#     return content
