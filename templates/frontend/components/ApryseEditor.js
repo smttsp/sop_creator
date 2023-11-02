@@ -35,19 +35,43 @@ const ApryseEditor = (props) => {
     }, []);
 
 
+    // const handleSave = () => {
+    //     if (documentViewer) {
+    //         const formData = new FormData();
+    //         formData.append('docxFile', props.selectedFile); // Ensure the key is 'docxFile'
+    //         console.log("file is here:", documentViewer.getDocument())
+    //         axios.post('http://localhost:5000/upload', formData)
+    //             .then((response) => {
+    //                 console.log('Successfully sent to the backend');
+    //             })
+    //             .catch((error) => {
+    //                 console.log('Failed to send to the backend');
+    //             });
+    //         props.shower(true);
+    //     }
+    // };
+
     const handleSave = () => {
         if (documentViewer) {
-            const formData = new FormData();
-            formData.append('docxFile', documentViewer.getDocument()); // Ensure the key is 'docxFile'
-            console.log(documentViewer.getDocument())
-            axios.post('http://localhost:5000/upload', formData)
-                .then((response) => {
-                    console.log('Successfully sent to the backend');
+            documentViewer.getDocument().getFileData()
+                .then((arrayBuffer) => {
+                    const blob = new Blob([arrayBuffer], {type: 'application/octet-stream'});
+                    const formData = new FormData();
+                    formData.append('resume_file', blob, 'document.docx');
+
+                    axios.post('http://localhost:5000/upload', formData)
+                        .then((response) => {
+                            console.log('Successfully sent to the backend');
+                        })
+                        .catch((error) => {
+                            console.log('Failed to send to the backend');
+                        });
+
+                    props.shower(true);
                 })
                 .catch((error) => {
-                    console.log('Failed to send to the backend');
+                    console.error('Error getting file data:', error);
                 });
-            props.shower(true);
         }
     };
 

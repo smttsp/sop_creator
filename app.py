@@ -21,7 +21,7 @@ session_info = SessionInfo(user="smttsp")
 def upload_file():
     print("hi")
 
-    file = request.files["file"]
+    file = request.files["resume_file"]
     if file:
         # file_path = f'tmp/{file.filename}'  # Save the file temporarily
         # file.save(file_path)
@@ -41,23 +41,6 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
 
 
-# from career_tool.utils.constants import DEFAULT_GCP_BUCKET
-# from career_tool.utils.secret_manager_utils import get_secret_value_dict
-# from main import get_content_from_inputs, get_session_id
-#
-#
-# app = Flask(__name__)
-#
-# entry_point_html = "index.html"
-#
-#
-
-#
-# @app.route("/")
-# def index():
-#     return render_template(entry_point_html)
-#
-#
 # @app.route("/process", methods=["POST"])
 # def process():
 #     # USER = "smttsp"
@@ -86,7 +69,3 @@ if __name__ == "__main__":
 #     # content = reply + "<br><br>" + tmp_content
 #     content = tmp_content
 #     return content
-#
-#
-# if __name__ == "__main__":
-#     app.run(debug=True, port=8080)
