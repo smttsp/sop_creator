@@ -5,19 +5,26 @@ import Button from './Button';
 const ApryseEditor = (props) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
+    const webViewer_dict = {
+        path: '/webviewer/lib',
+        initialDoc: props.selectedFile,
+        licenseKey: 'demo:1698352503737:7cf1a6ca0300000000099ad259d9fa3f9a59bc0274fbe417eeddcf4a18',
+        extension: 'docx',
+        enableOfficeEditing: true,
+        enableBackground: true,
+        enableColorSeparations: true,
+        enableAnnotations: true,
+        enableAnnotationNumbering: true,
+        enableFilePicker: true,
+        enableRedaction: true,
+        updateCustomHeaders: true,
+    }
+
     useEffect(() => {
         import('@pdftron/webviewer').then(({default: WebViewer}) => {
             if (typeof window !== 'undefined') {
                 WebViewer(
-                    {
-                        path: '/webviewer/lib',
-                        initialDoc: props.selectedFile,
-                        licenseKey: 'demo:1698352503737:7cf1a6ca0300000000099ad259d9fa3f9a59bc0274fbe417eeddcf4a18',
-                        extension: 'docx',
-                        enableOfficeEditing: true,
-                        enableAnnotationNumbering: true,
-                        enableFilePicker: true,
-                    },
+                    webViewer_dict,
                     viewer.current
                 ).then((instance) => {
                     const {documentViewer} = instance.Core;
@@ -52,7 +59,9 @@ const ApryseEditor = (props) => {
                     <Button
                         onClick={handleSave}
                         text="Identify keys"
-                        customClass="bg-purple-900 w-1/2 shadow-xl text-white py-2 px-4 rounded-lg hover:text-gray-200 hover:font-semibold hover:bg-purple-800 active:text-gray-400 active:font-semibold cursor-pointer"
+                        customClass="bg-purple-900 w-1/2 shadow-xl text-white py-2 px-4 rounded-lg
+                        hover:text-gray-200 hover:font-semibold hover:bg-purple-800
+                        active:text-gray-400 active:font-semibold cursor-pointer"
                     />
                 )}
             </div>
