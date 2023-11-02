@@ -12,25 +12,6 @@ EPS = sys.float_info.epsilon
 EXPECTED_SIMILARITY = 0.2
 
 
-def get_word_count_dict(wordcloud: WordCloud):
-    """Extracts word frequencies from a WordCloud object and returns a dictionary
-    where keys are words and values are their corresponding frequencies.
-
-    Parameters:
-        wordcloud (WordCloud): The input WordCloud object.
-
-    Returns:
-        dict: A dictionary containing words as keys and their frequencies as values.
-    """
-
-    word_count_dict = {}
-    for a_tuple in wordcloud.layout_:
-        word, freq = a_tuple[0]
-        word_count_dict[word] = freq
-
-    return word_count_dict
-
-
 class CareerFitAnalyzer:
     def __init__(self, resume: Resume, jd: JobDescription, top_n: int = 20):
         self.resume = resume

@@ -28,6 +28,24 @@ def get_word_cloud(content, stopwords=None):
     return wordcloud
 
 
+def get_word_freq(wordcloud: WordCloud):
+    """Extracts word frequencies from a WordCloud object and returns a dictionary
+    where keys are words and values are their corresponding frequencies.
+
+    Parameters:
+        wordcloud (WordCloud): The input WordCloud object.
+
+    Returns:
+        dict: A dictionary containing words as keys and their frequencies as values.
+    """
+
+    word_count_dict = {}
+    for a_tuple in wordcloud.layout_:
+        word, freq = a_tuple[0]
+        word_count_dict[word] = freq
+
+    return word_count_dict
+
 # def visualize_word_cloud(wordcloud):
 #     plt.figure(figsize=(15, 8))
 #     plt.imshow(wordcloud)
