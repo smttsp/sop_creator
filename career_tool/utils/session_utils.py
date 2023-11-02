@@ -1,10 +1,10 @@
-from .constants import DEFAULT_GCP_BUCKET
-from .secret_manager_utils import get_secret_value_dict
 import os
 from datetime import datetime
-import openai
 
 from google.cloud import storage
+
+from .constants import DEFAULT_GCP_BUCKET
+from .secret_manager_utils import get_secret_value_dict
 
 
 def get_session_id():
@@ -19,12 +19,9 @@ class SessionInfo:
 
         self.google_service_account = os.environ["GOOGLE_SERVICE_ACCOUNT"]
 
-        self.secret_value_dict = get_secret_value_dict(self.google_service_account)
-
-        # self.storage_client = None
-        # self.openai_api_key = None
-        # self.gcp_folder = None
-        # self.db_login_info_dict = None
+        self.secret_value_dict = get_secret_value_dict(
+            self.google_service_account
+        )
 
         self._set_apis()
 

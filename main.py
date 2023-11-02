@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 import openai
+from google.cloud import storage
 
 from career_tool import (
     CareerFitAnalyzer,
@@ -10,8 +11,8 @@ from career_tool import (
     Resume,
     ResumeAnalyzer,
 )
-from google.cloud import storage
 from career_tool.utils.secret_manager_utils import get_secret_value_dict
+
 
 # from google.cloud.storage.client import Client as StorageClient
 # from utils.constants import DEFAULT_GCP_BUCKET
