@@ -88,9 +88,6 @@ class CareerFitAnalyzer:
     def get_top_n_differences_as_wc(self):
         """Get the top n words with the highest differences in word frequencies.
 
-        Args:
-            n (int, optional): The number of words to return. Defaults to 10.
-
         Returns:
             list: A list of tuples containing the top n words with the highest
                 differences in word frequencies.

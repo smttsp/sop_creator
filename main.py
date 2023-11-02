@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 import openai
 from google.cloud import storage

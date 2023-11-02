@@ -1,14 +1,12 @@
-# import os
-import os.path
+import os
 
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from career_tool.utils.constants import DEFAULT_GCP_BUCKET
 from career_tool.utils.file_utils import save_file_to_cloud
 from career_tool.utils.session_utils import SessionInfo
-
+from career_tool.resume import Resume
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -34,6 +32,8 @@ def upload_file():
             file,
             file_path
         )
+
+        resume = Resume(file)
         return jsonify({"message": "File uploaded successfully"}), 200
     else:
         return jsonify({"error": "No file provided"}), 400
