@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import Button from './Button';
 
+// response.data.wc_svg = undefined;
 const ApryseEditor = (props) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
@@ -11,13 +12,10 @@ const ApryseEditor = (props) => {
         licenseKey: 'demo:1698352503737:7cf1a6ca0300000000099ad259d9fa3f9a59bc0274fbe417eeddcf4a18',
         extension: 'docx',
         enableOfficeEditing: true,
-        enableBackground: true,
-        enableColorSeparations: true,
         enableAnnotations: true,
         enableAnnotationNumbering: true,
         enableFilePicker: true,
         enableRedaction: true,
-        updateCustomHeaders: true,
     }
 
     useEffect(() => {
@@ -34,23 +32,6 @@ const ApryseEditor = (props) => {
         });
     }, []);
 
-
-    // const handleSave = () => {
-    //     if (documentViewer) {
-    //         const formData = new FormData();
-    //         formData.append('docxFile', props.selectedFile); // Ensure the key is 'docxFile'
-    //         console.log("file is here:", documentViewer.getDocument())
-    //         axios.post('http://localhost:5000/upload', formData)
-    //             .then((response) => {
-    //                 console.log('Successfully sent to the backend');
-    //             })
-    //             .catch((error) => {
-    //                 console.log('Failed to send to the backend');
-    //             });
-    //         props.shower(true);
-    //     }
-    // };
-
     const handleSave = () => {
         if (documentViewer) {
             documentViewer.getDocument().getFileData()
@@ -62,6 +43,9 @@ const ApryseEditor = (props) => {
                     axios.post('http://localhost:5000/upload', formData)
                         .then((response) => {
                             console.log('Successfully sent to the backend');
+                            // console.log(response.data.message);
+                            // const svgImage = response.data.wc_svg;
+                            // this.setState({ svgImage });
                         })
                         .catch((error) => {
                             console.log('Failed to send to the backend');
