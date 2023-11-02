@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -174,4 +175,39 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+
+
+.typewriter {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+
+.typewriter span {
+  border-right: 2px solid #333;
+  animation: typing 2s steps(40, end), blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #333;
+  }
 }
