@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
 from career_tool import JobDescription, Resume
-from career_tool.utils.word_utils import get_word_cloud
 
 
 EPS = sys.float_info.epsilon
@@ -18,8 +17,8 @@ class CareerFitAnalyzer:
         self.jd = jd
         self.top_n = top_n
 
-        self.resume_wc, self.jd_wc = self.get_word_cloud()
-        self.resume_wf, self.jd_wf = self.get_word_freq_dict()
+        self.resume_wc, self.jd_wc = self.resume.wc, self.jd.wc
+        self.resume_wf, self.jd_wf = self.resume.wf, self.jd.wf
 
         (
             self.differences,
@@ -32,26 +31,6 @@ class CareerFitAnalyzer:
             self.resume_jd_diff_wc,
             self.jd_resume_diff_wc,
         ) = self.get_top_n_differences_as_wc()
-
-    def get_word_cloud(self):
-        """Generate a word cloud from the resume and jd.
-
-        Returns:
-            WordCloud: The word cloud generated from the resume and jd.
-        """
-
-        resume_wc = get_word_cloud(self.resume.content)
-        jd_wc = get_word_cloud(self.jd.content)
-
-        return resume_wc, jd_wc
-
-    def get_word_freq_dict(self):
-        """Extract word frequencies from the word clouds of the resume and jd."""
-
-        resume_wf = get_word_count_dict(self.resume_wc)
-        jd_wf = get_word_count_dict(self.jd_wc)
-
-        return resume_wf, jd_wf
 
     def get_weighted_jaccard(self):
         """Calculate the weighted Jaccard similarity score between resume and jd.
