@@ -1,5 +1,4 @@
-"use client";
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
 import SignificantTerms from './SignificantTerms';
@@ -36,8 +35,8 @@ export default function Body() {
             <div className="">
                 <TextAnimation text="Hello, I am AI tool to Assist you to build your carier"
                                speed={100}/>
-                <div className="grid grid-cols-5">
-                    <div className="w-full mx-2 pr-4 col-span-3 min-h-96">
+                <div className="grid grid-cols-2">
+                    <div className="w-full mx-2 min-h-96">
                         {!selectedFile && (<Button
                             text="Upload Resume"
                             customClass="bg-purple-900 w-1/2 shadow-xl
@@ -62,7 +61,7 @@ export default function Body() {
                         )}
 
                     </div>
-                    <div className="w-full col-span-2">
+                    <div className="w-full ">
                         <Result className="min-h-150 h-auto">
                             {showResult && (
                                 <AnalysisContainer>
