@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState} from 'react';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
 import SignificantTerms from './SignificantTerms';
@@ -15,7 +15,6 @@ export default function Body() {
         if (pass) {
             setShowResult(true);
         }
-
     };
 
     const handleUploadClick = () => {
@@ -26,7 +25,6 @@ export default function Body() {
         if (file) {
             const fileURL = URL.createObjectURL(file);
             setSelectedFile(fileURL);
-
         }
     };
 
