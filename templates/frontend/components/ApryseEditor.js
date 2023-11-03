@@ -27,6 +27,8 @@ const ApryseEditor = (props) => {
                 ).then((instance) => {
                     const {documentViewer} = instance.Core;
                     setDocumentViewer(documentViewer);
+                
+                   
                 });
             }
         });
@@ -61,7 +63,7 @@ const ApryseEditor = (props) => {
 
     return (
         <div className="h-150 mt-1 flex flex-col">
-            <div className="flex-1 bg-gray-100" ref={viewer}></div>
+            <div className="flex-1 bg-gray-100" ref={viewer}  ></div>
             <div className="ml-24 my-4">
                 {documentViewer && (
                     <Button
