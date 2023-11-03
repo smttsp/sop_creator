@@ -17,7 +17,6 @@ export default function SignParent(){
             setShowSignIn(!showSignIn)
         }
     }
-    console.log("ins ing parent")
     return <div className="h-full w-auto flex justify-between items-center gap-6 text-white text-md font-semibold">
                       
                       <NavLink text={"Sign In"} onClick={toggleSignIn}/>
