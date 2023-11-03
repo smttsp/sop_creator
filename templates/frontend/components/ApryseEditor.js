@@ -27,8 +27,6 @@ const ApryseEditor = (props) => {
                 ).then((instance) => {
                     const {documentViewer} = instance.Core;
                     setDocumentViewer(documentViewer);
-                
-                   
                 });
             }
         });
@@ -45,6 +43,7 @@ const ApryseEditor = (props) => {
                     axios.post('http://localhost:5000/upload', formData)
                         .then((response) => {
                             console.log('Successfully sent to the backend');
+                            console.log(response.data)
                             // console.log(response.data.message);
                             // const svgImage = response.data.wc_svg;
                             // this.setState({ svgImage });
@@ -63,7 +62,7 @@ const ApryseEditor = (props) => {
 
     return (
         <div className="h-150 mt-1 flex flex-col">
-            <div className="flex-1 bg-gray-100" ref={viewer}  ></div>
+            <div className="flex-1 bg-gray-100" ref={viewer}></div>
             <div className="ml-24 my-4">
                 {documentViewer && (
                     <Button
