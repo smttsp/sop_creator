@@ -1,14 +1,27 @@
 // pages/index.js
  "use client"
+ import { useEffect } from 'react';
  import { signIn, signOut, useSession } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { logIn, logOut } from '@/redux/features/auth-slice';
  import Image from 'next/image';
+
  
  export default function SignWith() {
    const { data: session } = useSession();
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+    if (session) {
+      dispatch(logIn({ name: session.user.name, image: session.user.image }))
+      console.log(session.us);
+    }
+  }, [session, dispatch]);
  
    const handleLinkedInSignIn = () => {
      console.log(" LinkedIn");
      signIn('linkedin');
+   
    };
  
    const handleGoogleSignIn = () => {
