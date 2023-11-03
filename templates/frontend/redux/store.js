@@ -3,8 +3,8 @@ import { auth } from './features/auth-slice';
 
 const store = configureStore({
   reducer:{
-    
+
   }
 });
 
-export default rootReducer;
+export default store;
