@@ -1,4 +1,3 @@
-// auth-slice.js
 "use client"
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -13,7 +12,7 @@ const initialState = {
 
 export const auth = createSlice({
   name: "auth",
-  initialState, // Corrected the variable name here
+  initialState,
   reducers: {
     logOut: () => {
       return initialState;
@@ -31,5 +30,5 @@ export const auth = createSlice({
   }
 });
 
-export const { logIn, logOut } = auth.actions; // Corrected 'auth.action' to 'auth.actions'
+export const { logIn, logOut } = auth.actions;
 export default auth.reducer;
