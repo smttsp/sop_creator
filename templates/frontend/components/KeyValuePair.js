@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 
-export default function KeyValuePair({keywords}) {
+export default function KeyValuePair({keyValue}) {
+    
     
     return <div className="container mx-auto mt-4">
         <table className="w-full border border-collapse">
@@ -12,7 +13,7 @@ export default function KeyValuePair({keywords}) {
             </thead>
             <tbody>
           
-               {keywords.map((row) => (
+               {keyValue.map((row) => (
                     <tr key={row.id}>
                         <td className="border p-2">{row.id}</td>
                         <td className="border p-2">{row.name}</td>
