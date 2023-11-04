@@ -8,7 +8,7 @@ import base64
 # from career_tool.utils.file_utils import save_file_to_cloud
 # from career_tool.utils.session_utils import SessionInfo
 # from career_tool.resume import Resume
-
+ 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 

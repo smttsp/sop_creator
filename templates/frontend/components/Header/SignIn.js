@@ -14,7 +14,7 @@ const SignInForm = ({ onClose }) => {
   };
 
   return (
-    <div className='fixed shadow-xl top-24 right-16 w-96 h-3/4'>
+    <div className='fixed shadow-xl z-30 top-24 right-16 w-96 h-3/4'>
       <div className='absolute bg-yellow-400  shadow-xl rounded-xl h-full w-full -right-5 -bottom-5'>
 
       </div>

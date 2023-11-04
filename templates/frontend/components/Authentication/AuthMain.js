@@ -1,7 +1,6 @@
-// pages/index.js
- "use client"
- import { useEffect } from 'react';
- import { signIn, signOut, useSession } from 'next-auth/react';
+"use client"
+import { useEffect } from 'react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
 import { logIn, logOut } from '@/redux/features/auth-slice';
  import Image from 'next/image';
@@ -28,7 +27,7 @@ import { logIn, logOut } from '@/redux/features/auth-slice';
  
    return (
      <div className="flex justify-center">
-       {!session ? (
+       {!session && (
          <div>
            <div className="font-light mx-auto my-2">
              <p>Continue with</p>
@@ -60,8 +59,6 @@ import { logIn, logOut } from '@/redux/features/auth-slice';
              </button>
            </div>
          </div>
-       ) : (
-         <button onClick={() => signOut()}>Sign out</button>
        )}
      </div>
    );
