@@ -3,12 +3,12 @@ import axios from 'axios';
 import Button from './Button';
 
 // response.data.wc_svg = undefined;
-const ApryseEditor = (props) => {
+const ApryseEditor = ({handleKeyWords, selectedFile}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
     const webViewer_dict = {
         path: '/webviewer/lib',
-        initialDoc: props.selectedFile,
+        initialDoc: selectedFile,
         licenseKey: 'demo:1698352503737:7cf1a6ca0300000000099ad259d9fa3f9a59bc0274fbe417eeddcf4a18',
         extension: 'docx',
         enableOfficeEditing: true,
@@ -43,16 +43,14 @@ const ApryseEditor = (props) => {
                     axios.post('http://localhost:5000/upload', formData)
                         .then((response) => {
                             console.log('Successfully sent to the backend');
-                            console.log(response.data)
-                            // console.log(response.data.message);
-                            // const svgImage = response.data.wc_svg;
-                            // this.setState({ svgImage });
+                            handleKeyWords(response.data.message)
+                            
                         })
                         .catch((error) => {
                             console.log('Failed to send to the backend');
                         });
 
-                    props.shower(true);
+                   
                 })
                 .catch((error) => {
                     console.error('Error getting file data:', error);

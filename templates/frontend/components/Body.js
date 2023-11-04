@@ -9,6 +9,7 @@ import TextAnimation from './TextAnimation';
 export default function Body() {
     const [showResult, setShowResult] = useState(false);
     const [selectedFile, setSelectedFile] = useState('')
+    const [keywords, setKeyWords] = useState('')
     const fileInputRef = useRef(null);
 
     const handleIdentifyKeys = (pass) => {
@@ -27,6 +28,10 @@ export default function Body() {
             setSelectedFile(fileURL);
         }
     };
+
+    const handleKeyWords=(dict)=>{  
+        setKeyWords(dict)
+    }
 
     return (
         <div className="p-4 h-auto bg-gradient-to-br from-purple-900 to-pink-200">
@@ -53,7 +58,7 @@ export default function Body() {
 
                             <ApryseEditor text="Identify Keys"
                                           customClass={""}
-                                          shower={handleIdentifyKeys}
+                                          handleKeyWords={handleKeyWords}
                                           selectedFile={selectedFile}/>
 
                         )}
@@ -61,9 +66,9 @@ export default function Body() {
                     </div>
                     <div className="w-full ">
                         <Result className="min-h-150 h-auto">
-                            {showResult && (
+                            {keywords && (
                                 <AnalysisContainer>
-                                    <SignificantTerms/>
+                                    <SignificantTerms keywords={keywords}/>
                                 </AnalysisContainer>
                             )}
                         </Result>

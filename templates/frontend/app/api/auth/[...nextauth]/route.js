@@ -23,7 +23,6 @@ const authOption = {
       if (!profile?.email) {
         throw new Error('No profile'); // Corrected error syntax
       }
-      console.log('found');
       return true;
     },
   },

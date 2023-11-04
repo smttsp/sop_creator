@@ -1,4 +1,4 @@
-# import os
+import os
 
 # from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, request
@@ -34,7 +34,8 @@ def upload_file():
         # )
 
         # resume = Resume(file)
-        return jsonify({"message": "File uploaded successfully"}), 200
+        dict = [{"id":0, "name":"Naol"},{"id":1, "name":"john"}, {"id":2, "name":"alice"}, {"id":3, "name":"bob"}]
+        return jsonify({"message": dict}), 200
     else:
         return jsonify({"error": "No file provided"}), 400
 

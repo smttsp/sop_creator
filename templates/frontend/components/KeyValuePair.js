@@ -1,25 +1,7 @@
 import React, {useEffect, useState} from "react";
 
-export default function KeyValuePair() {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    // simulating fetching data from backend
-    useEffect(() => {
-
-        setTimeout(() => {
-            const fetchedData = [
-                {id: 1, name: 'John'},
-                {id: 2, name: 'Alice'},
-                {id: 3, name: 'Bob'},
-
-            ];
-            setData(fetchedData);
-            setLoading(false);
-        }, 2000);
-    }, []);
-
-
+export default function KeyValuePair({keywords}) {
+    
     return <div className="container mx-auto mt-4">
         <table className="w-full border border-collapse">
             <thead>
@@ -29,20 +11,13 @@ export default function KeyValuePair() {
             </tr>
             </thead>
             <tbody>
-            {loading ? (
-                <tr>
-                    <td className="border p-2" colSpan="2">
-                        Loading...
-                    </td>
-                </tr>
-            ) : (
-                data.map((row) => (
+          
+               {keywords.map((row) => (
                     <tr key={row.id}>
                         <td className="border p-2">{row.id}</td>
                         <td className="border p-2">{row.name}</td>
                     </tr>
-                ))
-            )}
+                ))}
             </tbody>
         </table>
     </div>

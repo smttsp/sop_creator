@@ -14,18 +14,15 @@ import { logIn, logOut } from '@/redux/features/auth-slice';
    useEffect(() => {
     if (session) {
       dispatch(logIn({ name: session.user.name, image: session.user.image }))
-      console.log(session.us);
     }
   }, [session, dispatch]);
  
    const handleLinkedInSignIn = () => {
-     console.log(" LinkedIn");
      signIn('linkedin');
    
    };
  
    const handleGoogleSignIn = () => {
-     console.log("Google");
      signIn('google');
    };
  

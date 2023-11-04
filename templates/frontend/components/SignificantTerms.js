@@ -1,7 +1,7 @@
 import KeyValuePair from "./KeyValuePair"
 import Image from "next/image"
 
-export default function SignificantTerms() {
+export default function SignificantTerms({keywords}) {
     return (
         <div className="p-4 mx-auto ">
             <h1 className="text-2xl text-white font-bold mb-2">Target words</h1>
@@ -12,7 +12,7 @@ export default function SignificantTerms() {
                     layout="fill"
                 />
             </div>
-            <KeyValuePair/>
+            <KeyValuePair keywords={keywords}/>
         </div>
     )
 }
