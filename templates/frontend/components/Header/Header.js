@@ -11,7 +11,7 @@ import {logIn} from "@/redux/features/auth-slice";
 export default function Header() {
     const [user, setUser] = useState({});
     const {data: session} = useSession();
-    const authReducerValue = useAppSelectror((state) => state.authReducer.value);
+    const authReducerValue = useAppSelector((state) => state.authReducer.value);
     const dispatch = useDispatch();
 
     useEffect(() => {
