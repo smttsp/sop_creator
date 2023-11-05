@@ -1,20 +1,34 @@
 import os
+import io
+import base64
 
-# from dotenv import find_dotenv, load_dotenv
+from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import base64
 
-# from career_tool.utils.file_utils import save_file_to_cloud
-# from career_tool.utils.session_utils import SessionInfo
-# from career_tool.resume import Resume
+from career_tool.utils.file_utils import save_file_to_cloud
+from career_tool.utils.session_utils import SessionInfo
+from career_tool.resume import Resume
  
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-# load_dotenv(find_dotenv())
+load_dotenv(find_dotenv())
 
-# session_info = SessionInfo(user="smttsp")
+session_info = SessionInfo(user="smttsp")
+
+
+def get_wc_as_binary(wc):
+    image = wc.to_image()
+
+    buffered = io.BytesIO()
+    image.save(buffered, format="PNG")
+
+    image_binary = buffered.getvalue()
+
+    image_data = base64.b64encode(image_binary).decode('utf-8')
+    return image_data
 
 
 @app.route("/upload", methods=["POST"])
@@ -23,25 +37,21 @@ def upload_file():
 
     file = request.files["resume_file"]
     if file:
-        # user = session_info.user
-        # session_id = session_info.session_id
-        # bucket = session_info.default_gcp_bucket
-        # file_path = os.path.join(bucket, user, session_id, file.filename)
+        user = session_info.user
+        session_id = session_info.session_id
+        bucket = session_info.default_gcp_bucket
+        file_path = os.path.join(bucket, user, session_id, file.filename)
 
-        # save_file_to_cloud(
-        #     session_info.storage_client,
-        #     file,
-        #     file_path
-        # )
+        save_file_to_cloud(
+            session_info.storage_client,
+            file,
+            file_path
+        )
 
-        # resume = Resume(file)
-        image_path = 'word-cloud.png'
-        # to check if the word_cloud image is in the file system
-        # since we will have the image file , we dont need to check existance
-        if os.path.exists(image_path):  
-            with open(image_path, 'rb') as image_file:
-                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+        resume = Resume(file)
 
+        image_data = get_wc_as_binary(resume.wc)
+        # data_dict = resume.wf
         data_dict = [
             {"id": 0, "name": "Naol"},
             {"id": 1, "name": "John"},
