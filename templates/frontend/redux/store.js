@@ -10,4 +10,4 @@ export const store = configureStore({
     }
 });
 
-export const useAppSelector = useSelector;
+export const useAppSelector = useSelector

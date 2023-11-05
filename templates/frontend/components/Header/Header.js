@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Profile from "./Profile";
 import {useSession} from "next-auth/react";
 import SignParent from "./SignParent";
-import {useAppSelectror} from "@/redux/store";
+import {useAppSelector} from "@/redux/store";
 import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {logIn} from "@/redux/features/auth-slice";
