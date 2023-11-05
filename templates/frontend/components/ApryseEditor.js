@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import Button from './Button';
 
-// response.data.wc_svg = undefined;
 const ApryseEditor = ({handleKeyWords, selectedFile}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
@@ -49,8 +48,6 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
                         .catch((error) => {
                             console.log('Failed to send to the backend');
                         });
-
-                   
                 })
                 .catch((error) => {
                     console.error('Error getting file data:', error);
