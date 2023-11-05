@@ -47,15 +47,10 @@ def upload_file():
         resume = Resume(file)
 
         image_data = get_wc_as_binary(resume.wc)
-        # data_dict = resume.wf
-        data_dict = [
-            {"id": 0, "name": "Naol"},
-            {"id": 1, "name": "John"},
-            {"id": 2, "name": "Alice"},
-            {"id": 3, "name": "Bob"},
-        ]
+        data_dict = resume.wf
+        data_list = [{"id": k, "name": v} for k, v in data_dict.items()]
 
-        response_data = {"image": image_data, "dict": data_dict}
+        response_data = {"image": image_data, "dict": data_list}
 
         return jsonify({"message": response_data}), 200
     else:
