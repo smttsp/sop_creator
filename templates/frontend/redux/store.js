@@ -1,12 +1,13 @@
 "use client"
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import authReducer from './features/auth-slice'
-import { useSelector } from 'react-redux';
-export const store = configureStore({
-  reducer:{
-    authReducer
+import {useSelector} from 'react-redux';
 
-  }
+export const store = configureStore({
+    reducer: {
+        authReducer
+
+    }
 });
 
-export const useAppSelectror = useSelector
+export const useAppSelector = useSelector;
