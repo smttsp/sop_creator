@@ -46,6 +46,7 @@ def get_word_freq(wordcloud: WordCloud):
 
     return word_count_dict
 
+
 # def visualize_word_cloud(wordcloud):
 #     plt.figure(figsize=(15, 8))
 #     plt.imshow(wordcloud)

@@ -29,7 +29,7 @@ export default function Body() {
         }
     };
 
-    const handleKeyWords=(dict)=>{  
+    const handleKeyWords = (dict) => {
         setKeyWords(dict)
     }
 
