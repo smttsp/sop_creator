@@ -7,7 +7,6 @@ export default function Home() {
     return (
         <main className="relative overflow-hidden">
             <div className=''>
-                <div className=''><Header/></div>
                 <div className=''><Body/></div>
             </div>
         </main>

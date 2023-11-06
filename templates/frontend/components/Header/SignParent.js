@@ -19,8 +19,10 @@ export default function SignParent(){
     }
     return <div className="h-full w-auto flex justify-between items-center gap-6 text-white text-md font-semibold">
                       
-                      <NavLink text={"Sign In"} onClick={toggleSignIn}/>
-                      <NavLink text={"Sign Up"} onClick={toggleSignUp}/>
+                      <NavLink text={"Sign In"} onClick={toggleSignIn}
+                                link={"/#"}/>
+                      <NavLink text={"Sign Up"} onClick={toggleSignUp}
+                                link={"/#"}/>
                       {showSignIn && <SignInForm onClose={toggleSignIn}/>}
                       {showSignUp && <SignUpForm onClose={toggleSignUp}/>}
                       

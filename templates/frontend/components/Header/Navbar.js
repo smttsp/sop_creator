@@ -1,11 +1,21 @@
-import NavLink from "./NavLink"
+import React, { useState } from 'react';
+import ProductList from './ProductList';
+import NavLink from './NavLink';
 
 export default function Navbar() {
-    return <div
-        className="h-full w-auto flex justify-between items-center  gap-4 text-white text-md ">
-        <NavLink text={"Product"}/>
-        <NavLink text={"About Us"}/>
-        <NavLink text={"Pricing"}/>
-        <NavLink text={"Help"}/>
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <div className="h-full w-auto flex justify-between items-center gap-4 text-white text-md">
+      <NavLink text="Product" link="/#" onClick={handleDropdownToggle} />
+      <NavLink text="About Us" link="/#" />
+      <NavLink text="Pricing" link="/#" />
+      <NavLink text="Help" link="/#" />
+      <ProductList isOpen={isDropdownOpen} onToggle={handleDropdownToggle} />
     </div>
+  );
 }
