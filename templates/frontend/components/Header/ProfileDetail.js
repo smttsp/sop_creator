@@ -40,7 +40,7 @@ export default function({userName, profileImage, closeDetail}){
                     </div>
                 </div>
                 <div className="text-white ml-3 mt-4">
-                <button className="py-auto w-48 rounded-lg hover:bg-gray-400  h-8 active:bg-gray-700"
+                <button className="py-auto w-48 rounded-lg hover:bg-gray-500  h-8 active:bg-gray-700"
                         onClick={handleLogOut}>
                     <p className="hover:bg-opacity-5"> Sign Out</p>
                     </button>
