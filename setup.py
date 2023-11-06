@@ -7,7 +7,7 @@ from distutils.core import setup
 
 
 setup(
-    name="example_template",
-    version="1.0.1",
-    packages=["example_template"],
+    name="career_tool",
+    version="1.1.0",
+    packages=["career_tool"],
 )

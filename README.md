@@ -47,6 +47,12 @@ pyenv: ~/.pyenv/versions/3.8.6 already exists
 continue with installation? (y/N) N
 ```
 
+In case of an error (missing libraries), you may need to run the following
+
+```bash
+brew install libbz2-dev libffi-dev libreadline-dev libssl-dev
+```
+
 ### Prerequisite: `direnv`
 
 `direnv` streamlines environment variable management, allowing you to isolate 
