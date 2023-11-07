@@ -64,26 +64,3 @@ export default function SignWith() {
     );
 }
 
-// function Home() {
-//
-
-//   return (
-//     <main className='bg-gray-100'>
-//     <div>
-//       {!session ? (
-//         <button }>Sign in with Google</button>
-//       ) : (
-//         <>
-//           <p>Welcome, {session.user.name}</p>
-//           <Image src={session.user.image} alt='this is profile picture'
-//                   width={40} height={40}/>
-//            {console.log(session.user)}
-//           <button onClick={() => signOut()}>Sign out</button>
-//         </>
-//       )}
-//     </div>
-//     </main>
-//   )
-// }
-
-// export default Home
