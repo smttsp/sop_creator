@@ -26,6 +26,11 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
                 ).then((instance) => {
                     const {documentViewer} = instance.Core;
                     setDocumentViewer(documentViewer);
+                    documentViewer.addEventListener("annotationsLoaded", ()=>{
+                        const FitMode = instance.UI.FitMode;
+                        instance.UI.setFitMode(FitMode.FitWidth)
+                    }) 
+                    
                 });
             }
         });
