@@ -77,8 +77,11 @@ export default function Body() {
                             )}
                         </Result>
                     </div>
-                    {recommendataion && (<Analysis/>)}
                 </div>
+                <div className='flex'>
+                {recommendataion && (<Analysis/>)}
+                </div>
+                
             </div>
         </div>
     );
