@@ -38,7 +38,7 @@ export default function Body() {
             <div className="">
                 <TextAnimation text="Hello, I am AI tool to Assist you to build your carier"
                                speed={100}/>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 h-auto">
                     <div className="w-full mx-2 min-h-96">
                         {!selectedFile && (<Button
                             text="Upload Resume"

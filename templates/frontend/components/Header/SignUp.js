@@ -10,13 +10,13 @@ const SignUpForm = ({ onClose }) => {
   const [phoneNo, setPhoneNo] = useState('')
   const [password, setPassword] = useState('');
   const [validPassword, setValidPassword] =useState('')
-
-  const handleSignIn = () => {
+  const handleSignUp = () => {
+    if (!name)
     onClose(); 
   };
 
   return (
-    <div className=" fixed shadow-xl top-24 right-16 w-96 h-3/4">
+    <div className=" fixed shadow-xl top-24 right-16 w-96 z-30 h-3/4">
       <div className="absolute bg-yellow-400  shadow-xl rounded-xl h-full w-full -right-5 -bottom-5">
 
       </div>

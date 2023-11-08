@@ -1,10 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import Button from './Button';
+import Analysis from './Authentication/Analysis';
 
 const ApryseEditor = ({handleKeyWords, selectedFile}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
+    const [showAnalysis, setShowAnalysis]=useState(null)
+    const [showAnalysisBtn, setShowAnalysisBtn]=useState("")
+
     const webViewer_dict = {
         path: '/webviewer/lib',
         initialDoc: selectedFile,
@@ -15,6 +19,7 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
         enableAnnotationNumbering: true,
         enableFilePicker: true,
         enableRedaction: true,
+       
     }
 
     useEffect(() => {
@@ -24,11 +29,39 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
                     webViewer_dict,
                     viewer.current
                 ).then((instance) => {
-                    const {documentViewer} = instance.Core;
+                    const {documentViewer,Search, annotationManager, Annotations} = instance.Core;
                     setDocumentViewer(documentViewer);
+                    // documentViewer.setSearchHighlightColors({
+                    //     searchResult: new Annotations.Color(0, 0, 255, 0.5),
+                    //     activeSearchResult: 'rgba(0, 255, 0, 0.5)',
+                    //   });
+                
                     documentViewer.addEventListener("annotationsLoaded", ()=>{
                         const FitMode = instance.UI.FitMode;
                         instance.UI.setFitMode(FitMode.FitWidth)
+                        // instance.UI.setFitMode(FitMode.FitWidth)
+                        // const searchText = 'computer';
+                        // const mode = Search.Mode.PAGE_STOP | Search.Mode.HIGHLIGHT;
+                        // const searchOptions = {
+                        //   fullSearch: true,
+                        //   onResult: (result) => {
+                        //     console.log("quads results", result);
+                        //     if (result.resultCode === Search.ResultCode.FOUND) {
+                        //       const textQuad = result.quads[0].getPoints();
+                        //       const annot = new Annotations.TextHighlightAnnotation({
+                        //         PageNumber: result.pageNum,
+                        //         Quads: [textQuad],
+                        //         StrokeColor: new Annotations.Color(255, 0, 0, 1),
+                        //       });
+                  
+                        //       annotationManager.addAnnotation(annot);
+                        //       annotationManager.redrawAnnotation(annot);
+                        //     }
+                        //   }
+                        // };
+                  
+                        // documentViewer.textSearchInit(searchText, mode, searchOptions);
+                        
                     }) 
                     
                 });
@@ -48,6 +81,8 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
                         .then((response) => {
                             console.log('Successfully sent to the backend');
                             handleKeyWords(response.data.message)
+                            setShowAnalysisBtn(true)
+
                             
                         })
                         .catch((error) => {
@@ -59,22 +94,33 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
                 });
         }
     };
+    const handleAnalysis=()=>{
+        setShowAnalysis(true)
+    }
 
     return (
-        <div className="h-150 mt-1 flex flex-col">
-            <div className="flex-1 bg-gray-100" ref={viewer}></div>
-            <div className="ml-24 my-4">
+        <div className="h-auto mt-1">
+            <div className="flex-1 h-150 bg-gray-100" ref={viewer}></div>
+            <div className="  my-4 h-16 flex justify-between px-16">
                 {documentViewer && (
                     <Button
                         onClick={handleSave}
                         text="Identify keys"
-                        customClass="bg-purple-900 w-1/2 shadow-xl text-white py-2 px-4 rounded-lg
-                        hover:text-gray-200 hover:font-semibold hover:bg-purple-800
-                        active:text-gray-400 active:font-semibold cursor-pointer"
+                        customClass="result"
                     />
                 )}
+                {showAnalysisBtn && (
+                    <Button 
+                          onClick={handleAnalysis}
+                          text="Analyse Resume"
+                          customClass="result"
+                          />
+                )}
             </div>
+            {showAnalysis && (<Analysis/>)}
         </div>
     );
 };
 export default ApryseEditor;
+
+      
