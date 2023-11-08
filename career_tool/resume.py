@@ -58,11 +58,12 @@ class Resume:
 
 
 class ResumeAnalyzer:
-    def __init__(self, resume, llm_model="gpt-3.5-turbo"):
+    def __init__(self, resume, session_info, llm_model="gpt-3.5-turbo"):
         self.resume = resume
+        self.session_info = session_info
 
         self.recommendations = self._get_ai_recommendations(llm_model)
-        self.info = self._get_resume_details(llm_model)
+        # self.info = self._get_resume_details(llm_model)
 
         # self.name = info.get("name", "")
         # self.email = info.get("email", "")
@@ -100,16 +101,23 @@ class ResumeAnalyzer:
             - reason:
         """
 
-        chat = ChatOpenAI(temperature=0.0, model=llm_model)
+        try:
+            chat = ChatOpenAI(
+                temperature=0.0,
+                openai_api_key=self.session_info.openai_api_key,
+                model=llm_model,
+            )
 
-        prompt_template = ChatPromptTemplate.from_template(template_string2)
+            prompt_template = ChatPromptTemplate.from_template(template_string2)
 
-        service_messages = prompt_template.format_messages(
-            resume=self.resume.content
-        )
-        response = chat(service_messages)
-        info = json.loads(response.content)
-
+            service_messages = prompt_template.format_messages(
+                resume=self.resume.content
+            )
+            response = chat(service_messages)
+            info = json.loads(response.content)
+        except Exception as e:
+            print(e)
+            info = {}
         return info
 
     def _get_resume_details(self, llm_model="gpt-3.5-turbo"):
