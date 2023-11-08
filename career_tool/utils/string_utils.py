@@ -62,3 +62,36 @@ def find_phone_numbers(text):
     formatted_numbers = standardize_phone_numbers(phone_numbers)
     unique_phone_numbers = list(set(formatted_numbers))
     return phone_numbers, unique_phone_numbers
+
+
+def find_track_changes(before, after):
+    changes = []
+    i = 0
+    j = 0
+
+    while i < len(before) and j < len(after):
+        if before[i] == after[j]:
+            i += 1
+            j += 1
+        else:
+            start = j
+            while j < len(after) and (before[i] != after[j]):
+                j += 1
+            end = j
+            change_type = ""
+
+            if i < len(before) and j < len(after):
+                change_type = "modified"
+            elif i < len(before):
+                change_type = "removed"
+            elif j < len(after):
+                change_type = "added"
+
+            change = {
+                "type": change_type,
+                "location": (start, end),
+                "text": after[start:end]
+            }
+            changes.append(change)
+
+    return changes
