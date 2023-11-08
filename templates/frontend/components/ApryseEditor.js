@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import Button from './Button';
-import Analysis from './Authentication/Analysis';
+import Analysis from './AnalysisResult';
 
 const ApryseEditor = ({handleKeyWords, selectedFile}) => {
     const viewer = useRef(null);

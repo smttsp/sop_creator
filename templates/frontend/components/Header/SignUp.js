@@ -1,22 +1,49 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Input from './Inpupt';
+import Input from './Input';
 import Brand from './Brand';
 import Link from 'next/link';
 const SignUpForm = ({ onClose }) => {
   const [name, setName] = useState('');
+  const [nameError, setNameError] = useState('')
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('')
   const [phoneNo, setPhoneNo] = useState('')
+  const [phoneNoError, setPhoneNoError]=useState('')
   const [password, setPassword] = useState('');
   const [validPassword, setValidPassword] =useState('')
+  const [passwordError, setPasswordError] =useState('')
+  const [passwordMismatchError, setPasswordMistamtchError]=useState('')
   const handleSignUp = () => {
-    if (!name)
-    onClose(); 
+    setNameError(false)
+    setEmailError(false)
+    setPhoneNoError(false)
+    setPasswordError(false)
+    setPasswordMistamtchError(false)
+    if (!name){
+      setNameError(true)
+    }
+    else if(!email){
+      setEmailError(true)
+    }
+    else if(!phoneNo){
+      setPhoneNoError(true)
+    }
+    else if(!password){
+      setPasswordError(true)
+    }
+    else if (password !== validPassword){
+      setPasswordMistamtchError(true)
+    }
+    else{
+      onClose()
+    }
+    
   };
 
   return (
-    <div className=" fixed shadow-xl top-24 right-16 w-96 z-30 h-3/4">
+    <div className=" fixed shadow-xl top-24 font-roboto right-16 w-96 z-30 h-3/4">
       <div className="absolute bg-yellow-400  shadow-xl rounded-xl h-full w-full -right-5 -bottom-5">
 
       </div>
@@ -33,6 +60,7 @@ const SignUpForm = ({ onClose }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        {nameError && <p className='input-error'>you need to insert you Name</p>}
       </div>
       <div className="mb-4">
         <Input
@@ -51,6 +79,7 @@ const SignUpForm = ({ onClose }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {emailError && <p className='input-error'>you need to insert you Email</p>}
       </div>
       <div className="mb-4">
         <Input
@@ -60,6 +89,7 @@ const SignUpForm = ({ onClose }) => {
           value={phoneNo}
           onChange={(e) => setPhoneNo(e.target.value)}
         />
+        {phoneNoError && <p className='input-error'>you need to insert you Phone number</p>}
       </div>
       <div className="mb-4">
         <Input
@@ -69,6 +99,7 @@ const SignUpForm = ({ onClose }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {passwordError && <p className='input-error'>you need to create Password</p>}
       </div>
       <div className="mb-4">
         <Input
@@ -78,6 +109,7 @@ const SignUpForm = ({ onClose }) => {
           value={validPassword}
           onChange={(e) => setValidPassword(e.target.value)}
         />
+        {passwordMismatchError && <p className='input-error'>insert similar password</p>}
       </div>
       <>
         <Link href="/#"
@@ -90,7 +122,7 @@ const SignUpForm = ({ onClose }) => {
         className="bg-gradient-to-br from-purple-800 to-purple-300 h-12 w-1/2 my-8
         rounded-sm shadow-2xl hover:bg-white hover:text-gray-500 active:text-gray-800
         transition duration-300 ease-in-out active:bg-slate-300"
-        onClick={handleSignIn}
+        onClick={handleSignUp}
       >
         Sign Up
       </button>
