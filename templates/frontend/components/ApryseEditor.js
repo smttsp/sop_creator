@@ -58,7 +58,6 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
                         // };
 
                         // documentViewer.textSearchInit(searchText, mode, searchOptions);
-
                     })
 
                 });
@@ -66,7 +65,7 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
         });
     }, []);
 
-    const handleSave = () => {
+    const handleIdentifyKeys = () => {
         loadingSpinnerResult(true)
         if (documentViewer) {
             documentViewer.getDocument().getFileData()
@@ -98,7 +97,7 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
             <div className="flex-1 h-150 bg-gray-100" ref={viewer}></div>
             {documentViewer && <div className='my-4 h-16 flex justify-between px-16'>
                 <Button
-                    onClick={handleSave}
+                    onClick={handleIdentifyKeys}
                     text="Identify keys"
                     customClass="result"
                 />
