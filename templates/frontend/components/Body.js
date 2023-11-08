@@ -5,19 +5,14 @@ import SignificantTerms from './SignificantTerms';
 import ApryseEditor from './ApryseEditor';
 import Button from './Button';
 import TextAnimation from './TextAnimation';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function Body() {
-    const [showResult, setShowResult] = useState(false);
     const [selectedFile, setSelectedFile] = useState('')
     const [keywords, setKeyWords] = useState('')
+    const [loading, setLoading]=useState('')
     const fileInputRef = useRef(null);
-
-    const handleIdentifyKeys = (pass) => {
-        if (pass) {
-            setShowResult(true);
-        }
-    };
-
+    
     const handleUploadClick = () => {
         fileInputRef.current.click();
     };
@@ -30,6 +25,7 @@ export default function Body() {
     };
 
     const handleKeyWords = (dict) => {
+        setLoading(false); // Set loading to false
         setKeyWords(dict)
     }
 
@@ -59,17 +55,22 @@ export default function Body() {
                             <ApryseEditor text="Identify Keys"
                                           customClass={""}
                                           handleKeyWords={handleKeyWords}
-                                          selectedFile={selectedFile}/>
+                                          selectedFile={selectedFile}
+                                          loadingSpinnerResult={setLoading}/>
 
                         )}
 
                     </div>
                     <div className="w-full ">
                         <Result className="min-h-150 h-auto">
-                            {keywords && (
-                                <AnalysisContainer>
-                                    <SignificantTerms keywords={keywords}/>
-                                </AnalysisContainer>
+                           {loading ? (
+                                <LoadingSpinner customClass="w-24 h-24" />
+                            ) : (
+                                keywords && (
+                                    <AnalysisContainer>
+                                        <SignificantTerms keywords={keywords} />
+                                    </AnalysisContainer>
+                                )
                             )}
                         </Result>
                     </div>
