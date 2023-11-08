@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from './Button';
 
 
-const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRecommendation}) => {
+const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showRecommendation}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
     const webViewer_dict = {
@@ -16,7 +16,7 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRec
         enableAnnotationNumbering: true,
         enableFilePicker: true,
         enableRedaction: true,
-       
+
     }
 
     useEffect(() => {
@@ -26,14 +26,14 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRec
                     webViewer_dict,
                     viewer.current
                 ).then((instance) => {
-                    const {documentViewer,Search, annotationManager, Annotations} = instance.Core;
+                    const {documentViewer, Search, annotationManager, Annotations} = instance.Core;
                     setDocumentViewer(documentViewer);
                     // documentViewer.setSearchHighlightColors({
                     //     searchResult: new Annotations.Color(0, 0, 255, 0.5),
                     //     activeSearchResult: 'rgba(0, 255, 0, 0.5)',
                     //   });
-                
-                    documentViewer.addEventListener("annotationsLoaded", ()=>{
+
+                    documentViewer.addEventListener("annotationsLoaded", () => {
                         const FitMode = instance.UI.FitMode;
                         instance.UI.setFitMode(FitMode.FitWidth)
                         // instance.UI.setFitMode(FitMode.FitWidth)
@@ -50,17 +50,17 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRec
                         //         Quads: [textQuad],
                         //         StrokeColor: new Annotations.Color(255, 0, 0, 1),
                         //       });
-                  
+
                         //       annotationManager.addAnnotation(annot);
                         //       annotationManager.redrawAnnotation(annot);
                         //     }
                         //   }
                         // };
-                  
+
                         // documentViewer.textSearchInit(searchText, mode, searchOptions);
-                        
-                    }) 
-                    
+
+                    })
+
                 });
             }
         });
@@ -89,27 +89,27 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRec
                 });
         }
     };
-    const handleAnalysis=()=>{
+    const handleAnalysis = () => {
         showRecommendation(true)
     }
 
     return (
         <div className="h-auto mt-1">
             <div className="flex-1 h-150 bg-gray-100" ref={viewer}></div>
-                {documentViewer && <div className='my-4 h-16 flex justify-between px-16'>
-                    <Button
-                        onClick={handleSave}
-                        text="Identify keys"
-                        customClass="result"
-                    />
-                    <Button 
+            {documentViewer && <div className='my-4 h-16 flex justify-between px-16'>
+                <Button
+                    onClick={handleSave}
+                    text="Identify keys"
+                    customClass="result"
+                />
+                <Button
                     onClick={handleAnalysis}
                     text="AI analysis"
                     customClass="result"
-                    />
-                </div>
-                  
-                }    
+                />
+            </div>
+
+            }
         </div>
     );
 };

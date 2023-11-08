@@ -90,7 +90,7 @@ def find_track_changes(before, after):
             change = {
                 "type": change_type,
                 "location": (start, end),
-                "text": after[start:end]
+                "text": after[start:end],
             }
             changes.append(change)
 

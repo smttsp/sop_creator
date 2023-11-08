@@ -11,10 +11,10 @@ import Analysis from './AnalysisResult';
 export default function Body() {
     const [selectedFile, setSelectedFile] = useState('')
     const [keywords, setKeyWords] = useState('')
-    const [loading, setLoading]=useState('')
-    const [recommendataion, setRecommendation]=useState()
+    const [loading, setLoading] = useState('')
+    const [recommendataion, setRecommendation] = useState()
     const fileInputRef = useRef(null);
-    
+
     const handleUploadClick = () => {
         fileInputRef.current.click();
     };
@@ -66,12 +66,12 @@ export default function Body() {
                     </div>
                     <div className="w-full ">
                         <Result className="min-h-150 h-auto">
-                           {loading ? (
-                                <LoadingSpinner customClass="w-24 h-24" />
+                            {loading ? (
+                                <LoadingSpinner customClass="w-24 h-24"/>
                             ) : (
                                 keywords && (
                                     <AnalysisContainer>
-                                        <SignificantTerms keywords={keywords} />
+                                        <SignificantTerms keywords={keywords}/>
                                     </AnalysisContainer>
                                 )
                             )}
@@ -79,9 +79,9 @@ export default function Body() {
                     </div>
                 </div>
                 <div className='flex'>
-                {recommendataion && (<Analysis/>)}
+                    {recommendataion && (<Analysis/>)}
                 </div>
-                
+
             </div>
         </div>
     );
