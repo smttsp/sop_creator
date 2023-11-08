@@ -6,11 +6,13 @@ import ApryseEditor from './ApryseEditor';
 import Button from './Button';
 import TextAnimation from './TextAnimation';
 import LoadingSpinner from './LoadingSpinner';
+import Analysis from './AnalysisResult';
 
 export default function Body() {
     const [selectedFile, setSelectedFile] = useState('')
     const [keywords, setKeyWords] = useState('')
     const [loading, setLoading]=useState('')
+    const [recommendataion, setRecommendation]=useState()
     const fileInputRef = useRef(null);
     
     const handleUploadClick = () => {
@@ -56,7 +58,8 @@ export default function Body() {
                                           customClass={""}
                                           handleKeyWords={handleKeyWords}
                                           selectedFile={selectedFile}
-                                          loadingSpinnerResult={setLoading}/>
+                                          loadingSpinnerResult={setLoading}
+                                          showRecommendation={setRecommendation}/>
 
                         )}
 
@@ -74,6 +77,7 @@ export default function Body() {
                             )}
                         </Result>
                     </div>
+                    {recommendataion && (<Analysis/>)}
                 </div>
             </div>
         </div>

@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import Button from './Button';
-import Analysis from './AnalysisResult';
 
-const ApryseEditor = ({handleKeyWords,loadingSpinnerResult, selectedFile}) => {
+
+const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRecommendation}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
-    const [showAnalysis, setShowAnalysis]=useState(null)
+   
     const [showAnalysisBtn, setShowAnalysisBtn]=useState("")
 
     const webViewer_dict = {
@@ -96,7 +96,7 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult, selectedFile}) => {
         }
     };
     const handleAnalysis=()=>{
-        setShowAnalysis(true)
+        showRecommendation(true)
     }
 
     return (
@@ -118,7 +118,7 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult, selectedFile}) => {
                           />
                 )}
             </div>
-            {showAnalysis && (<Analysis/>)}
+            
         </div>
     );
 };
