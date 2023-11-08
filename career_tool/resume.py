@@ -62,7 +62,33 @@ class ResumeAnalyzer:
         self.resume = resume
         self.session_info = session_info
 
-        self.recommendations = self._get_ai_recommendations(llm_model)
+        self.recommendations = [
+            {
+                "id": 1,
+                "current": "abc",
+                "recomend": "dsalfjads",
+                "reason": "iouodsjidsoijodsjidsohfs"
+            },
+            {
+                "id": 2,
+                "current": "dfklsfdj",
+                "recomend": "hkljportngl",
+                "reason": "iouodsjidsoijodsjidsohfs"
+            },
+            {
+                "id": 3,
+                "current": "sddada",
+                "recomend": "jlkj;akldjklajdsfkljdkljdsl",
+                "reason": "iouodsjidsoijodsjidsohfs"
+            },
+            {
+                "id": 4,
+                "current": "jhadjshfdsjhuuds",
+                "recomend": "jlkj;akldjklajdsfkljdkljdsl",
+                "reason": "iouodsjidsoijodsjidsohfs"
+            },
+        ]
+        # self.recommendations = self._get_ai_recommendations(llm_model)
         # self.info = self._get_resume_details(llm_model)
 
         # self.name = info.get("name", "")

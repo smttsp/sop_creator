@@ -62,7 +62,7 @@ def get_word_cloud():
 
 
 @app.route("/upload2", methods=["POST"])
-def get_word_cloud2():
+def get_ai_recommendation():
     print("hi2")
 
     file = request.files["resume_file"]
@@ -70,25 +70,10 @@ def get_word_cloud2():
         resume = Resume(file)
 
         ra = ResumeAnalyzer(resume, session_info)
-        # user = session_info.user
-        # session_id = session_info.session_id
-        # bucket = session_info.default_gcp_bucket
-        # file_path = os.path.join(bucket, user, session_id, file.filename)
-        #
-        # save_file_to_cloud(session_info.storage_client, file, file_path)
-        #
-        # resume = Resume(file)
-        #
-        # image_data = get_wc_as_binary(resume.wc)
-        # data_dict = resume.wf
-        # data_list = [
-        #     {"id": k, "name": round(v, 2)} for k, v in data_dict.items()
-        # ]
-        #
-        # response_data = {"image": image_data, "dict": data_list}
+        response_data = {"analysis": ra.recommendations}
 
         # return jsonify({"message": response_data}), 200
-        return jsonify({"message": "good job"}), 200
+        return jsonify({"message": response_data}), 200
     else:
         return jsonify({"error": "No file provided"}), 400
 
