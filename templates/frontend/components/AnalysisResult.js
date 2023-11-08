@@ -1,17 +1,20 @@
 import Button from "./Button"
 export default function Analysis(){
-    const keyValue = [{"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl"},
-                    {"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl"},
-                    {"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl"},
-                    {"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl"},
+    const keyValue = [{"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl", "reason":"iouodsjidsoijodsjidsohfs"},
+                    {"id":2, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl", "reason":"iouodsjidsoijodsjidsohfs"},
+                    {"id":3, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl", "reason":"iouodsjidsoijodsjidsohfs"},
+                    {"id":4, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl", "reason":"iouodsjidsoijodsjidsohfs"},
+                    {"id":5, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl", "reason":"iouodsjidsoijodsjidsohfs"},
+                    {"id":6, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl", "reason":"iouodsjidsoijodsjidsohfs"},
                 ]
-    return <div className="container mx-auto mt-4 h-72 overflow-scroll bg-gray-50 rounded-lg">
+    return <div className="container mx-auto mt-4 h-72 w-screen ml-8 overflow-scroll bg-gray-50 rounded-lg">
     <table className="w-full border border-collapse">
         <thead>
         <tr>
             <th className="border p-2">current</th>
-            <th className="border p-2">recommendataion</th>
-            <th className="border p-2">acceptance</th>
+            <th className="border p-2">Recommendataion</th>
+            <th className="border p-2">Reason</th>
+            <th className="border p-2">Acceptance</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +22,7 @@ export default function Analysis(){
             <tr key={row.id}>
                 <td className="border p-2">{row.current}</td>
                 <td className="border p-2">{row.recomend}</td>
+                <td className="border p-2">{row.reason}</td>
                 <td  className="border p-2 ">
                     <div className="ml-6 flex gap-8 text-sm text-white">
                     <Button
