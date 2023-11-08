@@ -6,9 +6,6 @@ import Button from './Button';
 const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRecommendation}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
-   
-    const [showAnalysisBtn, setShowAnalysisBtn]=useState("")
-
     const webViewer_dict = {
         path: '/webviewer/lib',
         initialDoc: selectedFile,
@@ -82,9 +79,6 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRec
                         .then((response) => {
                             console.log('Successfully sent to the backend');
                             handleKeyWords(response.data.message)
-                            setShowAnalysisBtn(true)
-
-                            
                         })
                         .catch((error) => {
                             console.log('Failed to send to the backend');
@@ -102,23 +96,20 @@ const ApryseEditor = ({handleKeyWords,loadingSpinnerResult,selectedFile, showRec
     return (
         <div className="h-auto mt-1">
             <div className="flex-1 h-150 bg-gray-100" ref={viewer}></div>
-            <div className="  my-4 h-16 flex justify-between px-16">
-                {documentViewer && (
+                {documentViewer && <div className='my-4 h-16 flex justify-between px-16'>
                     <Button
                         onClick={handleSave}
                         text="Identify keys"
                         customClass="result"
                     />
-                )}
-                {showAnalysisBtn && (
                     <Button 
-                          onClick={handleAnalysis}
-                          text="Analyse Resume"
-                          customClass="result"
-                          />
-                )}
-            </div>
-            
+                    onClick={handleAnalysis}
+                    text="AI analysis"
+                    customClass="result"
+                    />
+                </div>
+                  
+                }    
         </div>
     );
 };
