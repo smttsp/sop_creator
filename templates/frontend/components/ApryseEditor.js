@@ -90,6 +90,26 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
     };
     const handleAnalysis = () => {
         showRecommendation(true)
+        if (documentViewer) {
+            documentViewer.getDocument().getFileData()
+                .then((arrayBuffer) => {
+                    const blob = new Blob([arrayBuffer], {type: 'application/octet-stream'});
+                    const formData = new FormData();
+                    formData.append('resume_file', blob, 'document.docx');
+
+                    axios.post('http://localhost:5000/upload2', formData)
+                        .then((response) => {
+                            console.log('response', response.data.message);
+                            // handleKeyWords(response.data.message)
+                        })
+                        .catch((error) => {
+                            console.log('Failed to send to the backend');
+                        });
+                })
+                .catch((error) => {
+                    console.error('Error getting file data:', error);
+                });
+        }
     }
 
     return (
