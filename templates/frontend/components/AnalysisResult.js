@@ -1,4 +1,4 @@
-import Button from "../Button"
+import Button from "./Button"
 export default function Analysis(){
     const keyValue = [{"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl"},
                     {"id":1, "current":"jhadjshfdsjhuuds","recomend": "jlkj;akldjklajdsfkljdkljdsl"},

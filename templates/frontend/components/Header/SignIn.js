@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Input from './Inpupt';
+import Input from './Input';
 import Brand from './Brand';
 import Link from 'next/link';
 import SignWith from '../Authentication/AuthMain';

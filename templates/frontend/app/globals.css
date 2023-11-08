@@ -169,6 +169,9 @@ body {
     hover:text-gray-200 hover:font-semibold hover:bg-purple-800
     active:text-gray-400 active:font-semibold cursor-pointer
   }
+  .input-error{
+    @apply text-red-400 ml-2 font-roboto text-sm font-light
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
