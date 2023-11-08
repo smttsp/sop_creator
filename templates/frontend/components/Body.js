@@ -2,17 +2,17 @@ import React, {useRef, useState} from 'react';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
 import SignificantTerms from './SignificantTerms';
-import ApryseEditor from './ApryseEditor';
 import Button from './Button';
 import TextAnimation from './TextAnimation';
 import LoadingSpinner from './LoadingSpinner';
 import Analysis from './AnalysisResult';
+import ApryseEditor from "@/components/ApryseEditor";
 
 export default function Body() {
     const [selectedFile, setSelectedFile] = useState('')
     const [keywords, setKeyWords] = useState('')
     const [loading, setLoading] = useState('')
-    const [recommendataion, setRecommendation] = useState()
+    const [ai_recommendation, setAIRecommendation] = useState()
     const fileInputRef = useRef(null);
 
     const handleUploadClick = () => {
@@ -31,38 +31,44 @@ export default function Body() {
         setKeyWords(dict)
     }
 
+    const uploadResumeButton = (
+        <Button
+            text="Upload Resume"
+            customClass="bg-purple-900 w-1/2 shadow-xl text-white py-2 px-4 rounded cursor-pointer"
+            onClick={handleUploadClick}
+        />
+    );
+
+    const apryseEditorDiv = (
+        <ApryseEditor
+            text="Identify Keys"
+            customClass={""}
+            handleKeyWords={handleKeyWords}
+            selectedFile={selectedFile}
+            loadingSpinnerResult={setLoading}
+            showRecommendation={setAIRecommendation}
+        />
+    )
+
     return (
         <div className="p-4 h-auto bg-gradient-to-br from-purple-900 to-pink-200">
             <div className="">
-                <TextAnimation text="Hello, I am AI tool to Assist you to build your carier"
-                               speed={100}/>
+                <TextAnimation
+                    text="Hello, I am AI tool to Assist you to build your career"
+                    speed={100}
+                />
+
                 <div className="grid grid-cols-2 h-auto">
                     <div className="w-full mx-2 min-h-96">
-                        {!selectedFile && (<Button
-                            text="Upload Resume"
-                            customClass="bg-purple-900 w-1/2 shadow-xl
-                            text-white py-2 px-4 rounded cursor-pointer"
-                            onClick={handleUploadClick}
-                        />)
-                        }
+                        {!selectedFile && uploadResumeButton}
                         <input
                             type='file'
                             accept='.docx'
                             onChange={handleFileChange}
                             style={{display: 'none'}}
-                            ref={fileInputRef}/>
-                        {selectedFile && (
-                            // Render the ApryseEditor component when showEditor is true
-
-                            <ApryseEditor text="Identify Keys"
-                                          customClass={""}
-                                          handleKeyWords={handleKeyWords}
-                                          selectedFile={selectedFile}
-                                          loadingSpinnerResult={setLoading}
-                                          showRecommendation={setRecommendation}/>
-
-                        )}
-
+                            ref={fileInputRef}
+                        />
+                        {selectedFile && apryseEditorDiv}
                     </div>
                     <div className="w-full ">
                         <Result className="min-h-150 h-auto">
@@ -78,8 +84,9 @@ export default function Body() {
                         </Result>
                     </div>
                 </div>
+
                 <div className='flex'>
-                    {recommendataion && (<Analysis/>)}
+                    {ai_recommendation && (<Analysis/>)}
                 </div>
 
             </div>
