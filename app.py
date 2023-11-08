@@ -48,7 +48,7 @@ def upload_file():
 
         image_data = get_wc_as_binary(resume.wc)
         data_dict = resume.wf
-        data_list = [{"id": k, "name": v} for k, v in data_dict.items()]
+        data_list = [{"id": k, "name": round(v, 2)} for k, v in data_dict.items()]
 
         response_data = {"image": image_data, "dict": data_list}
 
