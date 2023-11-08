@@ -2,11 +2,12 @@ import base64
 import io
 import os
 
+import openai
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from career_tool.resume import Resume
+from career_tool.resume import Resume, ResumeAnalyzer
 from career_tool.utils.file_utils import save_file_to_cloud
 from career_tool.utils.session_utils import SessionInfo
 
@@ -17,6 +18,7 @@ CORS(app)  # Enable CORS for all routes
 load_dotenv(find_dotenv())
 
 session_info = SessionInfo(user="smttsp")
+openai.api_key = session_info.openai_api_key
 
 
 def get_wc_as_binary(wc):
@@ -32,7 +34,7 @@ def get_wc_as_binary(wc):
 
 
 @app.route("/upload", methods=["POST"])
-def upload_file():
+def get_word_cloud():
     print("hi")
 
     file = request.files["resume_file"]
@@ -42,7 +44,7 @@ def upload_file():
         bucket = session_info.default_gcp_bucket
         file_path = os.path.join(bucket, user, session_id, file.filename)
 
-        save_file_to_cloud(session_info.storage_client, file, file_path)
+        # save_file_to_cloud(session_info.storage_client, file, file_path)
 
         resume = Resume(file)
 
@@ -55,6 +57,38 @@ def upload_file():
         response_data = {"image": image_data, "dict": data_list}
 
         return jsonify({"message": response_data}), 200
+    else:
+        return jsonify({"error": "No file provided"}), 400
+
+
+@app.route("/upload2", methods=["POST"])
+def get_word_cloud2():
+    print("hi2")
+
+    file = request.files["resume_file"]
+    if file:
+        resume = Resume(file)
+
+        ra = ResumeAnalyzer(resume, session_info)
+        # user = session_info.user
+        # session_id = session_info.session_id
+        # bucket = session_info.default_gcp_bucket
+        # file_path = os.path.join(bucket, user, session_id, file.filename)
+        #
+        # save_file_to_cloud(session_info.storage_client, file, file_path)
+        #
+        # resume = Resume(file)
+        #
+        # image_data = get_wc_as_binary(resume.wc)
+        # data_dict = resume.wf
+        # data_list = [
+        #     {"id": k, "name": round(v, 2)} for k, v in data_dict.items()
+        # ]
+        #
+        # response_data = {"image": image_data, "dict": data_list}
+
+        # return jsonify({"message": response_data}), 200
+        return jsonify({"message": "good job"}), 200
     else:
         return jsonify({"error": "No file provided"}), 400
 
