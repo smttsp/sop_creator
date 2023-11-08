@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from './Button';
 import Analysis from './AnalysisResult';
 
-const ApryseEditor = ({handleKeyWords, selectedFile}) => {
+const ApryseEditor = ({handleKeyWords,loadingSpinnerResult, selectedFile}) => {
     const viewer = useRef(null);
     const [documentViewer, setDocumentViewer] = useState(null);
     const [showAnalysis, setShowAnalysis]=useState(null)
@@ -70,6 +70,7 @@ const ApryseEditor = ({handleKeyWords, selectedFile}) => {
     }, []);
 
     const handleSave = () => {
+        loadingSpinnerResult(true)
         if (documentViewer) {
             documentViewer.getDocument().getFileData()
                 .then((arrayBuffer) => {
