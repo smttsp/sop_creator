@@ -58,23 +58,59 @@ class Resume:
 
 
 class ResumeAnalyzer:
-    def __init__(self, resume):
+    def __init__(self, resume, llm_model="gpt-3.5-turbo"):
         self.resume = resume
 
-        info = self._get_resume_details()
+        self.recommendations = self._get_ai_recommendations(llm_model)
+        self.info = self._get_resume_details(llm_model)
 
-        self.name = info.get("name", "")
-        self.email = info.get("email", "")
-        self.phone_no = info.get("phone_no", "")
-        self.location = info.get("location", "")
-        self.github_address = info.get("github_address", "")
-        self.linkedin_address = info.get("linkedin_address", "")
-        self.fitting_job_title = info.get("fitting_job_title", "")
-        self.top5_skills = info.get("top5_skills", [])
-        self.total_industry_exp = info.get("total_industry_exp", 0)
-        self.total_academic_exp = info.get("total_academic_exp", 0)
-        self.management_score = info.get("management_score", 0)
-        self.professional_summary = info.get("professional_summary", 0)
+        # self.name = info.get("name", "")
+        # self.email = info.get("email", "")
+        # self.phone_no = info.get("phone_no", "")
+        # self.location = info.get("location", "")
+        # self.github_address = info.get("github_address", "")
+        # self.linkedin_address = info.get("linkedin_address", "")
+        # self.fitting_job_title = info.get("fitting_job_title", "")
+        # self.top5_skills = info.get("top5_skills", [])
+        # self.total_industry_exp = info.get("total_industry_exp", 0)
+        # self.total_academic_exp = info.get("total_academic_exp", 0)
+        # self.management_score = info.get("management_score", 0)
+        # self.professional_summary = info.get("professional_summary", "")
+
+    def _get_ai_recommendations(self, llm_model="gpt-3.5-turbo"):
+        template_string2 = """Given a resume ```{resume}```
+        Create a list of changes you recommend to the resume.
+        You need to look into the following things such as 
+        
+        1. the usage of action verbs
+        2. addition of more quantifiable achievements. You can put them as "***" in your
+            suggestions. (add comment  what user should put there)
+        3. highlight the leadership experience. 
+        4. the usage of numbers, ratios, improvements
+        3. grammar, spelling, punctuation issues
+        4. consistency of tense and other grammatical elements. Notice that current 
+            experience should be present tense, past experience should be past tense.
+        5. if you think some sections are redundant, such as interests, references, etc, 
+            you can suggest to remove them.
+
+        take a deep breath and give me suggestions in JSON format where the suggestions
+        are in a list of dictionaries with the following keys:        
+            - before:
+            - after:
+            - reason:
+        """
+
+        chat = ChatOpenAI(temperature=0.0, model=llm_model)
+
+        prompt_template = ChatPromptTemplate.from_template(template_string2)
+
+        service_messages = prompt_template.format_messages(
+            resume=self.resume.content
+        )
+        response = chat(service_messages)
+        info = json.loads(response.content)
+
+        return info
 
     def _get_resume_details(self, llm_model="gpt-3.5-turbo"):
         chat = ChatOpenAI(temperature=0.0, model=llm_model)
@@ -92,9 +128,11 @@ class ResumeAnalyzer:
                 total_industry_experience (in years)
                 total_academic_experience (in years)
                 management_score (out of 100)
-            
-            Can you also recommend a professional_summary which is at most 100 tokens?
+                professional_summary: Can you come up with a professional_summary which
+                    is at most 100 tokens? This is a concise, memorable statement that 
+                    lets the reader know what you offer the company
             ---
+            Take a deep breath and give me the answer. 
             Format the output as JSON with the following keys:
                 name
                 email
@@ -116,6 +154,6 @@ class ResumeAnalyzer:
             resume=self.resume.content
         )
         response = chat(service_messages)
-        info = json.loads(response.content)
+        recommendations = json.loads(response.content)
 
-        return info
+        return recommendations
