@@ -13,6 +13,7 @@ export default function Body() {
     const [keywords, setKeyWords] = useState('')
     const [loading, setLoading] = useState('')
     const [ai_recommendation, setAIRecommendation] = useState()
+    const [documentViewer, setDocumentViewer]=useState('')
     const fileInputRef = useRef(null);
 
     const handleUploadClick = () => {
@@ -47,6 +48,7 @@ export default function Body() {
             selectedFile={selectedFile}
             loadingSpinnerResult={setLoading}
             showRecommendation={setAIRecommendation}
+            passDocumentViwer={setDocumentViewer}
         />
     )
 
@@ -86,7 +88,7 @@ export default function Body() {
                 </div>
 
                 <div className='flex'>
-                    {ai_recommendation && (<Analysis/>)}
+                    {ai_recommendation && documentViewer && (<Analysis documentViewer={documentViewer}/>)}
                 </div>
 
             </div>
