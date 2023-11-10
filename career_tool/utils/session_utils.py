@@ -17,7 +17,7 @@ class SessionInfo:
         self.session_id = get_session_id()
         self.default_gcp_bucket = default_gcp_bucket
 
-        self.google_service_account = os.environ["GOOGLE_SERVICE_ACCOUNT"]
+        self.google_service_account = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
 
         self.secret_value_dict = get_secret_value_dict(
             self.google_service_account
