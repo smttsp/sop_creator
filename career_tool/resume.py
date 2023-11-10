@@ -65,13 +65,17 @@ class ResumeAnalyzer:
         self.resume = resume
         self.session_info = session_info
         from time import time
-        t1 = time()
-        # self.recommendations2 = self._get_ai_recommendations2(llm_model)
-        self.recommendations = self._get_ai_recommendations(llm_model)
+        # t1 = time()
+        self.recommendations = self._get_ai_recommendations_google()
+        # print("vertex", time() - t1)
 
-        print(time() - t1)
+        # for model in []:
+        # t1 = time()
+        # self.recommendations = self._get_ai_recommendations(llm_model)
 
-        self.recommendations = self._get_ai_recommendations(llm_model)
+        # print("openai", time() - t1)
+        # print()
+        # self.recommendations = self._get_ai_recommendations(llm_model)
         # self.info = self._get_resume_details(llm_model)
 
         # self.name = info.get("name", "")
@@ -87,7 +91,7 @@ class ResumeAnalyzer:
         # self.management_score = info.get("management_score", 0)
         # self.professional_summary = info.get("professional_summary", "")
 
-    def _get_ai_recommendations2(self, llm_model="gpt-3.5-turbo"):
+    def _get_ai_recommendations_google(self):
         template_string2 = """Given a resume ```{resume}```
         Create a list of changes you recommend to the resume.
         You need to look into the following things such as 
@@ -113,9 +117,9 @@ class ResumeAnalyzer:
 
         try:
             chat = ChatVertexAI(
-                temperature=0.0,
+                # temperature=0.0,
                 google_api_key=google_api_key,
-                model="codechat-bison",
+                model="text-bison",
                 max_output_tokens=2048,
             )
 
@@ -125,18 +129,18 @@ class ResumeAnalyzer:
                 resume=self.resume.content
             )
             response = chat(service_messages)
-            json_match = re.search(r'```JSON(.*?)\n```', response.content, re.DOTALL)
+            json_match = re.search(r'```JSON(.*?)```', response.content, re.DOTALL)
 
             if json_match:
                 json_data = json_match.group(1).strip()
                 info = json.loads(json_data)
             else:
-                info = {}
+                info = []
                 print("No JSON data found in the input string.")
 
         except JSONDecodeError | Exception as e:
             print(e)
-            info = {}
+            info = []
         return info
 
     def _get_ai_recommendations(self, llm_model="gpt-3.5-turbo"):
