@@ -1,10 +1,13 @@
 import json
+import re
 
-from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI, ChatVertexAI
 from langchain.prompts import ChatPromptTemplate
 
 from career_tool.utils.file_utils import anonymize_resume, read_text_from_file
 from career_tool.utils.word_utils import get_word_cloud, get_word_freq
+from langchain.llms import VertexAI
+from json import JSONDecodeError
 
 
 class Resume:
@@ -61,34 +64,14 @@ class ResumeAnalyzer:
     def __init__(self, resume, session_info, llm_model="gpt-3.5-turbo"):
         self.resume = resume
         self.session_info = session_info
+        from time import time
+        t1 = time()
+        # self.recommendations2 = self._get_ai_recommendations2(llm_model)
+        self.recommendations = self._get_ai_recommendations(llm_model)
 
-        self.recommendations = [
-            {
-                "id": 1,
-                "current": "abc",
-                "recomend": "dsalfjads",
-                "reason": "iouodsjidsoijodsjidsohfs"
-            },
-            {
-                "id": 2,
-                "current": "dfklsfdj",
-                "recomend": "hkljportngl",
-                "reason": "iouodsjidsoijodsjidsohfs"
-            },
-            {
-                "id": 3,
-                "current": "sddada",
-                "recomend": "jlkj;akldjklajdsfkljdkljdsl",
-                "reason": "iouodsjidsoijodsjidsohfs"
-            },
-            {
-                "id": 4,
-                "current": "jhadjshfdsjhuuds",
-                "recomend": "jlkj;akldjklajdsfkljdkljdsl",
-                "reason": "iouodsjidsoijodsjidsohfs"
-            },
-        ]
-        # self.recommendations = self._get_ai_recommendations(llm_model)
+        print(time() - t1)
+
+        self.recommendations = self._get_ai_recommendations(llm_model)
         # self.info = self._get_resume_details(llm_model)
 
         # self.name = info.get("name", "")
@@ -103,6 +86,58 @@ class ResumeAnalyzer:
         # self.total_academic_exp = info.get("total_academic_exp", 0)
         # self.management_score = info.get("management_score", 0)
         # self.professional_summary = info.get("professional_summary", "")
+
+    def _get_ai_recommendations2(self, llm_model="gpt-3.5-turbo"):
+        template_string2 = """Given a resume ```{resume}```
+        Create a list of changes you recommend to the resume.
+        You need to look into the following things such as 
+
+        1. the usage of action verbs
+        2. addition of more quantifiable achievements. You can put them as "***" in your
+            suggestions. (add comment  what user should put there)
+        3. highlight the leadership experience. 
+        4. the usage of numbers, ratios, improvements
+        3. grammar, spelling, punctuation issues
+        4. consistency of tense and other grammatical elements. Notice that current 
+            experience should be present tense, past experience should be past tense.
+        5. if you think some sections are redundant, such as interests, references, etc, 
+            you can suggest to remove them.
+
+        take a deep breath and give me suggestions in JSON format where the suggestions
+        are in a list of dictionaries with the following keys:        
+            - before:
+            - after:
+            - reason:
+        """
+        google_api_key = self.session_info.google_service_account
+
+        try:
+            chat = ChatVertexAI(
+                temperature=0.0,
+                google_api_key=google_api_key,
+                model="codechat-bison",
+                max_output_tokens=2048,
+            )
+
+            prompt_template = ChatPromptTemplate.from_template(template_string2)
+
+            service_messages = prompt_template.format_messages(
+                resume=self.resume.content
+            )
+            response = chat(service_messages)
+            json_match = re.search(r'```JSON(.*?)\n```', response.content, re.DOTALL)
+
+            if json_match:
+                json_data = json_match.group(1).strip()
+                info = json.loads(json_data)
+            else:
+                info = {}
+                print("No JSON data found in the input string.")
+
+        except JSONDecodeError | Exception as e:
+            print(e)
+            info = {}
+        return info
 
     def _get_ai_recommendations(self, llm_model="gpt-3.5-turbo"):
         template_string2 = """Given a resume ```{resume}```
