@@ -11,6 +11,11 @@ from career_tool import (
     ResumeAnalyzer,
 )
 from career_tool.utils.secret_manager_utils import get_secret_value_dict
+from dotenv import find_dotenv, load_dotenv
+from career_tool.resume import Resume, ResumeAnalyzer
+from career_tool.utils.session_utils import SessionInfo
+
+load_dotenv(find_dotenv())
 
 
 # from google.cloud.storage.client import Client as StorageClient
@@ -72,23 +77,18 @@ if __name__ == "__main__":
 
     secret_value_dict = get_secret_value_dict(service_account_key_path)
     openai.api_key = secret_value_dict["OPENAI_API_KEY"]
-    # db_login_info_dict = secret_value_dict["DATABASE_INFO"]
-    # from utils.database_utils import connect_to_db
-    # conn = connect_to_db(db_login_info_dict)
 
     cv_file = "/users/samet/desktop/sop_creator/resumes/Resume_Mariana_Queiroz_Velter_2023.pdf"
     jd_file = "/users/samet/desktop/sop_creator/resumes/cellino_simple2.docx"
 
-    # gcp_folder = f"gs://{DEFAULT_GCP_BUCKET}/_files/user1"
-    resume, jd = get_content_from_inputs(
-        None,
-        resume_file=cv_file,
-        jd_file=jd_file,
-    )
-    ra = ResumeAnalyzer(resume)
-    cfa = CareerFitAnalyzer(resume, jd)
-    cfa.visualize_word_clouds()
-    cfa.give_recommendations()
+    resume = Resume(cv_file)
+
+    session_info = SessionInfo(user="smttsp")
+
+    ra = ResumeAnalyzer(resume, session_info)
+    # cfa = CareerFitAnalyzer(resume, jd)
+    # cfa.visualize_word_clouds()
+    # cfa.give_recommendations()
 
     # jaccard = ra.get_weighted_jaccard()
     cover_letter = CoverLetter(resume, jd)
