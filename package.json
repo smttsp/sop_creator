@@ -14,7 +14,7 @@
   "dependencies": {
     "@pdftron/webviewer": "^10.5.0",
     "@reduxjs/toolkit": "^1.9.7",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "ckeditor4-react": "^5.0.0",
     "draft-js-export-html": "^1.4.1",
     "html-react-parser": "^4.2.9",
