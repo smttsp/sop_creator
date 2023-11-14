@@ -4,9 +4,8 @@ import axios from "axios";
 import Button from "./Button";
 
 const fetchAIAnalysis = async (documentData) => {
-    console.log("fetch analysis")
-    const formData = new FormData();
-    formData.append("resume_file", documentData, "document.docx");
+  const formData = new FormData();
+  formData.append("resume_file", documentData, "document.docx");
 
     try {
         const response = await axios.post("http://localhost:5000/upload2", formData);

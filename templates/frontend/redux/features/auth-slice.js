@@ -6,7 +6,8 @@ const initialState = {
         isAuth: false,
         name: "beki",
         imageUrl: "",
-        userId: ""
+        session:{},
+       
     }
 };
 
@@ -23,7 +24,8 @@ export const auth = createSlice({
                     isAuth: true,
                     name: action.payload.name,
                     imageUrl: action.payload.image,
-                    userId: ""
+                    session:action.payload.session,
+                   
                 }
             };
         }
