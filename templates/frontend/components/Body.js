@@ -1,3 +1,4 @@
+'use client'
 import React, {useRef, useState} from 'react';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
@@ -22,8 +23,7 @@ export default function Body() {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const fileURL = URL.createObjectURL(file);
-            setSelectedFile(fileURL);
+            setSelectedFile(fileInputRef.current.files[0]);
         }
     };
 
@@ -48,7 +48,7 @@ export default function Body() {
             selectedFile={selectedFile}
             loadingSpinnerResult={setLoading}
             showRecommendation={setAIRecommendation}
-            passDocumentViwer={setDocumentViewer}
+            
         />
     )
 
@@ -60,9 +60,9 @@ export default function Body() {
                     speed={100}
                 />
 
-                <div className="grid grid-cols-2 h-auto">
-                    <div className="w-full mx-2 min-h-96">
-                        {!selectedFile && uploadResumeButton}
+                <div className="grid grid-cols-5 h-auto">
+                    <div className="w-full mx-2 min-h-96 col-span-3">
+                        {uploadResumeButton}
                         <input
                             type='file'
                             accept='.docx'
@@ -72,7 +72,7 @@ export default function Body() {
                         />
                         {selectedFile && apryseEditorDiv}
                     </div>
-                    <div className="w-full ">
+                    <div className="w-full col-span-2 ">
                         <Result className="min-h-150 h-auto">
                             {loading ? (
                                 <LoadingSpinner customClass="w-24 h-24"/>
@@ -88,7 +88,7 @@ export default function Body() {
                 </div>
 
                 <div className='flex'>
-                    {ai_recommendation && documentViewer && (<Analysis documentViewer={documentViewer}/>)}
+                    {ai_recommendation && (<Analysis documentViewer={documentViewer}/>)}
                 </div>
 
             </div>

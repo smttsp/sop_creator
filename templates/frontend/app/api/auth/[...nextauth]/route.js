@@ -1,32 +1,34 @@
-import NextAuth from 'next-auth/next';
-import GoogleProvider from 'next-auth/providers/google';
-import LinkedInProvider from 'next-auth/providers/linkedin';
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
-const authOption = {
-  session: {
-    strategy: 'jwt',
-  },
+export const authOptions = {
   providers: [
-    LinkedInProvider({
-      clientId: process.env.LINKEDIN_CLIENT_ID,
-      clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-      redirect_uri: process.env.LinkedIn_Redirect,
-      
-    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: "openid email profile https://www.googleapis.com/auth/drive",
+        },
+      },
     }),
   ],
   callbacks: {
-    async signIn({ account, profile }) {
-      if (!profile?.email) {
-        throw new Error('No profile'); // Corrected error syntax
+    async jwt({ token, account, profile }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token;
       }
-      return true;
+      return token;
+    },
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.accessToken = token.accessToken;
+      return session;
     },
   },
 };
 
-const handler = NextAuth(authOption);
+const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };

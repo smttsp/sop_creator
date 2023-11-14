@@ -39,6 +39,7 @@ def get_word_cloud():
 
     file = request.files["resume_file"]
     if file:
+        print("the file is found in the back end")
         user = session_info.user
         session_id = session_info.session_id
         bucket = session_info.default_gcp_bucket

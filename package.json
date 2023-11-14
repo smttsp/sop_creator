@@ -17,6 +17,7 @@
     "axios": "^1.6.0",
     "ckeditor4-react": "^5.0.0",
     "draft-js-export-html": "^1.4.1",
+    "googleapis": "^128.0.0",
     "html-react-parser": "^4.2.9",
     "jszip": "^3.10.1",
     "mammoth": "^1.6.0",
