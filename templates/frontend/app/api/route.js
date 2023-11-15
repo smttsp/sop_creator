@@ -29,6 +29,7 @@ export async function POST(req) {
       axios.post('http://localhost:5000/upload', formData)
       .then((response) => {
         console.log('Successfully sent to the backend');
+        console.log(response.data)
         return new Response(JSON.stringify(response.data), {
           headers: { 'Content-Type': 'application/json' },
           status: 200, // Set the appropriate status code
