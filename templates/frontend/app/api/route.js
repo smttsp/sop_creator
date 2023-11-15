@@ -24,6 +24,7 @@ export async function POST(req) {
   
       const arrayBuffer = await response.arrayBuffer();
       const blob = new Blob([arrayBuffer], { type: 'application/octet-stream' });
+      console.log("this is blob data", blob)
       const formData = new FormData();
       formData.append('resume_file', blob, 'document.docx');
       axios.post('http://localhost:5000/upload', formData)
