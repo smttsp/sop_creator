@@ -7,6 +7,7 @@ import Button from './Button';
 const ApryseEditor = ({ handleKeyWords, loadingSpinnerResult, selectedFile, showRecommendation }) => {
   const { data: session } = useSession({ required: true, onUnauthenticated() { redirect('/'); } });
   const [googleDocsUrl, setGoogleDocsUrl] = useState('');
+  const [fileId, setFileId]=useState('')
 
   useEffect(() => {
     const handleSendToDrive = async () => {
@@ -25,12 +26,16 @@ const ApryseEditor = ({ handleKeyWords, loadingSpinnerResult, selectedFile, show
             headers: {
               Authorization: `Bearer ${session.accessToken}`,
             },
+            params: {
+              key:process.env.GOOGLE_APIKEY,
+            },
           });
 
           const uploadedFile = await response.json();
           const url = `https://docs.google.com/document/d/${uploadedFile.id}/edit`;
 
           setGoogleDocsUrl(url); // Save the Google Docs URL
+          setFileId(uploadedFile.id)
           
           const iframe = document.createElement('iframe');
           iframe.src = url;
@@ -57,19 +62,18 @@ const ApryseEditor = ({ handleKeyWords, loadingSpinnerResult, selectedFile, show
       return;
     }
   
-    try {
-      console.log("this is google doc link", googleDocsUrl);
-      const response=await fetch('/api', {
-        method:"POST",
-        body:JSON.stringify({googleDocsUrl:googleDocsUrl, accessToken:session.accessToken})
-      })
-      console.log("this is imageresponse",response)
-      // handleKeyWords(response.data.message)
-     
-    } catch (error) {
+    axios.post('/api', {
+      googleDocsUrl: googleDocsUrl,
+      accessToken: session.accessToken,
+      fileId: fileId,
+    })
+    .then(response => {
+      console.log("this is imageresponse", response.data.responseData);
+    })
+    .catch(error => {
       console.error('Error fetching file from Google Drive:', error);
       alert('Failed to fetch the document from Google Drive.');
-    }
+    });
   };
 
   const handleIdentifyKeys = () => {
@@ -106,34 +110,7 @@ export default ApryseEditor;
 
 
 
-// .then((arrayBuffer) => {
-//   const blob = new Blob([arrayBuffer], {type: 'application/octet-stream'});
-//   const formData = new FormData();
-//   formData.append('resume_file', blob, 'document.docx');
 
-//   axios.post('http://localhost:5000/upload', formData)
-//       .then((response) => {
-//           console.log('Successfully sent to the backend');
-//           handleKeyWords(response.data.message)
-//           image_data = get_wc_as_binary(resume.wc)
-//           data_dict = resume.wf
-//           data_list = [
-//               {"id": k, "name": round(v, 2)} for k, v in data_dict.items()
-//           ]
-  
-//           response_data = {"image": image_data, "dict": data_list}
-  
-//           return jsonify({"message": response_data}), 200
-//       })
-//       .catch((error) => {
-//           console.log('Failed to send to the backend');
-//       });
-// })
-// .catch((error) => {
-//   console.error('Error getting file data:', error);
-// });
-// }
-// };
 
 // import React, {useEffect, useRef, useState} from 'react';
 // import axios from 'axios';
