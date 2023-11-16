@@ -14,7 +14,7 @@ export default function Body() {
     const [keywords, setKeyWords] = useState('')
     const [loading, setLoading] = useState('')
     const [ai_recommendation, setAIRecommendation] = useState()
-    const [documentViewer, setDocumentViewer]=useState('')
+    const [documentViewer, setDocumentViewer] = useState('')
     const fileInputRef = useRef(null);
 
     const handleUploadClick = () => {
@@ -48,7 +48,7 @@ export default function Body() {
             selectedFile={selectedFile}
             loadingSpinnerResult={setLoading}
             showRecommendation={setAIRecommendation}
-            
+
         />
     )
 

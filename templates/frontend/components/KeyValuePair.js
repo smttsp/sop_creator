@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function KeyValuePair({keyValue}) {
-
     return <div className="container mx-auto mt-4 h-72 overflow-scroll bg-gray-50 rounded-lg">
         <table className="w-full border border-collapse">
             <thead>
