@@ -72,7 +72,8 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
             fileId: fileId,
         })
             .then(response => {
-                console.log("this is imageresponse", response.data.responseData);
+                console.log("this is imageresponse", response.data.message);
+                handleKeyWords(response.data.message)
             })
             .catch(error => {
                 console.error('Error fetching file from Google Drive:', error);
@@ -81,7 +82,6 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
     };
 
     const handleIdentifyKeys = () => {
-        // You may want to add additional logic here if needed
         loadingSpinnerResult(true)
         handleFetchFromDriveAndSendToBackend();
     };
