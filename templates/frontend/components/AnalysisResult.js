@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
+import { useSession } from "next-auth/react";
 import LoadingSpinner from "./LoadingSpinner";
+import {redirect} from 'next/navigation';
 import axios from "axios";
 import Button from "./Button";
 
-const fetchAIAnalysis = async (documentData) => {
-    const formData = new FormData();
-    formData.append("resume_file", documentData, "document.docx");
-
+const fetchAIAnalysis = async (fileId,accessToken) => {
+  
     try {
-        const response = await axios.post("http://localhost:5000/upload2", formData);
+        const response = await axios.post("api/recommendation", {fileId:fileId, accessToken:accessToken});
+        console.log(response.data.message)
         const analysisData = response.data.message.analysis;
         return analysisData;
     } catch (error) {
@@ -17,25 +18,21 @@ const fetchAIAnalysis = async (documentData) => {
     }
 };
 
-export default function Analysis({documentViewer}) {
+export default function Analysis({fileId}) {
     const [AIAnalysis, setAIAnalysis] = useState([]);
     const [acceptedRows, setAcceptedRows] = useState([]);
     const [selectedButton, setSelectedButton] = useState(null);
     const [loading, setLoading] = useState(true);
+    const {data: session} = useSession({
+        required: true, onUnauthenticated() {
+            redirect('/');
+        }
+    });
 
 
     useEffect(() => {
-        documentViewer.getDocument().getFileData().then((arrayBuffer) => {
-            const blob = new Blob([arrayBuffer], {type: "application/octet-stream"});
-
-            fetchAIAnalysis(blob).then((analysisData) => {
-                console.log(analysisData)
-
-                setLoading(false); // Update loading state to false once data is fetched
-                setAIAnalysis(analysisData);
-            });
-        });
-    }, [documentViewer]);
+              setAIAnalysis(fetchAIAnalysis(fileId,session.accessToken))
+    }, [fileId]);
 
     const handleButtonClick = (rowId) => {
         if (acceptedRows.includes(rowId)) {

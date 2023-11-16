@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import axios from 'axios';
-
 export async function POST(req) {
   const body = await req.json();
   try {
@@ -24,7 +23,7 @@ export async function POST(req) {
     const formData = new FormData();
     formData.append('resume_file', fetchedFile, 'document.docx');
 
-    return axios.post('http://localhost:5000/upload', formData)
+    return axios.post('http://localhost:5000/upload2', formData)
         .then((response) => {
           return new Response(JSON.stringify(response.data), {
             status: 200,
