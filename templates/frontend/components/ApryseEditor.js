@@ -67,12 +67,10 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
         }
 
         axios.post('/api', {
-            googleDocsUrl: googleDocsUrl,
             accessToken: session.accessToken,
             fileId: fileId,
         })
             .then(response => {
-                console.log("this is imageresponse", response.data.message);
                 handleKeyWords(response.data.message)
             })
             .catch(error => {
@@ -87,8 +85,9 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
     };
 
     const handleAnalysis = () => {
-        console.log("analysis is selected")
-    }
+                // showRecommendation(fileId)
+                
+    };
 
     return (
         <div className='mt-1 h-auto '>
