@@ -1,6 +1,5 @@
 const Input = (props) => {
     return (
-
         <div className="relative mt-8 text-sm text-gray-800">
             <input type={props.type} id={props.id} value={props.value} onChange={props.onChange}
                    name={props.name} placeholder={props.placeholder}
