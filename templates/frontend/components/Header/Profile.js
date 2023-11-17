@@ -11,8 +11,7 @@ export default function Profile({user}) {
     const closeDetail = () => {
         setShowDetail(false)
     }
-    console.log(user)
-    return <div className="">
+    return <div className="mr-8">
         <button className="h-12 w-12 rounded-full overflow-hidden bg-white "
                 onClick={handleShowDetail}>
             <Image src={user.imageUrl}

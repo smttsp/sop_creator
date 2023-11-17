@@ -1,5 +1,7 @@
 'use client'
 import React, {useRef, useState} from 'react';
+import {redirect} from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
 import SignificantTerms from './SignificantTerms';
@@ -7,9 +9,15 @@ import Button from './Button';
 import TextAnimation from './TextAnimation';
 import LoadingSpinner from './LoadingSpinner';
 import Analysis from './AnalysisResult';
-import ApryseEditor from "@/components/ApryseEditor";
+import GoogledocEditor from "@/components/GoogledocEditor";
+
 
 export default function Body() {
+    const {data: session} = useSession({
+        required: true, onUnauthenticated() {
+            redirect('/');
+        }
+    });
     const [selectedFile, setSelectedFile] = useState('')
     const [keywords, setKeyWords] = useState('')
     const [loading, setLoading] = useState('')
@@ -40,7 +48,7 @@ export default function Body() {
     );
 
     const apryseEditorDiv = (
-        <ApryseEditor
+        <GoogledocEditor
             text="Identify Keys"
             customClass={""}
             handleKeyWords={handleKeyWords}
