@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import axios from 'axios'; // Import Axios
 import Button from './Button';
 
-const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showRecommendation}) => {
+const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showRecommendation}) => {
     const {data: session} = useSession({
         required: true, onUnauthenticated() {
             redirect('/');
@@ -107,5 +107,4 @@ const ApryseEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showR
         </div>
     );
 };
-
-export default ApryseEditor;
+export default GoogledocEditor;
