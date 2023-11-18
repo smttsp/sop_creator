@@ -2,7 +2,7 @@
 import ElaborateBg from "./ElaboratBG"
 import Promo from "./Promo"
 import TextAnimation from "./TextAnimation"
-const Body=()=>{
+const BodyLandingPage=()=>{
     return (<div className="">
             <Promo/>
             <ElaborateBg/>
@@ -11,5 +11,5 @@ const Body=()=>{
     </div>)
 
 }
-export default Body
+export default BodyLandingPage
 

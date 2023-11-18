@@ -6,13 +6,12 @@ import Result from './Result';
 import AnalysisContainer from './AnalysisContainer';
 import SignificantTerms from './SignificantTerms';
 import Button from './Button';
-import TextAnimation from './TextAnimation';
 import LoadingSpinner from './LoadingSpinner';
 import Analysis from './AnalysisResult';
-import GoogledocEditor from "@/components/GoogledocEditor";
+import GoogledocEditor from "@/components/Resume/GoogledocEditor";
 
 
-export default function Body() {
+export default function BodyResume() {
     const {data: session} = useSession({
         required: true, onUnauthenticated() {
             redirect('/');
@@ -62,10 +61,6 @@ export default function Body() {
     return (
         <div className="p-4 h-auto bg-gradient-to-br from-purple-900 to-pink-200">
             <div className="">
-                <TextAnimation
-                    text="Hello, I am AI tool to Assist you to build your career"
-                    speed={100}
-                />
 
                 <div className="grid grid-cols-5 h-auto">
                     <div className="w-full mx-2 min-h-96 col-span-3">

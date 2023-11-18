@@ -1,9 +1,9 @@
-import Body from '@/components/Body'
+import BodyResume from "@/components/Resume/BodyResume"
 export default function Home() {
     return (
         <main className="relative overflow-hidden">
             <div className=''>
-                <div className=''><Body/></div>
+                <div className=''><BodyResume/></div>
             </div>
         </main>
     )

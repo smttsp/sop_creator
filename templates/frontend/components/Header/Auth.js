@@ -1,8 +1,8 @@
 'use client'
 import { useState } from "react";
 import { motion } from "framer-motion";
-import SignInForm from "../Header/SignIn";
-import SignUpForm from "../Header/SignUp";
+import SignInForm from "./SignIn";
+import SignUpForm from "./SignUp";
 
 const Auth = () => {
   const [showSignIn, setShowSignIn] = useState(false);

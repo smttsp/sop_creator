@@ -1,8 +1,8 @@
 'use client'
-import Logo from "./Logo"
+import Logo from "../LandingPage/Logo"
 import Navbar from "./Navbar"
-import Auth from "./Auth"
-import Profile from "../Header/Profile";
+import Auth from "./Auth";
+import Profile from "./Profile";
 import {useSession} from "next-auth/react";
 import {useAppSelector} from "@/redux/store";
 import {useEffect, useState} from 'react';
