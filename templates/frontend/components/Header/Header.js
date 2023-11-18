@@ -24,7 +24,7 @@ const Header=()=>{
         setUser(authReducerValue);
     }, [authReducerValue]);
 
-    return (<div className="flexBetween bg-white max-container padding-container relative z-30 py-5 px-6">
+    return (<div className="flexBetween border-b-2 bg-white max-container padding-container relative z-30 py-5 px-6">
         <Logo/>
         <Navbar/>
         {!user.isAuth && <Auth/>}

@@ -9,8 +9,6 @@ import Button from './Button';
 import LoadingSpinner from './LoadingSpinner';
 import Analysis from './AnalysisResult';
 import GoogledocEditor from "@/components/Resume/GoogledocEditor";
-import ElaborateBg from '../LandingPage/ElaboratBG';
-
 
 export default function BodyResume() {
     const {data: session} = useSession({
@@ -42,11 +40,11 @@ export default function BodyResume() {
     const uploadResumeButton = (
         <Button
             text="Upload Resume"
-            customClass="bg-purple-900 w-1/2 shadow-xl text-white py-2 px-4 rounded cursor-pointer"
+            customClass="bg-gray-850 h-16 w-64 flexCenter text-white font-semibold px-4 rounded-md w-48"
             onClick={handleUploadClick}
         />
     );
-
+ 
     const apryseEditorDiv = (
         <GoogledocEditor
             text="Identify Keys"
@@ -60,10 +58,9 @@ export default function BodyResume() {
     )
 
     return (
-        <div className="p-4 h-auto bg-gradient-to-br from-purple-900 to-pink-200">
+        <div className="h-auto ">
             <div className="">
-
-                <div className="grid grid-cols-5 h-auto">
+                <div className="grid grid-cols-5 h-auto bg-gradient-to-b  from-white via-pink-200 to-green-300">
                     <div className="w-full mx-2 min-h-96 col-span-3">
                         {uploadResumeButton}
                         <input
@@ -94,7 +91,6 @@ export default function BodyResume() {
                     {ai_recommendation && <Analysis fileId={ai_recommendation}/>}
                 </div>
             </div>
-            <ElaborateBg/>
         </div>
     );
 }

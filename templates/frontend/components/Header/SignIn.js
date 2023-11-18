@@ -14,20 +14,20 @@ const SignInForm = ({onClose}) => {
     };
 
     return (
-        <div className='fixed shadow-xl z-30 top-24 right-16 w-96 h-3/4'>
+        <div className='fixed z-30 top-24 right-16 w-96 h-3/4'>
             <div
-                className='absolute bg-yellow-400  shadow-xl rounded-xl h-full w-full -right-5 -bottom-5'>
+                className='absolute bg-blue-900 rounded-xl  w-full -right-1 -bottom-1'>
 
             </div>
             <div
-                className="overflow-scroll relative h-full w-full p-4 bg-gray-50
-                           shadow-xl shadow-yellow-400 text-black rounded-xl px-6"
+                className="overflow-scroll relative  w-full p-4 bg-gray-50
+                           shadow-xl shadow-blue-900 text-black rounded-xl px-6"
             >
                 <button className="absolute text-sm top-2 right-2" onClick={onClose}>
                     <Image src={"close-bold.svg"} alt="close image" width={20} height={20}/>
                 </button>
                 <Brand/>
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <Input
                         type="email"
                         placeholder="Email"
@@ -44,14 +44,14 @@ const SignInForm = ({onClose}) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                </div>
-                <>
+                </div> */}
+                {/* <>
                     <Link href="/#"
                           className="text-purple-900 text-md font-medium hover:text-gray-800  my-8">
                         Forgot password?
                     </Link>
-                </>
-                <div className='flex justify-center'>
+                </> */}
+                {/* <div className='flex justify-center'>
                     <button
                         className="bg-gradient-to-br from-purple-800 to-purple-300 h-12 w-1/2 my-8
                                    rounded-sm shadow-2xl hover:bg-white hover:text-gray-500 active:text-gray-800
@@ -60,7 +60,7 @@ const SignInForm = ({onClose}) => {
                     >
                         Sign In
                     </button>
-                </div>
+                </div> */}
                 <SignWith/>
             </div>
         </div>
