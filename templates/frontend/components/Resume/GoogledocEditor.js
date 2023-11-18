@@ -1,6 +1,7 @@
 import {useSession} from 'next-auth/react';
 import {redirect} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
+import {motion} from 'framer-motion'
 import axios from 'axios';
 import Button from './Button';
 
@@ -89,7 +90,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
     };
 
     const handleAnalysis = () => {
-                // showRecommendation(fileId)
+        showRecommendation(fileId)
                 
     };
 
@@ -112,3 +113,4 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
     );
 };
 export default GoogledocEditor;
+

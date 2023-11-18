@@ -69,10 +69,15 @@ def get_ai_recommendation():
 
     file = request.files["resume_file"]
     if file:
-        resume = Resume(file)
+        # resume = Resume(file)
 
-        ra = ResumeAnalyzer(resume, session_info)
-        response_data = {"analysis": ra.recommendations}
+        # ra = ResumeAnalyzer(resume, session_info)
+        # response_data = {"analysis": ra.recommendations}
+        response_data=[{"id":1, "current":"this is current value", "recommendation":"this is recommendation value", "reason":"this is reason value"},
+                       {"id":2, "current":"this is current value", "recommendation":"this is recommendation value", "reason":"this is reason value"},
+                       {"id":3, "current":"this is current value", "recommendation":"this is recommendation value", "reason":"this is reason value"},
+                       {"id":4, "current":"this is current value", "recommendation":"this is recommendation value", "reason":"this is reason value"},
+                       {"id":5, "current":"this is current value", "recommendation":"this is recommendation value", "reason":"this is reason value"}]
 
         # return jsonify({"message": response_data}), 200
         return jsonify({"message": response_data}), 200
