@@ -1,7 +1,7 @@
 import {useSession} from 'next-auth/react';
 import {redirect} from 'next/navigation';
-import {useEffect, useState} from 'react';
-import axios from 'axios'; // Import Axios
+import {useEffect, useState, useRef} from 'react';
+import axios from 'axios';
 import Button from './Button';
 
 const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showRecommendation}) => {
@@ -12,6 +12,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
     });
     const [googleDocsUrl, setGoogleDocsUrl] = useState('');
     const [fileId, setFileId] = useState('')
+    const editorRef=useRef(null)
 
     useEffect(() => {
         const handleSendToDrive = async () => {
@@ -38,7 +39,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
                     const uploadedFile = await response.json();
                     const url = `https://docs.google.com/document/d/${uploadedFile.id}/edit`;
 
-                    setGoogleDocsUrl(url); // Save the Google Docs URL
+                    setGoogleDocsUrl(url); 
                     setFileId(uploadedFile.id)
 
                     const iframe = document.createElement('iframe');
@@ -49,6 +50,9 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
                     const container = document.getElementById("container-id");
                     container.innerHTML = "";
                     container.appendChild(iframe);
+                    if (editorRef.current) {
+                        editorRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
                 } catch (error) {
                     alert("Ouch, something went wrong. Try again by choosing a file.");
                 }
@@ -91,7 +95,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
 
     return (
         <div className='mt-1 h-auto '>
-            <div id="container-id"></div>
+            <div id="container-id" ref={editorRef}></div>
             <div className='my-4 h-16 flex justify-between px-16'>
                 <Button
                     onClick={handleIdentifyKeys}

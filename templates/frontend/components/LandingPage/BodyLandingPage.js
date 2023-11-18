@@ -6,8 +6,6 @@ const BodyLandingPage=()=>{
     return (<div className="">
             <Promo/>
             <ElaborateBg/>
-            {/* <TextAnimation text={"Build your carrier, Amaze Hiring Mangers"} speed={80}/> */}
-
     </div>)
 
 }

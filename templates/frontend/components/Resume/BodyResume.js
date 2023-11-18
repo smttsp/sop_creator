@@ -9,6 +9,7 @@ import Button from './Button';
 import LoadingSpinner from './LoadingSpinner';
 import Analysis from './AnalysisResult';
 import GoogledocEditor from "@/components/Resume/GoogledocEditor";
+import ElaborateBg from '../LandingPage/ElaboratBG';
 
 
 export default function BodyResume() {
@@ -92,8 +93,8 @@ export default function BodyResume() {
                 <div className='flex'>
                     {ai_recommendation && <Analysis fileId={ai_recommendation}/>}
                 </div>
-
             </div>
+            <ElaborateBg/>
         </div>
     );
 }
