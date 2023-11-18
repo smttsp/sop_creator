@@ -25,6 +25,7 @@ export async function POST(req) {
 
     return axios.post('http://localhost:5000/upload2', formData)
         .then((response) => {
+          console.log(response.data)
           return new Response(JSON.stringify(response.data), {
             status: 200,
             headers: {
