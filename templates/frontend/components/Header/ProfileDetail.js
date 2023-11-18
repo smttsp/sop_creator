@@ -19,7 +19,7 @@ export default function ({userName, profileImage, closeDetail}) {
 
     return (
         <div
-            className="absolute top-16 z-30 overflow-hidden text-white rounded-lg shadow-xl right-2 bg-purple-600 px-2 py-4">
+            className="absolute top-24 right-8 z-30 bg-gray-200  bg-opacity-10 overflow-hidden shadow-xl shadow-gray-850 w-64 rounded-lg text-gray-850 px-2 py-4">
             <button className="absolute top-1 right-1"
                     onClick={() => closeDetail()}>
                 <Image src="close-bold.svg"
@@ -28,7 +28,7 @@ export default function ({userName, profileImage, closeDetail}) {
                 />
             </button>
             <div className="flex justify-center my-2 gap-2">
-                <div className="h-16 w-16 rounded-full overflow-hidden bg-white">
+                <div className="h-16 w-16 rounded-full overflow-hidden">
                     <Image src={profileImage}
                            alt="profile"
                            className="object-cover w-full h-full"
@@ -40,9 +40,9 @@ export default function ({userName, profileImage, closeDetail}) {
                     <p>{userName}</p>
                 </div>
             </div>
-            <div className="text-white ml-3 mt-4">
+            <div className="ml-3 mt-4">
                 <button
-                    className="py-auto w-48 rounded-lg hover:bg-gray-500  h-8 active:bg-gray-700"
+                    className="py-auto w-48 rounded-lg hover:bg-gray-500 bg-gray-200 h-8 active:bg-gray-700"
                     onClick={handleLogOut}>
                     <p className="hover:bg-opacity-5"> Sign Out</p>
                 </button>

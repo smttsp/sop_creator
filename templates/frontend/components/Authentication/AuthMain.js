@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import {signIn, useSession} from 'next-auth/react';
 import {useDispatch} from 'react-redux';
 import {logIn} from '@/redux/features/auth-slice';
+import {motion} from 'framer-motion'
 import Image from 'next/image';
 
 
@@ -16,36 +17,39 @@ export default function SignWith() {
         }
     }, [session, dispatch]);
 
-    const handleLinkedInSignIn = () => {
-        signIn('linkedin');
+    // const handleLinkedInSignIn = () => {
+    //     signIn('linkedin');
 
-    };
+    // };
 
     const handleGoogleSignIn = () => {
         signIn('google');
     };
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-16 mt-8">
             {!session && (
                 <div>
-                    <div className="font-light mx-auto my-2">
-                        <p>Continue with</p>
+                    <div className="mx-auto my-2 font-roboto text-xl text-center">
+                        <p >Continue with</p>
                     </div>
-                    <div className="flex gap-8">
-                        <button
+                    <div className="">
+                        <motion.button
+                            whileHover={{ scale: 1.05, fontWeight: "bold" }}
+                            whileTap={{ scale: 0.95 }}
                             className="shadow-xl hover:bg-gray-200 active:bg-slate-500"
                             onClick={handleGoogleSignIn}
                         >
                             <Image
                                 className="hover:shadow-lg hover:shadow-gray-800 rounded-lg active:shadow-black"
-                                src="/google-sign.webp"
+                                src="/signin-google.png"
                                 alt="googleauth image"
-                                width={30}
-                                height={30}
+                                width={200}
+                                height={60}
                             />
-                        </button>
-                        <button
+                            
+                        </motion.button>
+                        {/* <button
                             className="shadow-xl hover:bg-gray-200 active:bg-slate-500"
                             onClick={handleLinkedInSignIn}
                         >
@@ -56,7 +60,7 @@ export default function SignWith() {
                                 width={30}
                                 height={30}
                             />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             )}
