@@ -91,6 +91,6 @@ if __name__ == "__main__":
     # cfa.give_recommendations()
 
     # jaccard = ra.get_weighted_jaccard()
-    cover_letter = CoverLetter(resume, jd)
+    # cover_letter = CoverLetter(resume, jd)
 
     pass
