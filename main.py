@@ -12,9 +12,8 @@ from career_tool import (
 )
 from career_tool.utils.secret_manager_utils import get_secret_value_dict
 from dotenv import find_dotenv, load_dotenv
-from career_tool.resume import Resume, ResumeAnalyzer
 from career_tool.utils.session_utils import SessionInfo
-
+from career_tool.resume_ai_recommendation import ResumeAnalyzer_Pydantic
 load_dotenv(find_dotenv())
 
 
@@ -85,7 +84,7 @@ if __name__ == "__main__":
 
     session_info = SessionInfo(user="smttsp")
 
-    ra = ResumeAnalyzer(resume, session_info)
+    ra = ResumeAnalyzer_Pydantic(resume, session_info)
     # cfa = CareerFitAnalyzer(resume, jd)
     # cfa.visualize_word_clouds()
     # cfa.give_recommendations()
