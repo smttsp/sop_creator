@@ -22,6 +22,16 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
   useEffect(() => {
     const handleSendToDrive = async () => {
       if (selectedFile) {
+        const refreshResponse = await axios.post(
+            "https://accounts.google.com/o/oauth2/token",
+            new URLSearchParams({
+              client_id: process.env.GOOGLE_CLIENT_ID,
+              client_secret: process.env.GOOGLE_CLIENT_SECRET,
+              refresh_token: session.refreshToken,
+              grant_type: "refresh_token",
+            })
+          );
+        session.accessToken = refreshResponse.data.access_token;
         const body = new FormData();
         const metadata = {
           name: selectedFile.name,
@@ -69,7 +79,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
     };
 
     handleSendToDrive();
-  }, [selectedFile, session.accessToken]);
+  }, [selectedFile]);
 
   const handleFetchFromDriveAndSendToBackend = async () => {
     if (!googleDocsUrl) {
