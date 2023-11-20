@@ -19,7 +19,6 @@ export default function BodyResume() {
     const [selectedFile, setSelectedFile] = useState('')
     const [keywords, setKeyWords] = useState('')
     const [loading, setLoading] = useState('')
-    const [ai_recommendation, setAIRecommendation] = useState()
     const fileInputRef = useRef(null);
 
     const handleUploadClick = () => {
@@ -52,8 +51,6 @@ export default function BodyResume() {
             handleKeyWords={handleKeyWords}
             selectedFile={selectedFile}
             loadingSpinnerResult={setLoading}
-            showRecommendation={setAIRecommendation}
-
         />
     )
 
@@ -88,7 +85,7 @@ export default function BodyResume() {
                 </div>
 
                 <div className='flex bg-opacity-5'>
-                    {ai_recommendation && <Analysis fileId={ai_recommendation}/>}
+                   <Analysis fileId={ai_recommendation}/>
                 </div>
             </div>
         </div>
