@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const apiUrl = '/api/recommendation';
 
-export const fetchData = createAsyncThunk('data/fetchData', async (postData) => {
+export const fetchData = createAsyncThunk('data/fetchData', async (recommendPost) => {
     try {
-      const response = await axios.post(apiUrl, {fileId:postData});
+      const response = await axios.post(apiUrl, {...recommendPost});
       return response.data.message;
     } catch (error) {
       throw error;

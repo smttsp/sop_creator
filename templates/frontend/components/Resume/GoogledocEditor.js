@@ -107,7 +107,11 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
 
   const handleAnalysis = () => {
     showRecommendation(fileId);
-    dispatch(fetchData(fileId));
+    const recommendPost={
+      fileId:fileId,
+      accessToken:session.accessToken
+    }
+    dispatch(fetchData(recommendPost));
   };
 
   return (
