@@ -36,8 +36,8 @@ export default function Analysis({ fileId }) {
   if (status === 'succeeded' && data.length > 0) {
   return (
     <>
-        <div className="container mx-auto mt-4 h-72 w-screen overflow-scroll bg-gray-50 rounded-lg">
-            <table className="w-full border border-collapse">
+        <div className="container mx-auto mt-4 h-72 w-screen overflow-scroll rounded-lg">
+            <table className="w-full border border-collapse bg-opacity-5">
               <thead>
                 <tr>
                   <th className="border p-2">Current</th>
@@ -46,10 +46,10 @@ export default function Analysis({ fileId }) {
                   <th className="border p-2">Acceptance</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="">
                 {data.map((row) => (
                   <tr key={row.id}>
-                    <td className="border text-center">{row.current}</td>
+                    <td className="border text-cente ">{row.current}</td>
                     <td className="border text-center">{row.recommendation}</td>
                     <td className="border p-2 text-center">{row.reason}</td>
                     <td className="border p-2 flex justify-center">

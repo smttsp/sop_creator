@@ -16,7 +16,6 @@ const Header=()=>{
 
     useEffect(() => {
         if (session && !user.isAuth) {
-            console.log("iam in sessionjdklfjsdkljf kdjsfkladsj kldsjfklsd", session)
             dispatch(logIn({name: session.user.name, image: session.user.image}));
         }
     }, [session, user]);

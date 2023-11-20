@@ -87,7 +87,7 @@ export default function BodyResume() {
                     </div>
                 </div>
 
-                <div className='flex'>
+                <div className='flex bg-opacity-5'>
                     {ai_recommendation && <Analysis fileId={ai_recommendation}/>}
                 </div>
             </div>
