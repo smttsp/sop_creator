@@ -11,7 +11,7 @@ export const authOptions = {
           scope: "openid email profile https://www.googleapis.com/auth/drive.file",
           prompt: "consent",
           access_type: "offline",
-          response_type: "code"// Include this line for offline access
+          response_type: "code"
         },
       },
     }),
