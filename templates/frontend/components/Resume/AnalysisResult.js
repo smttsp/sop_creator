@@ -1,29 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "./LoadingSpinner";
+import { useSelector } from 'react-redux';
 import { redirect } from "next/navigation";
 import axios from "axios";
 import Button from "./Button";
-
-const fetchAIAnalysis = async (fileId, accessToken) => {
-  try {
-    const response = await axios.post("api/recommendation", {
-      fileId: fileId,
-      accessToken: accessToken,
-    });
-    const analysisData = response.data.message;
-    return analysisData;
-  } catch (error) {
-    console.error("Failed to send to the backend:", error);
-    return null;
-  }
-};
 
 export default function Analysis({ fileId }) {
   const [AIAnalysis, setAIAnalysis] = useState([]);
   const [acceptedRows, setAcceptedRows] = useState([]);
   const [selectedButton, setSelectedButton] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { data, status, error } = useSelector((state) => state.data);
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
@@ -31,24 +19,16 @@ export default function Analysis({ fileId }) {
     },
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const analysisData = await fetchAIAnalysis(
-          fileId,
-          session.accessToken
-        );
-        console.log("return analysis", analysisData)
-        setAIAnalysis(analysisData);
-        setLoading(false); // Set loading to false once the data is fetched
-      } catch (error) {
-        console.error("Error fetching AI analysis:", error);
-        setLoading(false); // Set loading to false in case of an error
-      }
-    };
+ 
 
-    fetchData();
-  }, [fileId, session.accessToken]);
+
+  if (status === 'loading') {
+    return <LoadingSpinner customClass="w-24 h-24" /> ;
+  }
+
+  if (status === 'failed') {
+    return <p>Error: {error}</p>;
+  }
 
   const handleButtonClick = (rowId) => {
     if (acceptedRows.includes(rowId)) {
@@ -59,13 +39,12 @@ export default function Analysis({ fileId }) {
     setSelectedButton(null);
   };
 
+
+
+  if (status === 'succeeded' && data.length > 0) {
   return (
     <>
-      {loading ? (
-        <LoadingSpinner customClass="w-24 h-24" />
-      ) : (
         <div className="container mx-auto mt-4 h-72 w-screen overflow-scroll bg-gray-50 rounded-lg">
-          {AIAnalysis && (
             <table className="w-full border border-collapse">
               <thead>
                 <tr>
@@ -76,7 +55,7 @@ export default function Analysis({ fileId }) {
                 </tr>
               </thead>
               <tbody>
-                {AIAnalysis.map((row) => (
+                {data.map((row) => (
                   <tr key={row.id}>
                     <td className="border text-center">{row.current}</td>
                     <td className="border text-center">{row.recommendation}</td>
@@ -100,9 +79,34 @@ export default function Analysis({ fileId }) {
                 ))}
               </tbody>
             </table>
-          )}
         </div>
-      )}
     </>
-  );
+  );}
 }
+
+
+// import React from 'react';
+
+
+// function DataDisplay() {
+ 
+
+
+
+//   if (status === 'succeeded' && data.length > 0) {
+//     return (
+//       <div>
+//         <h1>Data:</h1>
+//         <ul>
+//           {data.map((item) => (
+//             <li key={item.id}>{item.name}</li>
+//           ))}
+//         </ul>
+//       </div>
+//     );
+//   }
+
+//   return null; // If data is empty, don't render anything
+// }
+
+// export default DataDisplay;

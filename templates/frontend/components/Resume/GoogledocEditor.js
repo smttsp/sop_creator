@@ -1,7 +1,8 @@
 import {useSession} from 'next-auth/react';
 import {redirect} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
-import {motion} from 'framer-motion'
+import { fetchData } from '@/redux/features/recommend-slice';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import Button from './Button';
 
@@ -11,6 +12,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
             redirect('/');
         }
     });
+    const dispatch=useDispatch()
     const [googleDocsUrl, setGoogleDocsUrl] = useState('');
     const [fileId, setFileId] = useState('')
     const editorRef=useRef(null)
@@ -91,6 +93,7 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
 
     const handleAnalysis = () => {
         showRecommendation(fileId)
+        dispatch(fetchData(fileId))
                 
     };
 

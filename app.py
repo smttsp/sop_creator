@@ -39,8 +39,6 @@ def get_word_cloud():
 
     file = request.files["resume_file"]
     if file:
-        print(file.read())
-        print("the file is found in the back end")
         user = session_info.user
         session_id = session_info.session_id
         bucket = session_info.default_gcp_bucket
@@ -70,7 +68,6 @@ def get_ai_recommendation():
     file = request.files["resume_file"]
     if file:
         # resume = Resume(file)
-        print("this is in upload2 to upload the recommendation")
         # ra = ResumeAnalyzer(resume, session_info)
         # response_data = {"analysis": ra.recommendations}
         response_data=[{"id":1, "current":"this is current value", "recommendation":"this is recommendation value", "reason":"this is reason value"},
