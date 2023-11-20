@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux';
 import { redirect } from "next/navigation";
 import Button from "./Button";
 
-export default function Analysis({ fileId }) {
-  const [AIAnalysis, setAIAnalysis] = useState([]);
+export default function Analysis() {
   const [acceptedRows, setAcceptedRows] = useState([]);
   const [selectedButton, setSelectedButton] = useState(null);
   const { data, status, error } = useSelector((state) => state.data);
