@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import Button from './Button';
 
-const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, showRecommendation}) => {
+const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile}) => {
   const {data: session} = useSession({
     required: true,
     onUnauthenticated() {
@@ -106,7 +106,6 @@ const GoogledocEditor = ({handleKeyWords, loadingSpinnerResult, selectedFile, sh
   };
 
   const handleAnalysis = () => {
-    showRecommendation(fileId);
     const recommendPost={
       fileId:fileId,
       accessToken:session.accessToken
