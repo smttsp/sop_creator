@@ -3,14 +3,12 @@ import { useSession } from "next-auth/react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useSelector } from 'react-redux';
 import { redirect } from "next/navigation";
-import axios from "axios";
 import Button from "./Button";
 
 export default function Analysis({ fileId }) {
   const [AIAnalysis, setAIAnalysis] = useState([]);
   const [acceptedRows, setAcceptedRows] = useState([]);
   const [selectedButton, setSelectedButton] = useState(null);
-  const [loading, setLoading] = useState(true);
   const { data, status, error } = useSelector((state) => state.data);
   const { data: session } = useSession({
     required: true,
@@ -18,10 +16,6 @@ export default function Analysis({ fileId }) {
       redirect("/");
     },
   });
-
- 
-
-
   if (status === 'loading') {
     return <LoadingSpinner customClass="w-24 h-24" /> ;
   }
@@ -38,8 +32,6 @@ export default function Analysis({ fileId }) {
     }
     setSelectedButton(null);
   };
-
-
 
   if (status === 'succeeded' && data.length > 0) {
   return (
@@ -83,30 +75,3 @@ export default function Analysis({ fileId }) {
     </>
   );}
 }
-
-
-// import React from 'react';
-
-
-// function DataDisplay() {
- 
-
-
-
-//   if (status === 'succeeded' && data.length > 0) {
-//     return (
-//       <div>
-//         <h1>Data:</h1>
-//         <ul>
-//           {data.map((item) => (
-//             <li key={item.id}>{item.name}</li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   }
-
-//   return null; // If data is empty, don't render anything
-// }
-
-// export default DataDisplay;
